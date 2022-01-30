@@ -232,4 +232,6 @@ return [
 
     ],
 
+    'layout' => 'app.other_default_layout'
+
 ];

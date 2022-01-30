@@ -21,6 +21,7 @@ class CreateEventsTable extends Migration
             $table->string('photo');
             $table->string('banner');
             $table->string('title');
+            $table->string('slug');
             $table->string('description');
             $table->integer('quota');
             $table->timestamps();
