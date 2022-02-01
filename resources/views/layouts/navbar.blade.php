@@ -28,8 +28,8 @@
         </nav>
         <div :class="{'flex': open, 'hidden': !open}"
             class="flex-col hidden md:flex md:justify-end md:flex-row px-4 md:px-0">
-            <button class="btn-secondary mb-5 md:mb-0">Masuk</button>
-            <button class="btn-primary md:ml-8 ">Daftar</button>
+            <a href="{{route('login')}}" class="btn-secondary mb-5 md:mb-0">Masuk</a>
+            <a href="{{route('register')}}" class="btn-primary md:ml-8 ">Daftar</a>
         </div>
     </div>
 </div>
