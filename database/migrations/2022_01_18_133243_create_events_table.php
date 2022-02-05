@@ -18,11 +18,11 @@ class CreateEventsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('status_id');
-            $table->integer('is_ended')->default(0);
+            $table->boolean('is_ended')->default(false);
             $table->string('photo');
             $table->string('name');
             $table->string('slug');
-            $table->string('description');
+            $table->longText('description');
             $table->string('address');
             $table->integer('quota');
             $table->integer('price')->default(0);

@@ -15,7 +15,9 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
+            'id' => 1,
             'role_id' => 1,
+            'photo' => 'default/2.png',
             'name' => 'Admin HeyEvents',
             'bio' => 'Superadmin',
             'address' => 'Surabaya, Jawa Timur',
@@ -25,11 +27,37 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 2,
             'role_id' => 2,
+            'photo' => 'default/ampersand.jpg',
             'name' => 'Ampersand',
             'bio' => 'Perusahaan Teknologi',
             'address' => 'Surabaya, Jawa Timur',
             'email' => 'ampersand@gmail.com',
+            'email_verified_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'password' => bcrypt('secret123')
+        ]);
+
+        User::create([
+            'id' => 3,
+            'role_id' => 2,
+            'photo' => 'default/adi.jpg',
+            'name' => 'Adi Cipto',
+            'bio' => 'Kepala Sekolah',
+            'address' => 'Surabaya, Jawa Timur',
+            'email' => 'adicipto@gmail.com',
+            'email_verified_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'password' => bcrypt('secret123')
+        ]);
+
+        User::create([
+            'id' => 4,
+            'role_id' => 2,
+            'photo' => 'default/warkop.jpg',
+            'name' => 'Warkop GH',
+            'bio' => 'Warung Kopi',
+            'address' => 'Solo, Jawa Tengah',
+            'email' => 'warkopgh@gmail.com',
             'email_verified_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'password' => bcrypt('secret123')
         ]);

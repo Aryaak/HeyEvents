@@ -15,13 +15,13 @@ class EventStatusesTableSeeder extends Seeder
     public function run()
     {
         EventStatus::create([
-            'id'=> 1,
-            'name' => 'Gratis'
+            'id' => 1,
+            'name' => 'Berbayar'
         ]);
 
         EventStatus::create([
-            'id'=> 1,
-            'name' => 'Berbayar'
+            'id' => 2,
+            'name' => 'Gratis'
         ]);
     }
 }
