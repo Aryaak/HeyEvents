@@ -30,3 +30,11 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('search/{category?}/{keyword?}', [EventController::class, 'search'])->name('event.search');
 Route::get('event/{slug}', [EventController::class, 'show'])->name('event.show');
+
+// admin
+Route::get('/admin', function () {
+    return view('admin.layouts.dashboard');
+});
+Route::get('/admin-login', function () {
+    return view('admin.layouts.auth');
+});

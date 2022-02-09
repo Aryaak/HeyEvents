@@ -89,46 +89,46 @@
             <!-- End Logo-->
              <!-- Author -->
              <div class="bg-white w-max py-4 px-6 absolute  -right-6 -top-8 shadow-md text-center">
-                <img src="{{asset('storage/' . $event->user->photo)}}" class="mx-auto" width="53" height="53">
-                <p class="text-prime font-bold mt-3">{{Str::limit($event->user->name, 10, $end='...') }}</p>
-                <p class="text-grey">{{Str::limit($event->user->bio, 10, $end='...') }}</p>
+                <img src="{{asset('storage/' . $event ?? ''->user->photo)}}" class="mx-auto" width="53" height="53">
+                <p class="text-prime font-bold mt-3">{{Str::limit($event ?? ''->user->name, 10, $end='...') }}</p>
+                <p class="text-grey">{{Str::limit($event ?? ''->user->bio, 10, $end='...') }}</p>
             </div>
             <!-- End Author-->
             <div class="mb-5">
-                <img src="{{asset('storage/' . $event->photo)}}" class="w-full">
+                <img src="{{asset('storage/' . $event ?? ''->photo)}}" class="w-full">
             </div>
             <div class="mb-5 w-full">
-                <h4 class="text-prime font-bold text-xl w-full mb-2">{{Str::limit($event->name, 31, $end='...') }}</h4>
-                <div class="text-grey max-w-full break-words whitespace-pre-wrap card-text">{{strip_tags(Str::limit($event->description, 70, $end='...')) }}</div>
+                <h4 class="text-prime font-bold text-xl w-full mb-2">{{Str::limit($event ?? ''->name, 31, $end='...') }}</h4>
+                <div class="text-grey max-w-full break-words whitespace-pre-wrap card-text">{{strip_tags(Str::limit($event ?? ''->description, 70, $end='...')) }}</div>
             </div>
             <div class="grid grid-cols-2 gap-y-5 mb-5">
                 <div class="flex items-center">
                     <img src="{{asset('img/ic_location.svg')}}">
-                    <p class="text-grey ml-3">{{$event->category->name}}</p>
+                    <p class="text-grey ml-3">{{$event ?? ''->category->name}}</p>
                 </div>
                 <div class="flex items-center">
                     <img src="{{asset('img/ic_people.svg')}}">
-                    <p class="text-grey ml-3">{{$event->quota}} Peserta</p>
+                    <p class="text-grey ml-3">{{$event ?? ''->quota}} Peserta</p>
                 </div>
                 <div class="flex items-center">
                     <img src="{{asset('img/ic_calendar.svg')}}">
-                    <p class="text-grey ml-3">{{ \Carbon\Carbon::parse($event->date)->isoFormat('D MMMM Y')}}</p>
+                    <p class="text-grey ml-3">{{ \Carbon\Carbon::parse($event ?? ''->date)->isoFormat('D MMMM Y')}}</p>
                 </div>
                 <div class="flex items-center">
                     <img src="{{asset('img/ic_ticket.svg')}}">
-                    <p class="text-prime font-semibold ml-3">{{$event->status->name}}</p>
+                    <p class="text-prime font-semibold ml-3">{{$event ?? ''->status->name}}</p>
                 </div>
             </div>
            <div>
                 <div class="flex items-center">
-                    <img src="{{asset('storage/' . $event->user->photo)}}" width="53" height="53">
+                    <img src="{{asset('storage/' . $event ?? ''->user->photo)}}" width="53" height="53">
                     <div class="ml-5">
-                        <p class="text-prime font-bold">{{$event->user->name}}</p>
-                        <p class="text-grey">{{$event->user->bio ? $event->user->bio : 'Bio belum di set'}}</p>
+                        <p class="text-prime font-bold">{{$event ?? ''->user->name}}</p>
+                        <p class="text-grey">{{$event ?? ''->user->bio ? $event ?? ''->user->bio : 'Bio belum di set'}}</p>
                     </div>
                 </div>
             </div>
-            <a href="{{route('event.show', $event->slug)}}" class="btn-event absolute right-0 bottom-0 py-4 group overflow-hidden">
+            <a href="{{route('event.show', $event ?? ''->slug)}}" class="btn-event absolute right-0 bottom-0 py-4 group overflow-hidden">
                 <svg class="group-active:relative group-active:-right-4 transform group-hover:scale-125  transition duration-100 ease-in-out"
                     width="32" height="32" viewBox="0 0 32 32" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
                     <path
