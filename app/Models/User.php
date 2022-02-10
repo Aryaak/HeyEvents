@@ -22,7 +22,10 @@ class User extends Authenticatable
         'role_id',
         'photo',
         'name',
+        'slug',
+        'bio',
         'email',
+        'address',
         'password',
     ];
 
@@ -47,6 +50,16 @@ class User extends Authenticatable
 
     public function events()
     {
+        return $this->hasMany(Event::class);
+    }
+
+    public function eventsJoined()
+    {
         return $this->belongsToMany(Event::class);
+    }
+
+    public function eventsSaved()
+    {
+        return $this->belongsToMany(Event::class, 'event_saved');
     }
 }

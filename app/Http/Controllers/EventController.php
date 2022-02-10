@@ -122,8 +122,12 @@ class EventController extends Controller
     public function show($slug)
     {
         $event = Event::where('slug', $slug)->first();
+
         $event['is_joined'] = DB::table('event_user')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event->id)->first();
+        $event['is_saved'] = DB::table('event_saved')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event->id)->first();
+
         $members = array_slice($event->users->toArray(), 0, 11);
+
         return view('pages.event.show', compact('event', 'members'));
     }
     
@@ -145,6 +149,21 @@ class EventController extends Controller
         $input = request()->all();
 
         DB::table('event_user')->where('event_id', $input['event_id'])->where('user_id', $input['user_id'])->delete();
+
+        return redirect()->back();
+    }
+
+    public function save()
+    {
+        DB::table('event_saved')->insert(request()->except('_token'));
+        return redirect()->back();
+    }
+
+    public function unsave()
+    {
+        $input = request()->all();
+        
+        DB::table('event_saved')->where('event_id', $input['event_id'])->where('user_id', $input['user_id'])->delete();
 
         return redirect()->back();
     }

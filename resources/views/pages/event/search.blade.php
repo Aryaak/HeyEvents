@@ -12,7 +12,7 @@
             <a href="{{route('event.search', 'terverifikasi')}}" class="{{$category == 'terverifikasi' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Terverifikasi</a>
             <a href="{{route('event.search', 'gratis')}}" class="{{$category == 'gratis' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Gratis</a>
             <a href="{{route('event.search', 'berbayar')}}" class="{{$category == 'berbayar' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Berbayar</a>
-        </section>
+        </section>  
         <div>
             <div
                 class='flex items-center justify-center from-cyan-100 via-pink-200 to-yellow-200 bg-gradient-to-br'>
@@ -69,13 +69,13 @@
                 </div>
             </div>
             <div class="relative">
-                <div class="flex items-center">
+                <a href="{{route('profile', $item->user->slug)}}" class="flex items-center">
                     <img src="{{asset('storage/' . $item->user->photo)}}" width="53" height="53">
                     <div class="ml-5">
                         <p class="text-prime font-bold">{{$item->user->name}}</p>
                         <p class="text-grey">{{$item->user->bio ? $item->user->bio : 'Bio belum di set'}}</p>
                     </div>
-                </div>
+                </a>
             </div>
             <a href="{{route('event.show', $item->slug)}}" class="btn-event absolute right-0 bottom-0 py-4 group overflow-hidden">
                 <svg class="group-active:relative group-active:-right-4 transform group-hover:scale-125  transition duration-100 ease-in-out"

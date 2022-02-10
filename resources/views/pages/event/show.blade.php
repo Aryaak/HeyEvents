@@ -13,16 +13,19 @@
     </div>
 
     <div class="flex justify-center mt-12 items-center">
-        <div>
-            <img src="{{asset('storage/' . $event->user->photo)}}" width="53" height="53">
-        </div>
-        <div class="text-start px-4 flex flex-col justify-center">
-            <div class="flex mb-3">
-                <p class="font-semibold text-prime mr-3">{{$event->user->name}}</p>
-                <img src="{{asset('img/check.svg')}}" >
+        <a href="{{route('profile', $event->user->slug)}}" class="flex justify-center  items-center">
+            <div>
+                <img src="{{asset('storage/' . $event->user->photo)}}" width="53" height="53">
             </div>
-            <p class="text-grey">{{$event->user->bio ? $event->user->bio : 'Bio belum di set'}}</p>
-        </div>
+            <div class="text-start px-4 flex flex-col justify-center">
+                <div class="flex mb-3">
+                    <p class="font-semibold text-prime mr-3">{{$event->user->name}}</p>
+                    <img src="{{asset('img/check.svg')}}" >
+                </div>
+                <p class="text-grey">{{$event->user->bio ? $event->user->bio : 'Bio belum di set'}}</p>
+            </div>
+        </a>
+       
         <div class="ml-36">
             @auth
                 @if ($event->user_id == Auth::user()->id)
@@ -58,17 +61,42 @@
         </div>
     </div>
 
+    @auth
     <div class="fixed md:left-32 left-5 md:top-72 top-96 flex flex-col justify-center items-center">
-        <a href="{{route('event.discussion', $event->slug)}}" class="border-2 border-prime md:p-3 p-1 mb-3">
-            <img src="{{asset('img/icon-1.png')}}" >
+        @if ($event->is_joined)
+        <a href="{{route('event.discussion', $event->slug)}}" class="group btn-event-action mb-3">
+            <img class="img-event-action" src="{{asset('img/icon-1.svg')}}" >
         </a>
-        <div class="border-2 border-prime md:p-3 p-1 mb-3">
-            <img src="{{asset('img/icon-2.png')}}" >
-        </div>
-        <div class="border-2 border-prime md:p-3 p-1 mb-3">
-            <img src="{{asset('img/icon-3.png')}}" >
-        </div>
+        @endif
+        @if ($event->user_id != Auth::user()->id)
+            <button type="submit" class="group btn-event-action mb-3">
+                <img class="img-event-action" src="{{asset('img/icon-2.svg')}}" >
+            </button>
+        @endif
+        @if (Auth::user()->id != $event->user->id)
+            @if ($event['is_saved'])
+            <form action="{{route('event.unsave')}}" method="POST">
+                @csrf
+                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                <input type="hidden" name="event_id" value="{{$event->id}}">
+                <button type="submit" class="group btn-event-action-active mb-3">
+                    <img class="img-event-action-active" src="{{asset('img/icon-3.svg')}}" >
+                </button>
+            </form>
+            @else
+                <form action="{{route('event.save')}}" method="POST">
+                    @csrf
+                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                    <input type="hidden" name="event_id" value="{{$event->id}}">
+                    <button type="submit" class="group btn-event-action mb-3">
+                        <img class="img-event-action" src="{{asset('img/icon-3.svg')}}" >
+                    </button>
+                </form>
+            @endif
+        @endif
     </div>
+    @endauth
+    
 
     <div class="mt-12 mx-auto w-6/12">
         <h1 class="font-bold text-3xl">{{$event->name}}</h1>
@@ -84,7 +112,7 @@
             <div class="flex items-start">
                 <img src="{{asset('img/Location.png')}}">
                 <div class="ml-3">
-                    <p class="text-grey ">Onsite</p>
+                    <p class="text-grey ">{{$event->category->name}}</p>
                     <p class="text-prime font-semibold">{{$event->address}}</p>
                 </div>
             </div>
