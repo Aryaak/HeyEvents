@@ -23,8 +23,8 @@
                     </div>
                     <div>
                         <button type="submit"
-                            class="flex items-center bg-blue-500 justify-center w-12 h-12 text-white rounded-r-lg"
-                            :class="(search.length > 0) ? 'bg-purple-500' : 'bg-gray-500 cursor-not-allowed'"
+                            class="flex items-center bg-prime justify-center w-12 h-12 text-white"
+                            :class="(search.length > 0) ? 'bg-blue-500' : 'bg-prime cursor-not-allowed'"
                             :disabled="search.length == 0">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
