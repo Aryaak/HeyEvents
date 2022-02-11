@@ -6055,9 +6055,6 @@
             "require": {
                 "php": "^7.1 || ^8.0"
             },
-            "replace": {
-                "myclabs/deep-copy": "self.version"
-            },
             "require-dev": {
                 "doctrine/collections": "^1.0",
                 "doctrine/common": "^2.6",
@@ -7966,5 +7963,9 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
+<<<<<<< HEAD
     "plugin-api-version": "2.1.0"
+=======
+    "plugin-api-version": "2.2.0"
+>>>>>>> 307d8a1f4799ebd8fd9b133f1a77a7041aac28e7
 }

@@ -19,6 +19,23 @@
 }
 
 
+.btn-event-action {
+    @apply  p-3 text-white font-semibold border-1 border-prime  hover:text-prime hover:border-prime hover:bg-prime hover:border-1 active:scale-75 cursor-pointer transition duration-150 ease-in-out flex justify-center items-center outline-none
+}
+
+.btn-event-action-active {
+    @apply  bg-prime p-3 text-white font-semibold border-1 border-prime  hover:text-prime hover:border-prime hover:bg-white hover:border-1 active:scale-75 cursor-pointer transition duration-150 ease-in-out flex justify-center items-center outline-none
+}
+
+.img-event-action {
+    @apply group-hover:brightness-0 group-hover:invert
+}
+
+.img-event-action-active {
+    @apply brightness-0 invert group-hover:brightness-100 group-hover:invert-0
+}
+
+
 .btn-secondary {
     @apply bg-overlay px-5 py-2 text-prime border-1 border-prime font-semibold hover:bg-prime hover:text-white active:scale-75 cursor-pointer transition duration-150 ease-in-out flex justify-center items-center outline-none
 }

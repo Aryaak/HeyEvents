@@ -40,13 +40,13 @@
                 </div>
             </div>
             <div>
-                <div class="flex items-center">
+                 <a href="{{route('profile', $item->user->slug)}}" class="flex items-center">
                     <img src="{{asset('storage/' . $item->user->photo)}}" width="53" height="53">
                     <div class="ml-5">
                         <p class="text-prime font-bold">{{$item->user->name}}</p>
                         <p class="text-grey">{{$item->user->bio ? $item->user->bio : 'Bio belum di set'}}</p>
                     </div>
-                </div>
+                </a>
             </div>
             <a href="{{route('event.show', $item->slug)}}" class="btn-event absolute right-0 bottom-0 py-4 group overflow-hidden">
                 <svg class="group-active:relative group-active:-right-4 transform group-hover:scale-125  transition duration-100 ease-in-out"
