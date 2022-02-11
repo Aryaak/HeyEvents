@@ -89,7 +89,7 @@
     </section>
 
     {{-- modal --}}
-    <div class="bg-black bg-opacity-50 absolute inset-0 hidden justify-center items-center" id="overlay">
+    <div class="bg-black bg-opacity-50 fixed inset-0 hidden justify-center items-center" id="overlay">
         <div class="bg-gray-100 max-w-2xl py-2 px-3 rounded shadow-xl text-gray-800">
             <div class="p-6 space-y-6">
                 <div class="flex justify-between">
