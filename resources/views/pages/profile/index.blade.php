@@ -20,6 +20,14 @@
             </div> 
             @endif
         </div>
+
+        
+        <div class="border-solid border-1 border-indigo-600 p-2 cursor-pointer" id="btn">
+            <img src="{{asset('/img/info.svg')}} " class="w-7">
+        </div>
+        
+    </div>
+
     </section>
 
     <section class="flex items-center gap-x-10 md:mt-20 mt-24 border-b-1 border-grey pb-10 mb-10 text-sm md:text-base">
@@ -79,5 +87,36 @@
         <!-- End Card -->
         @endforeach
     </section>
+
+    {{-- modal --}}
+    <div class="bg-black bg-opacity-50 absolute inset-0 hidden justify-center items-center" id="overlay">
+        <div class="bg-gray-100 max-w-2xl py-2 px-3 rounded shadow-xl text-gray-800">
+            <div class="p-6 space-y-6">
+                <div class="flex justify-between">
+                    <h3 class="text-xl font-bold text-prime lg:text-lg dark:text-white">
+                        Laporkan {{$user->name}}
+                    </h3>
+                    <svg class="h-6 w-6 cursor-pointer p-1 hover:bg-gray-300 rounded-full" id="close-modal" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                    Kami menangani laporan pengguna dengan serius. Pihak HeyEvents!
+                    tidak akan segan menindak pengguna yang melanggar ITE
+                  </p>
+                <!-- input -->
+                <div>
+                    <label for="email" class="block mb-2 text-base font-medium text-gray-900 dark:text-gray-300">Mengapa Anda Melaporkan {{$user->name}}</label>
+                    <textarea id="message" rows="9" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 border border-prime focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                </div>
+                <div class="flex items-center space-x-2 rounded-b border-gray-200 dark:border-gray-600 ">
+                    <button data-modal-toggle="defaultModal" type="button" class="text-white bg-prime hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Laporkan</button>
+                    <button data-modal-toggle="defaultModal" type="button" class="text-prime bg-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 border border-prime text-sm font-medium px-5 py-2.5 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600">Batal</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 @endsection

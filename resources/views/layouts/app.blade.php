@@ -26,6 +26,23 @@
     @stack('js')
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="{{asset('js/slick.js')}}" type="text/javascript" charset="utf-8"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () =>{
+            const overlay = document.querySelector('#overlay')
+            const delBtn = document.querySelector('#btn')
+            const closeBtn = document.querySelector('#close-modal')
+
+            const toggleModal = () => {
+                overlay.classList.toggle('hidden')
+                overlay.classList.toggle('flex')
+            }
+
+            delBtn.addEventListener('click', toggleModal)
+
+            closeBtn.addEventListener('click', toggleModal)
+        })
+
+    </script>
 </body>
 
 </html>
