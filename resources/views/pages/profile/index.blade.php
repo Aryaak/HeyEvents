@@ -109,11 +109,13 @@
                 <!-- input -->
                 <div>
                     <label for="email" class="block mb-2 text-base font-medium text-gray-900 dark:text-gray-300">Mengapa Anda Melaporkan {{$user->name}}</label>
-                    <textarea id="message" rows="9" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 border border-prime focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                    <div class="border-1 border-prime">
+                          <textarea id="message" rows="9" class="block p-2.5 w-full text-sm text-gray-900 bg-white border border-prime focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                    </div>
                 </div>
                 <div class="flex items-center space-x-2 rounded-b border-gray-200 dark:border-gray-600 ">
                     <button data-modal-toggle="defaultModal" type="button" class="text-white bg-prime hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Laporkan</button>
-                    <button data-modal-toggle="defaultModal" type="button" class="text-prime bg-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 border border-prime text-sm font-medium px-5 py-2.5 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600">Batal</button>
+                    <button data-modal-toggle="defaultModal" type="button" class="text-prime bg-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 border border-prime text-sm font-medium px-5 py-2.5 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-prime dark:hover:text-white dark:hover:bg-gray-600">Batal</button>
                 </div>
             </div>
         </div>
