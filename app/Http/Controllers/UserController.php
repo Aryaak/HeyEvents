@@ -29,7 +29,11 @@ class UserController extends Controller
                 $events = isset($user->events) ?  $user->events : [];
                 break;
             case 'disimpan':
-                $events = isset($user->eventsSaved) ?  $user->eventsSaved : [];
+                if(Auth::user()->id == $user->id) {
+                    $events = isset($user->eventsSaved) ?  $user->eventsSaved : [];
+                } else {
+                    $category = 'semua';
+                }
                 break;
             default:
                 $category = 'semua';
@@ -76,6 +80,11 @@ class UserController extends Controller
 
         User::where('id', Auth::user()->id)->update($data);
 
+        return redirect()->back();
+    }
+
+    public function report()
+    {
         return redirect()->back();
     }
 }
