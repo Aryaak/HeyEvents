@@ -24,7 +24,9 @@
 
   <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
     @include('admin.layouts.navbar')
-    @include('admin.pages.home.index')
+    
+    @yield('content')
+    {{-- @include('admin.pages.home.index') --}}
   </main>
   
   <!--   Core JS Files   -->

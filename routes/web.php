@@ -35,9 +35,17 @@ Route::get('search/{category?}/{keyword?}', [EventController::class, 'search'])-
 Route::get('event/{slug}', [EventController::class, 'show'])->name('event.show');
 
 // admin
-Route::get('/admin', function () {
-    return view('admin.layouts.dashboard');
-});
-Route::get('/admin-login', function () {
+
+Route::get('admin/login', function () {
     return view('admin.layouts.auth');
+});
+Route::get('/admin/dashboard', function () {
+    return view('admin.pages.home.index');
+});
+
+Route::get('admin/user', function () {
+    return view('admin.pages.user.user');
+});
+Route::get('admin/event', function () {
+    return view('admin.pages.event.event');
 });
