@@ -4,8 +4,8 @@
 
 @section('content')
 <main class="py-16  max-w-screen-xl mx-auto px-4 md:px-6">
-    <div class="flex justify-between">
-        <section class="flex items-center gap-x-10">
+    <div class="flex flex-col md:flex-row justify-between">
+        <section class="flex items-center gap-x-10 overflow-x-auto space-x-8">
             <a href="{{route('event.search')}}"class="{{$category == 'semua' ? 'link-secondary ' : 'text-grey cursor-pointer'}} ">Semua</a>
             <a href="{{route('event.search', 'onsite')}}" class="{{$category == 'onsite' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Onsite</a>
             <a href="{{route('event.search', 'online')}}" class="{{$category == 'online' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Online</a>
@@ -14,29 +14,31 @@
             <a href="{{route('event.search', 'berbayar')}}" class="{{$category == 'berbayar' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Berbayar</a>
         </section>
 
-        <div class='w-3/12'>
-            <div class="flex items-center max-w-md mx-auto bg-white rounded-lg " x-data="{ search: '' }">
-                <div class="w-full border-1 p-1.5">
-                    <input type="search" class="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
-                        placeholder="Cari nama atau pengelola event..." x-model="search">
-                </div>
-                <div>
-                    <button type="submit" class="flex items-center bg-prime justify-center w-12 h-12 text-white"
-                        :class="(search.length > 0) ? 'bg-purple-500' : 'bg-prime cursor-not-allowed'"
-                        :disabled="search.length == 0">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </button>
+        <div class="mt-5 md:mt-0">
+            <div class="flex items-center justify-center">
+                <div class="flex items-center max-w-md mx-auto bg-white" x-data="{ search: '' }">
+                    <div class="w-60 border-1 p-1.5">
+                        <input type="search" class="w-full px-4 py-1 text-gray-800 outline-none"
+                            placeholder="Cari nama atau pengelola event... " x-model="search">
+                    </div>
+                    <div>
+                        <button type="submit"
+                            class="flex items-center bg-prime justify-center w-12 h-12 text-white"
+                            :class="(search.length > 0) ? 'bg-purple-500' : 'bg-prime'"
+                            :disabled="search.length == 0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 
-    <section class="mt-16 grid grid-cols-3 gap-10">
+    <section class="mt-16 grid grid-cols-0 md:grid-col-3 gap-10">
         @foreach ($events as $item)
         <!-- Card -->
         <div class="card">
