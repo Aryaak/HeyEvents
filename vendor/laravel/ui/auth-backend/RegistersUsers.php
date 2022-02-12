@@ -6,7 +6,6 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Event;
 
 trait RegistersUsers
 {
@@ -19,8 +18,7 @@ trait RegistersUsers
      */
     public function showRegistrationForm()
     {
-        $event = Event::inRandomOrder()->first();
-        return view('auth.register', compact('event'));
+        return view('auth.register');
     }
 
     /**
@@ -42,8 +40,8 @@ trait RegistersUsers
         }
 
         return $request->wantsJson()
-            ? new JsonResponse([], 201)
-            : redirect($this->redirectPath());
+                    ? new JsonResponse([], 201)
+                    : redirect($this->redirectPath());
     }
 
     /**

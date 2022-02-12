@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('role_id')->default(2);
+            $table->unsignedBigInteger('status_id')->default(3);
             $table->string('photo')->nullable();
             $table->string('name');
             $table->string('slug');
@@ -29,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('status_id')->references('id')->on('user_statuses')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

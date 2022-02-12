@@ -184,10 +184,10 @@
 
             <div class="mt-5">
                 <button type="submit" class="btn-primary w-full">Daftar</button>
-                <button class="btn-outline-primary w-full mt-3">
+                <a href="{{ '/auth/redirect'}}" class="btn-outline-primary w-full mt-3">
                     <img src="{{asset('img/ic_google.svg')}}" class="mr-3">
                     <span>Daftar dengan Google</span>
-                </button>
+                </a>
             </div>
         </form>
 

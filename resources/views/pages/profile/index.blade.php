@@ -7,25 +7,32 @@
     <section class="mx-auto flex md:justify-center gap-x-8 items-center relative">
         <img src="{{asset('storage/'.$user->photo)}}" width="110" >
         <div>
-            <h3 class="text-black font-bold md:text-3xl text-2xl">{{$user->name}}</h3>
+            <div class="flex ">
+                <h3 class="text-black font-bold md:text-3xl text-2xl">{{$user->name}}</h3>
+                @if ($user->status_id == 1)
+                <img src="{{asset('img/check.svg')}}" class="ml-3" width="20">
+                @endif
+            </div>
             <p class="text-grey text-lg mt-2">{{$user->bio ?$user->bio : 'Bio belum di set' }}</p>
             <div class="flex justify-start mt-2">
                 <img src="{{asset('img/ic_location.svg')}}" class="mr-3">
                 <p>{{$user->address ?$user->address : 'Belum ditentukan' }}</p>
             </div>
-            @if ($user->id == Auth::user()->id)
+            @if ($user->id == Auth::user()->id )
             <div class="flex absolute md:mt-3 mt-5 justify-self-center ">
                 <a href="{{route('profile.edit')}}" class="btn-secondary mr-3">Edit Profil</a>
-                <button class="btn-primary">Ajukan Verifikasi</button>
+                @if (Auth::user()->status_id == 3)
+                    <button class="btn-primary">Ajukan Verifikasi</button>
+                @endif
             </div> 
             @endif
         </div>
 
-       
-        <div class="group btn-event-action  @if ($user->id != Auth::user()->id) hidden @endif" id="btn">
+        @if ($user->id != Auth::user()->id)
+        <div class="group btn-event-action   hidden " id="btn">
             <img src="{{asset('img/info.svg')}} " class="img-event-action">
         </div>
-        
+        @endif
         
     </div>
 
@@ -92,11 +99,11 @@
     </section>
 
     {{-- modal --}}
-    <div class="bg-black bg-opacity-50 fixed inset-0 hidden justify-center items-center" id="overlay">
+    <div class="bg-black bg-opacity-50 fixed inset-0 hidden justify-center items-center z-50" id="overlay">
         <div class="bg-white max-w-2xl py-2 px-3  shadow-xl ">
             <div class="p-6  mt-10 ">
                 <div class="flex justify-between mb-3">
-                    <h3 class="text-lg font-bold  text-dark ">
+                    <h3 class="text-lg font-bold  text-black ">
                         Laporkan {{$user->name}}
                     </h3>
                     <svg class="h-6 w-6 cursor-pointer p-1 hover:bg-gray-300 rounded-full" id="close-modal" fill="currentColor" viewBox="0 0 20 20">
@@ -112,10 +119,15 @@
                 <!-- input -->
                 <form action="{{route('user.report')}}" method="POST">
                 @csrf
+                <input type="hidden" name="user_id" value="{{$user->id}}">
+                <input type="hidden" name="reporter_id" value="{{Auth::user()->id}}">
                 <div class="mt-5 mb-3">
-                    <label for="email" class="block mb-2 text-xl text-dark font-bold">Mengapa Anda Melaporkan {{$user->name}}</label>
-                    <div class="border-1 border-prime">
-                        <textarea id="message" rows="9" class="block p-2.5 w-full text-sm text-dark bg-white border border-prime focus:ring-blue-500 focus:border-blue-500 outline-none "></textarea>
+                    <label for="email" class="block mb-2 text-xl text-black font-bold">Mengapa Anda Melaporkan {{$user->name}}?</label>
+                    @error('report')
+                    <span class="text-red-600 italic text-xs">{{$message}}</span>
+                    @enderror
+                    <div class="border-1 border-black">
+                        <textarea name="report" id="message" rows="9" class="block p-2.5 w-full text-sm text-black bg-white border border-black outline-none "></textarea>
                     </div>
                 </div>
                 <div class="flex items-center space-x-5 rounded-b border-gray-200  ">

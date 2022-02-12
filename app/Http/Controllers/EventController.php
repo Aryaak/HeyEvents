@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\EventReport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -31,6 +32,9 @@ class EventController extends Controller
                 $query = $query->where('status_id', 2);
                 break;
             case 'terverifikasi':
+                $query = $query->whereHas('user', function($query){
+                    $query->where('status_id', 1);
+                });
                 break;
             default:
                 $category = 'semua';
@@ -79,7 +83,7 @@ class EventController extends Controller
 
     public function joined($category = 'semua')
     {
-        $events = Auth::user()->events;
+        $events = Auth::user()->eventsJoined->where('user_id', '!=', Auth::user()->id);
 
         switch ($category) {
             case 'akan-berlangsung':
@@ -126,7 +130,7 @@ class EventController extends Controller
         $event['is_joined'] = DB::table('event_user')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event->id)->first();
         $event['is_saved'] = DB::table('event_saved')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event->id)->first();
 
-        $members = array_slice($event->users->toArray(), 0, 11);
+        $members = array_slice($event->users->where('id', '!=', $event->user->id)->toArray(), 0, 11);
 
         return view('pages.event.show', compact('event', 'members'));
     }
@@ -164,6 +168,19 @@ class EventController extends Controller
         $input = request()->all();
         
         DB::table('event_saved')->where('event_id', $input['event_id'])->where('user_id', $input['user_id'])->delete();
+
+        return redirect()->back();
+    }
+
+    public function report(Request $request)
+    {
+        $data = $this->validate($request, [
+            'event_id' => 'required',
+            'reporter_id' => 'required',
+            'report' => ['required', 'min:10']
+        ]);
+
+        EventReport::create($data);
 
         return redirect()->back();
     }

@@ -20,7 +20,9 @@
             <div class="text-start px-4 flex flex-col justify-center">
                 <div class="flex mb-3">
                     <p class="font-semibold text-prime mr-3">{{$event->user->name}}</p>
-                    <img src="{{asset('img/check.svg')}}" >
+                    @if ($event->user->status_id == 1)
+                        <img src="{{asset('img/check.svg')}}" >
+                    @endif
                 </div>
                 <p class="text-grey">{{$event->user->bio ? $event->user->bio : 'Bio belum di set'}}</p>
             </div>
@@ -69,7 +71,7 @@
         </a>
         @endif
         @if ($event->user_id != Auth::user()->id)
-            <button type="submit" class="group btn-event-action mb-3">
+            <button id="btn" class="group btn-event-action mb-3">
                 <img class="img-event-action" src="{{asset('img/icon-2.svg')}}" >
             </button>
         @endif
@@ -148,21 +150,81 @@
         <hr>
     
         <div class="my-10">
-            <h1 class="text-dark font-semibold">Partisipan bergabung</h1>
+            <h1 class="text-dark font-semibold mb-10">Partisipan bergabung</h1>
+            @empty($members)
+            <span>Belum ada partisipan yang bergabung</span>
+            @endempty
         </div>
         <div class="grid md:grid-cols-6 grid-cols-3 gap-5 md:mt-12 mt-3 justify-items-center items-center ">
             @foreach ($members as $item)
-            <img src="{{asset('storage/' . $item['photo'])}}" width="100" height="100">
+            <a href="{{route('profile', $item['slug'])}}">
+                <img src="{{asset('storage/' . $item['photo'])}}" width="100" height="100">
+            </a>
             @endforeach
             @if (count( $event->users) > 11)
             <div class="border-1 w-full h-24 border-prime flex justify-center items-center">
                 <h2 class="text-center font-bold text-prime text-2xl ">+{{count($event->users) - 11}}</h2>
             </div> 
             @endif
-            
         </div>
     </div>
 </main>
+
+ {{-- modal --}}
+ @auth
+ <div class="bg-black bg-opacity-50 fixed inset-0 hidden justify-center items-center z-50" id="overlay">
+    <div class="bg-white max-w-2xl py-2 px-3  shadow-xl ">
+        <div class="p-6  mt-10 ">
+            <div class="flex justify-between mb-3">
+                <h3 class="text-lg font-bold  text-black ">
+                    Laporkan {{$event->name}}
+                </h3>
+            </div>
+              <p class="text-base leading-relaxed text-grey ">
+                Kami menangani laporan event dengan serius. Pihak HeyEvents!
+                tidak akan segan menindak pengguna yang melanggar ITE
+              </p>
+            <!-- input -->
+            <form action="{{route('event.report')}}" method="POST">
+            @csrf
+            <input type="hidden" name="event_id" value="{{$event->id}}">
+            <input type="hidden" name="reporter_id" value="{{Auth::user()->id}}">
+            <div class="mt-5 mb-3">
+                <label for="email" class="block mb-2 text-xl text-black font-bold">Mengapa Anda Melaporkan {{$event->name}}?</label>
+                @error('report')
+                <span class="text-red-600 italic text-xs">{{$message}}</span>
+                @enderror
+                <div class="border-1 border-black">
+                    <textarea name="report" id="message" rows="9" class="block p-2.5 w-full text-sm text-black bg-white border border-black outline-none "></textarea>
+                </div>
+            </div>
+            <div class="flex items-center space-x-5 rounded-b border-gray-200  ">
+                <button data-modal-toggle="defaultModal" type="submit" type="button" class="btn-primary">Laporkan</button>
+                <button data-modal-toggle="defaultModal" id="close-btn" type="button" class="btn-secondary">Batal</button>
+            </div>
+            </form>
+           
+        </div>
+    </div>
+</div>
+ @endauth
+ 
 @endsection
 
+@push('js')
+<script>
+    // modal
+const overlay = document.querySelector('#overlay')
+const delBtn = document.querySelector('#btn')
+const closeBtn = document.querySelector('#close-btn')
 
+const toggleModal = () => {
+    overlay.classList.toggle('hidden')
+    overlay.classList.toggle('flex')
+}
+
+delBtn.addEventListener('click', toggleModal)
+
+closeBtn.addEventListener('click', toggleModal)
+</script>
+@endpush

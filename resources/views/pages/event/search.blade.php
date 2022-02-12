@@ -69,7 +69,12 @@
                 <a href="{{route('profile', $item->user->slug)}}" class="flex items-center">
                     <img src="{{asset('storage/' . $item->user->photo)}}" width="53" height="53">
                     <div class="ml-5">
-                        <p class="text-prime font-bold">{{$item->user->name}}</p>
+                        <div class="flex ">
+                            <p class="text-prime font-bold">{{$item->user->name}}</p>
+                            @if ($item->user->status_id == 1)
+                            <img src="{{asset('img/check.svg')}}" class="ml-3">
+                            @endif
+                        </div>
                         <p class="text-grey">{{$item->user->bio ? $item->user->bio : 'Bio belum di set'}}</p>
                     </div>
                 </a>
