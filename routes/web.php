@@ -19,14 +19,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('event/leave', [EventController::class, 'leave'])->name('event.leave');
     Route::post('event/save', [EventController::class, 'save'])->name('event.save');
     Route::post('event/unsave', [EventController::class, 'unsave'])->name('event.unsave');
-
+    
     Route::get('discussion/{slug}', [DiscussionController::class, 'discussions'])->name('event.discussion');
     Route::post('discussion/store', [DiscussionController::class, 'store'])->name('discussion.store');
-
+    
     Route::get('profile/show/{slug?}/{category?}', [UserController::class, 'profile'])->name('profile');
     Route::get('profile/edit', [UserController::class, 'edit'])->name('profile.edit');
     Route::put('profile/update', [UserController::class, 'update'])->name('profile.update');
-
+    Route::get('profile/verification', [UserController::class, 'verification'])->name('profile.verification');
+    // Route::get('profile/verification', function () {
+    //     return view('pages.profile.verification');
+    // });
+    
     Route::post('user/report', [UserController::class, 'report'])->name('user.report');
     Route::post('event/report', [EventController::class, 'report'])->name('event.report');
 });
@@ -36,7 +40,6 @@ Route::get('search/{category?}/{keyword?}', [EventController::class, 'search'])-
 Route::get('event/{slug}', [EventController::class, 'show'])->name('event.show');
 
 // admin
-<<<<<<< HEAD
 
 Route::get('admin/login', function () {
     return view('admin.layouts.auth');
@@ -51,14 +54,3 @@ Route::get('admin/user', function () {
 Route::get('admin/event', function () {
     return view('admin.pages.event.event');
 });
-=======
-Route::get('admin', [DashboardController::class, 'index'])->name('admin');
-Route::get('/admin-login', function () {
-    return view('admin.layouts.auth');
-});
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/auth/redirect', [LoginController::class, 'redirectToProvider']);
-Route::get('/auth/callback', [LoginController::class, 'handleProviderCallback']);
->>>>>>> 6056f0544afd47d20c288107eba740973f3209dd
