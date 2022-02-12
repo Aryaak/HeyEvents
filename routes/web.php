@@ -27,9 +27,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('profile/edit', [UserController::class, 'edit'])->name('profile.edit');
     Route::put('profile/update', [UserController::class, 'update'])->name('profile.update');
     Route::get('profile/verification', [UserController::class, 'verification'])->name('profile.verification');
-    // Route::get('profile/verification', function () {
-    //     return view('pages.profile.verification');
-    // });
     
     Route::post('user/report', [UserController::class, 'report'])->name('user.report');
     Route::post('event/report', [EventController::class, 'report'])->name('event.report');
