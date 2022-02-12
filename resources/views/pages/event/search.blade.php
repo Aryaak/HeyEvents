@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <section class="mt-16 grid grid-cols-0 md:grid-col-3 gap-10">
+    <section class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-10">
         @foreach ($events as $item)
         <!-- Card -->
         <div class="card">
