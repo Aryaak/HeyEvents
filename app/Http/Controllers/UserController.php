@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\UserReport;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -20,10 +21,7 @@ class UserController extends Controller
 
         switch ($category) {
             case 'event-diikuti':
-                $events = isset($user->eventsJoined) ?  $user->eventsJoined : [];
-                foreach($events as $key => $item){
-                    if($item->user->id == Auth::user()->id) unset($events[$key]);
-                }
+                $events = isset($user->eventsJoined) ?  $user->eventsJoined->where('user_id', '!=', $user->id) : [];
                 break;
             case 'event-dibuat':
                 $events = isset($user->events) ?  $user->events : [];
@@ -83,8 +81,16 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function report()
+    public function report(Request $request)
     {
+        $data = $this->validate($request, [
+            'user_id' => 'required',
+            'reporter_id' => 'required',
+            'report' => ['required', 'min:10']
+        ]);
+
+        UserReport::create($data);
+
         return redirect()->back();
     }
 }

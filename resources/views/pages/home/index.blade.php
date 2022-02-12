@@ -148,7 +148,7 @@
                                     <div class="ml-5">
                                         <div class="flex">
                                             <p class="text-prime font-bold">SMKN 1 Surabaya</p>
-                                            <img src="img/check.svg" alt="">
+                                            <img src="{{asset('img/check.svg')}}" alt="">
                                         </div>
                                         <p class="text-grey">Sekolah</p>
                                     </div>
@@ -214,7 +214,7 @@
                                     <div class="ml-5">
                                         <div class="flex">
                                             <p class="text-prime font-bold">SMKN 1 Surabaya</p>
-                                            <img src="img/check.svg" alt="">
+                                            <img src="{{asset('img/check.svg')}}" alt="">
                                         </div>
                                         <p class="text-grey">Sekolah</p>
                                     </div>
@@ -280,7 +280,7 @@
                                     <div class="ml-5">
                                         <div class="flex">
                                             <p class="text-prime font-bold">SMKN 1 Surabaya</p>
-                                            <img src="img/check.svg" alt="">
+                                            <img src="{{asset('img/check.svg')}}" alt="">
                                         </div>
                                         <p class="text-grey">Sekolah</p>
                                     </div>
@@ -346,7 +346,7 @@
                                     <div class="ml-5">
                                         <div class="flex">
                                             <p class="text-prime font-bold">SMKN 1 Surabaya</p>
-                                            <img src="img/check.svg" alt="">
+                                            <img src="{{asset('img/check.svg')}}" class="ml-3">
                                         </div>
                                         <p class="text-grey">Sekolah</p>
                                     </div>
@@ -410,7 +410,7 @@
                                     <div class="ml-5">
                                         <div class="flex">
                                             <p class="text-prime font-bold">SMKN 1 Surabaya</p>
-                                            <img src="img/check.svg" class="w-1/4 h-1/4">
+                                            <img src="{{asset('img/check.svg')}}" class="w-1/4 h-1/4">
                                         </div>
                                         <p class="text-grey">Sekolah</p>
                                     </div>
@@ -441,7 +441,7 @@
                                     <div class="ml-5">
                                         <div class="flex">
                                             <p class="text-prime font-bold">SMKN 1 Surabaya</p>
-                                            <img src="img/check.svg" class="w-1/4 h-1/4">
+                                            <img src="{{asset('img/check.svg')}}" class="w-1/4 h-1/4">
                                         </div>
                                         <p class="text-grey">Sekolah</p>
                                     </div>
@@ -472,7 +472,7 @@
                                     <div class="ml-5">
                                         <div class="flex">
                                             <p class="text-prime font-bold">SMKN 1 Surabaya</p>
-                                            <img src="img/check.svg" class="w-1/4 h-1/4">
+                                            <img src="{{asset('img/check.svg')}}" class="w-1/4 h-1/4">
                                         </div>
                                         <p class="text-grey">Sekolah</p>
                                     </div>

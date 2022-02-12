@@ -14,6 +14,7 @@
   <!-- Icons -->
   <link href="{{asset('css/nucleo-icons.css')}} " rel="stylesheet" />
   <link href="{{asset('css/nucleo-svg.css')}} " rel="stylesheet" />
+  <link href="{{asset('css/admin.css')}} " rel="stylesheet" />
   <!-- CSS -->
   <link id="pagestyle" href="{{asset('css/soft-ui-dashboard.css?v=1.0.3')}}" rel="stylesheet" />
 </head>

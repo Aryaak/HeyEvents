@@ -1,12 +1,12 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
-
 
 Auth::routes();
 
@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('profile/update', [UserController::class, 'update'])->name('profile.update');
 
     Route::post('user/report', [UserController::class, 'report'])->name('user.report');
+    Route::post('event/report', [EventController::class, 'report'])->name('event.report');
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -35,9 +36,12 @@ Route::get('search/{category?}/{keyword?}', [EventController::class, 'search'])-
 Route::get('event/{slug}', [EventController::class, 'show'])->name('event.show');
 
 // admin
-Route::get('/admin', function () {
-    return view('admin.layouts.dashboard');
-});
+Route::get('admin', [DashboardController::class, 'index'])->name('admin');
 Route::get('/admin-login', function () {
     return view('admin.layouts.auth');
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/auth/redirect', [LoginController::class, 'redirectToProvider']);
+Route::get('/auth/callback', [LoginController::class, 'handleProviderCallback']);

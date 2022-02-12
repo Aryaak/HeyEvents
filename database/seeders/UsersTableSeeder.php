@@ -17,6 +17,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'id' => 1,
             'role_id' => 1,
+            'status_id' => 1,
             'photo' => 'default/2.png',
             'name' => 'Admin HeyEvents',
             'slug' => 'admin-heyEvents',
@@ -30,6 +31,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'id' => 2,
             'role_id' => 2,
+            'status_id' => 1,
             'photo' => 'default/ampersand.jpg',
             'name' => 'Ampersand',
             'slug' => 'ampersand',
@@ -43,6 +45,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'id' => 3,
             'role_id' => 2,
+            'status_id' => 1,
             'photo' => 'default/adi.jpg',
             'name' => 'Adi Cipto',
             'slug' => 'adi-cipto',

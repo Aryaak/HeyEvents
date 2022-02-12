@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\EventUserStatus;
+use App\Models\UserStatus;
 use Illuminate\Database\Seeder;
 
-class EventUserStatusesTableSeeder extends Seeder
+class UserStatusesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,13 +14,19 @@ class EventUserStatusesTableSeeder extends Seeder
      */
     public function run()
     {
-        EventUserStatus::create([
+        UserStatus::create([
             'id' => 1,
-            'name' => 'Tergabung'
+            'name' => 'Terverifikasi'
         ]);
-        EventUserStatus::create([
+
+        UserStatus::create([
             'id' => 2,
             'name' => 'Tertunda'
+        ]);
+
+        UserStatus::create([
+            'id' => 3,
+            'name' => 'Belum Terverifikasi'
         ]);
     }
 }
