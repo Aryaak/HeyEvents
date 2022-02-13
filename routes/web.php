@@ -19,14 +19,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('event/leave', [EventController::class, 'leave'])->name('event.leave');
     Route::post('event/save', [EventController::class, 'save'])->name('event.save');
     Route::post('event/unsave', [EventController::class, 'unsave'])->name('event.unsave');
-
+    
     Route::get('discussion/{slug}', [DiscussionController::class, 'discussions'])->name('event.discussion');
     Route::post('discussion/store', [DiscussionController::class, 'store'])->name('discussion.store');
-
+    
     Route::get('profile/show/{slug?}/{category?}', [UserController::class, 'profile'])->name('profile');
     Route::get('profile/edit', [UserController::class, 'edit'])->name('profile.edit');
     Route::put('profile/update', [UserController::class, 'update'])->name('profile.update');
-
+    Route::get('profile/verification', [UserController::class, 'verification'])->name('profile.verification');
+    
     Route::post('user/report', [UserController::class, 'report'])->name('user.report');
     Route::post('event/report', [EventController::class, 'report'])->name('event.report');
 });

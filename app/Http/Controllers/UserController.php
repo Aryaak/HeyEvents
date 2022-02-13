@@ -93,4 +93,10 @@ class UserController extends Controller
 
         return redirect()->back();
     }
+    
+    public function verification()
+    {
+        $user = Auth::user();
+        return view('pages.profile.verification', compact('user'));
+    }
 }

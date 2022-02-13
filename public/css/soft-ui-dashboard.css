@@ -21624,7 +21624,8 @@ hr.horizontal.gray-light {
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
-  background-image: linear-gradient(310deg, #cb0c9f 0%, #cb0c9f 100%);
+  /* background-image: linear-gradient(310deg, #cb0c9f 0%, #cb0c9f 100%); */
+  background-color: #312B78;
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon svg .color-background,

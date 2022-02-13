@@ -1603,6 +1603,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(49 43 120 / var(--tw-bg-opacity));
 }
 
+<<<<<<< HEAD
+.hover\:bg-gray-300:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
+
+=======
+>>>>>>> 6056f0544afd47d20c288107eba740973f3209dd
 .hover\:text-prime:hover {
   --tw-text-opacity: 1;
   color: rgb(49 43 120 / var(--tw-text-opacity));
@@ -1613,11 +1621,27 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+<<<<<<< HEAD
+.focus\:border-blue-500:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(59 130 246 / var(--tw-border-opacity));
+}
+
+=======
+>>>>>>> 6056f0544afd47d20c288107eba740973f3209dd
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
 
+<<<<<<< HEAD
+.focus\:ring-blue-500:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));
+}
+
+=======
+>>>>>>> 6056f0544afd47d20c288107eba740973f3209dd
 .group:hover .group-hover\:scale-125 {
   --tw-scale-x: 1.25;
   --tw-scale-y: 1.25;

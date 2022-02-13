@@ -36,7 +36,6 @@
         </div>
         </form>
     </div>
-    </div>
 
     <section class="mt-16 grid md:grid-cols-3 grid-cols-1 md:gap-10 gap-5">
         @foreach ($events as $item)

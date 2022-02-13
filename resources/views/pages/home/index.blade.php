@@ -82,7 +82,7 @@
         <img src="img/content3-3.png">
     </div>
     <div
-        class="relative content flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-16">
+        class="relative content gap-x-5 flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-16">
         <div class="md:ml-20 ml-0">
             <h1 class="font-bold md:text-4xl text-lg leading-relaxed">Pengelola Event? Atau, Ingin Mengadakan Event?
                 Sans.</h1>
