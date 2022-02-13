@@ -75,7 +75,7 @@
                 </div> -->
             </nav>
             <div :class="{'flex': open, 'hidden': !open}"
-                class=" hidden  px-5 md:flex md:justify-end md:flex-row md:pl-14 items-center md:border-l-2 border-ghost z-50">
+                class=" hidden  px-5 md:flex md:justify-end md:flex-row md:pl-14 items-center md:border-l-2 border-ghost z-30">
                 <p class="text-white font-semibold text-xl mr-3 order-2 md:order-1">{{$user->name}}</p>
                 <img src="{{asset('img/3.jpg')}} " width="44" class="mr-3 order-1 md:order-2">
                 <div class="relative order-3 cursor-pointer group br-prime " @click="nav_open = !nav_open">
