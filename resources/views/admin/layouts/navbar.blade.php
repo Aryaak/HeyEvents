@@ -8,11 +8,9 @@
         </ol>
         <h6 class="font-weight-bolder mb-0">@yield('page')</h6>
       </nav>
-      <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-          <p class=" text-dark  font-weight-bolder mx-3">{{Auth::user()->name}}</p>
-          <img src="{{asset('storage/' . Auth::user()->photo)}}">
-        </div>
+      <div class="d-flex justify-content-end ms-md-auto pe-md-3 ">
+        <p class=" text-dark  font-weight-bolder my-4 mx-3">{{Auth::user()->name}}</p>
+        <img src="{{asset('storage/' . Auth::user()->photo)}}" class="w-7">
       </div>
     </div>
   </nav>
