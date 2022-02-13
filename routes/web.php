@@ -18,8 +18,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('event/join', [EventController::class, 'join'])->name('event.join');
     Route::post('event/leave', [EventController::class, 'leave'])->name('event.leave');
     Route::post('event/save', [EventController::class, 'save'])->name('event.save');
-    Route::post('event/unsave', [EventController::class, 'unsave'])->name('event.unsave');
+    Route::delete('event/unsave', [EventController::class, 'unsave'])->name('event.unsave');
     Route::post('event/pay', [EventController::class, 'pay'])->name('event.pay');
+    Route::post('event/accept', [EventController::class, 'accept'])->name('event.accept');
+    Route::delete('event/reject', [EventController::class, 'reject'])->name('event.reject');
     
     Route::get('discussion/{slug}', [DiscussionController::class, 'discussions'])->name('event.discussion');
     Route::post('discussion/store', [DiscussionController::class, 'store'])->name('discussion.store');

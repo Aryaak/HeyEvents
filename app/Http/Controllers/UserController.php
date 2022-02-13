@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\UserReport;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -75,11 +76,24 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        $data = $this->validate($request, [
+        $validation = [
+            'photo' => ['mimes:png,jpg,jpeg'],
             'name' => ['required', 'string', 'min:4', 'max:20'],
             'bio' => ['required', 'string', 'min:4', 'max:20'],
             'address' => ['required', 'string', 'min:4', 'max:20'],
-        ]);
+        ];
+
+        if($request->name != Auth::user()->name){
+            $validation['name'] = ['required', 'string', 'min:4', 'max:20', 'unique:users'];
+        }
+
+        $data = $this->validate($request, $validation);
+
+        $data['slug'] = Str::slug($data['name']);
+
+        if($request->photo){
+            $data['photo'] = request()->file('photo')->store('photos');
+        }
 
         User::where('id', Auth::user()->id)->update($data);
 

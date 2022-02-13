@@ -75,15 +75,12 @@
             <img class="img-event-action" src="{{asset('img/icon-1.svg')}}" >
         </a>
         @endif
-        @if ($event->user_id != Auth::user()->id)
-            <button id="btn" class="group btn-event-action mb-3">
-                <img class="img-event-action" src="{{asset('img/icon-2.svg')}}" >
-            </button>
-        @endif
+     
         @if (Auth::user()->id != $event->user->id)
             @if ($event['is_saved'])
             <form action="{{route('event.unsave')}}" method="POST">
                 @csrf
+                @method('DELETE')
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                 <input type="hidden" name="event_id" value="{{$event->id}}">
                 <button type="submit" class="group btn-event-action-active mb-3">
@@ -100,6 +97,12 @@
                     </button>
                 </form>
             @endif
+        @endif
+
+        @if ($event->user_id != Auth::user()->id)
+        <button id="btn" class="group btn-event-action mb-3">
+            <img class="img-event-action" src="{{asset('img/info.svg')}}" >
+        </button>
         @endif
     </div>
     @endauth
@@ -176,6 +179,7 @@
         </div>
     </div>
 
+    @if ($event->status_id == 1 && count($pendings) > 0 && Auth::user()->id == $event->user->id)
     <div class="mt-12 mx-auto w-6/12">
         <hr>
         <h1 class="text-dark font-semibold mt-10">Partisipan tertunda</h1>
@@ -191,7 +195,7 @@
                     <th class="p-2 whitespace-nowrap">
                         <div class="font-semibold text-left">Bukti Pembayaran</div>
                     </th>
-                    <th class="p-2 whitespace-nowrap">
+                    <th class="p-2 whitespace-nowrap" >
                         <div class="font-semibold text-center">Aksi</div>
                     </th>
                 </tr>
@@ -201,24 +205,42 @@
                 <tr>
                     <td class="p-2 whitespace-nowrap">
                         <div class="flex items-center">
-                            <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img src="https://raw.githubusercontent.com/cruip/vuejs-admin-dashboard-template/main/src/images/user-36-05.jpg" width="40" height="40" alt="Alex Shatov"></div>
-                            <div class="font-medium text-gray-800">Alex Shatov</div>
+                            <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img src="{{asset('storage/'.$item->photo)}}" width="40" height="40" ></div>
+                            <div class="font-medium text-gray-800">{{$item->name}}</div>
                         </div>
                     </td>
                     <td class="p-2 whitespace-nowrap">
-                        <div class="text-left">alexshatov@gmail.com</div>
+                        <div class="text-left">{{$item->email}}</div>
                     </td>
                     <td class="p-2 whitespace-nowrap">
-                        <div class="text-left font-medium text-green-500">$2,890.66</div>
+                        <a class="link-secondary" href="{{asset('storage/' .$item->pivot->document)}}" target="_blank">
+                            Dokumen
+                        </a>
                     </td>
-                    <td class="p-2 whitespace-nowrap">
-                        <div class="text-lg text-center">🇺🇸</div>
+                    <td class="p-2 whitespace-nowrap " >
+                        <div class="flex justify-between gap-x-5 items-end">
+                            <form action="{{route('event.accept')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="user_id" value="{{$item->id}}">
+                                <input type="hidden" name="event_id" value="{{$event->id}}">
+                                <button type="submit" class="btn-primary">Setujui</button>
+                            </form>
+                            <form action="{{route('event.reject')}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="user_id" value="{{$item->id}}">
+                                <input type="hidden" name="event_id" value="{{$event->id}}">
+                                <button type="submit" class="btn-secondary">Tolak</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+    @endif
+   
 </main>
 
     {{-- modal --}}

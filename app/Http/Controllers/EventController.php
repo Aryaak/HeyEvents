@@ -21,7 +21,7 @@ class EventController extends Controller
 
     public function search($category = 'semua')
     {
-        $query    = Event::latest();
+        $query    = new Event();
         if(request('keyword')){
             $query = $query->where(function($query2){
                 $query2->where('name', 'LIKE', '%' . request('keyword') . '%')
@@ -152,14 +152,12 @@ class EventController extends Controller
     public function show($slug)
     {
         $event = Event::where('slug', $slug)->first();
-
         $event['is_joined'] = DB::table('event_user')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event->id)->where('status_id', 1)->first();
         $event['is_pending'] = DB::table('event_user')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event->id)->where('status_id', 2)->first();
         $event['is_saved'] = DB::table('event_saved')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event->id)->first();
 
-        $members = array_slice($event->users->where('id', '!=', $event->user->id)->where('status_id',  1)->toArray(), 0, 11);
-        $pendings = $event->users->where('status_id', 1);
-        dd($pendings);
+        $members = array_slice($event->users->where('id', '!=', $event->user->id)->where('pivot.status_id',  1)->toArray(), 0, 11);
+        $pendings = $event->users->where('pivot.status_id', 2);
         return view('pages.event.show', compact('event', 'members', 'pendings'));
     }
     
@@ -227,6 +225,30 @@ class EventController extends Controller
             'status_id' => 2,
             'document' => request()->file('document') ? request()->file('document')->store('documents') : null
         ]);
+        return redirect()->back();
+    }
+
+    public function accept()
+    {
+        $input = request()->all();
+
+        DB::table('event_user')->where([
+            'user_id' => $input['user_id'],
+            'event_id' => $input['event_id']
+        ])->update(['status_id' => 1]);
+
+        return redirect()->back();
+    }
+
+    public function reject()
+    {
+        $input = request()->all();
+        
+        DB::table('event_user')->where([
+            'user_id' => $input['user_id'],
+            'event_id' => $input['event_id']
+        ])->delete();
+
         return redirect()->back();
     }
 }
