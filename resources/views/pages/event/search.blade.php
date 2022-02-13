@@ -16,9 +16,9 @@
         <form action="{{route('event.search', $category)}}" method="GET">
             @csrf
         <div >
-            <div class="flex items-center max-w-md mx-auto bg-white rounded-lg mt-10" x-data="{ search: '' }">
-                <div class="w-full border-1 p-1.5">
-                    <input value="{{old('keyword')}}" name="keyword" type="search" class="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+            <div class="search flex items-center max-w-md mx-auto bg-white rounded-lg" x-data="{ search: '' }">
+                <div class="md:w-60 w-full border-1 p-1.5">
+                    <input value="{{old('keyword')}}" name="keyword" type="search" class="w-full px-4 py-1 text-gray-800 rounded-full"
                         placeholder="Cari nama atau pengelola event..." x-model="search">
                 </div>
                 <div>

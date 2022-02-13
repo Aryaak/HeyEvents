@@ -156,3 +156,17 @@ input[type="radio"]:checked+label {
 .navbar{
     overflow: auto;
 }
+
+.search{
+    margin-top:20px;
+}
+
+input:focus{
+    outline: none;
+}
+
+@media (min-width: 768px) {
+.search{
+    margin-top: 0px;
+}
+}
