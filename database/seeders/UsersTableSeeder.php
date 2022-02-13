@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
             'status_id' => 1,
             'photo' => 'default/2.png',
             'name' => 'Admin HeyEvents',
-            'slug' => 'admin-heyEvents',
+            'slug' => 'admin-heyevents',
             'bio' => 'Superadmin',
             'address' => 'Surabaya, Jawa Timur',
             'email' => 'admin@heyevents.com',

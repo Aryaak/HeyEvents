@@ -5,7 +5,7 @@
 @section('content')
 <main class="py-16  max-w-screen-xl mx-auto px-4 md:px-6">
     <div class="flex justify-between">
-        <section class="flex items-center gap-x-10">
+        <section class="flex items-center gap-x-10 overflow-auto md:overflow-visible">
             <a href="{{route('event.search')}}"class="{{$category == 'semua' ? 'link-secondary ' : 'text-grey cursor-pointer'}} ">Semua</a>
             <a href="{{route('event.search', 'onsite')}}" class="{{$category == 'onsite' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Onsite</a>
             <a href="{{route('event.search', 'online')}}" class="{{$category == 'online' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Online</a>
@@ -13,11 +13,12 @@
             <a href="{{route('event.search', 'gratis')}}" class="{{$category == 'gratis' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Gratis</a>
             <a href="{{route('event.search', 'berbayar')}}" class="{{$category == 'berbayar' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Berbayar</a>
         </section>
-
-        <div class='w-3/12'>
+        <form action="{{route('event.search', $category)}}" method="GET">
+            @csrf
+        <div >
             <div class="flex items-center max-w-md mx-auto bg-white rounded-lg " x-data="{ search: '' }">
                 <div class="w-full border-1 p-1.5">
-                    <input type="search" class="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+                    <input value="{{old('keyword')}}" name="keyword" type="search" class="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
                         placeholder="Cari nama atau pengelola event..." x-model="search">
                 </div>
                 <div>
@@ -33,10 +34,11 @@
                 </div>
             </div>
         </div>
+        </form>
     </div>
     </div>
 
-    <section class="mt-16 grid grid-cols-3 gap-10">
+    <section class="mt-16 grid md:grid-cols-3 grid-cols-1 md:gap-10 gap-5">
         @foreach ($events as $item)
         <!-- Card -->
         <div class="card">
@@ -58,7 +60,11 @@
                 </div>
                 <div class="flex items-center">
                     <img src="{{asset('img/ic_calendar.svg')}}">
+                    @if ($item->is_ended)
+                    <p class="text-grey ml-3">Selesai</p>
+                    @else
                     <p class="text-grey ml-3">{{ \Carbon\Carbon::parse($item->date)->isoFormat('D MMMM Y')}}</p>
+                    @endif
                 </div>
                 <div class="flex items-center">
                     <img src="{{asset('img/ic_ticket.svg')}}">

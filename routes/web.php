@@ -32,16 +32,14 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('search/{category?}/{keyword?}', [EventController::class, 'search'])->name('event.search');
+Route::get('search/{category?}', [EventController::class, 'search'])->name('event.search');
 Route::get('event/{slug}', [EventController::class, 'show'])->name('event.show');
 
-// admin
 Route::get('admin', [DashboardController::class, 'index'])->name('admin');
-Route::get('/admin-login', function () {
+Route::get('/admin/login', function () {
     return view('admin.layouts.auth');
 });
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/auth/redirect', [LoginController::class, 'redirectToProvider']);
-Route::get('/auth/callback', [LoginController::class, 'handleProviderCallback']);
+Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('auth/redirect', [LoginController::class, 'redirectToProvider']);
+Route::get('auth/callback', [LoginController::class, 'handleProviderCallback']);

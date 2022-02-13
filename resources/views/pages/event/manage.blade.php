@@ -32,7 +32,11 @@
                 </div>
                 <div class="flex items-center">
                     <img src="{{asset('img/ic_calendar.svg')}}">
+                      @if ($item->is_ended)
+                    <p class="text-grey ml-3">Selesai</p>
+                    @else
                     <p class="text-grey ml-3">{{ \Carbon\Carbon::parse($item->date)->isoFormat('D MMMM Y')}}</p>
+                    @endif
                 </div>
                 <div class="flex items-center">
                     <img src="{{asset('img/ic_ticket.svg')}}">
@@ -40,7 +44,7 @@
                 </div>
             </div>
             <div>
-                 <a href="{{route('profile', $item->user->slug)}}" class="flex items-center">
+                <a href="{{route('profile', $item->user->slug)}}" class="flex items-center">
                     <img src="{{asset('storage/' . $item->user->photo)}}" width="53" height="53">
                     <div class="ml-5">
                         <div class="flex ">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\EventReport;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -11,12 +12,18 @@ use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
-    public function search($category = 'semua', $keyword = '')
+    public function search($category = 'semua')
     {
         $query    = Event::latest();
-
-        $query = $query->where('name', 'LIKE', '%' . $keyword . '%')
-            ->where('description', 'LIKE', '%' . $keyword . '%');
+        if(request('keyword')){
+            $query = $query->where(function($query2){
+                $query2->where('name', 'LIKE', '%' . request('keyword') . '%')
+                ->oRwhere('description', 'LIKE', '%' . request('keyword') . '%')
+                ->oRwhereHas('user', function($query3){
+                    $query3->where('name', 'LIKE', '%' . request('keyword') . '%');
+                });
+            });
+        }
 
         switch ($category) {
             case 'onsite':
@@ -42,7 +49,7 @@ class EventController extends Controller
         }
 
         $events = $query->get();
-        return view('pages.event.search', compact('events', 'category', 'keyword'));
+        return view('pages.event.search', compact('events', 'category'));
     }
 
     public function create()
@@ -83,20 +90,25 @@ class EventController extends Controller
 
     public function joined($category = 'semua')
     {
-        $events = Auth::user()->eventsJoined->where('user_id', '!=', Auth::user()->id);
+        $events = [];
+        $query = Auth::user()->eventsJoined->where('user_id', '!=', Auth::user()->id);
 
         switch ($category) {
             case 'akan-berlangsung':
-                break;
-            case 'selesai':
-                foreach ($events as $key => $item) {
-                    if (!$item->is_ended) {
+                $events = $query->where('is_ended', false);
+
+                foreach($events as $key => $item){
+                    if(Carbon::parse($item->date)->subDays(7) > Carbon::now()){
                         unset($events[$key]);
                     }
                 }
                 break;
+            case 'selesai':
+                $events = $query->where('is_ended', true);
+                break;
             default:
                 $category = 'semua';
+                $events = $query;
                 break;
         }
 
@@ -105,20 +117,27 @@ class EventController extends Controller
 
     public function manage($category = 'semua')
     {
+        $events = [];
         $query    = Event::where('user_id', Auth::user()->id)->latest();
 
         switch ($category) {
             case 'akan-berlangsung':
+                $events = $query->where('is_ended', false)->get();
+
+                foreach($events as $key => $item){
+                    if(Carbon::parse($item->date)->subDays(7) > Carbon::now()){
+                        unset($events[$key]);
+                    }
+                }
                 break;
             case 'selesai':
-                $query = $query->where('is_ended', true);
+                $events = $query->where('is_ended', true)->get();
                 break;
             default:
                 $category = 'semua';
+                $events = $query->get();
                 break;
         }
-
-        $events = $query->get();
 
         return view('pages.event.manage', compact('events', 'category'));
     }
