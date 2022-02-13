@@ -4,8 +4,8 @@
 
 @section('content')
 <main class="py-16  max-w-screen-xl mx-auto px-4 md:px-6">
-    <div class="flex justify-between">
-        <section class="flex items-center gap-x-10 overflow-auto md:overflow-visible">
+    <div class="flex flex-col md:flex-row justify-between">
+        <section class="navbar flex items-center gap-x-10 overflow-x-auto space-x-8">
             <a href="{{route('event.search')}}"class="{{$category == 'semua' ? 'link-secondary ' : 'text-grey cursor-pointer'}} ">Semua</a>
             <a href="{{route('event.search', 'onsite')}}" class="{{$category == 'onsite' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Onsite</a>
             <a href="{{route('event.search', 'online')}}" class="{{$category == 'online' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Online</a>
@@ -16,7 +16,7 @@
         <form action="{{route('event.search', $category)}}" method="GET">
             @csrf
         <div >
-            <div class="flex items-center max-w-md mx-auto bg-white rounded-lg " x-data="{ search: '' }">
+            <div class="flex items-center max-w-md mx-auto bg-white rounded-lg mt-10" x-data="{ search: '' }">
                 <div class="w-full border-1 p-1.5">
                     <input value="{{old('keyword')}}" name="keyword" type="search" class="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
                         placeholder="Cari nama atau pengelola event..." x-model="search">
