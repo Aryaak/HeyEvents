@@ -1,4 +1,4 @@
-@section('title', 'Buat Event')
+@section('title', 'Lihat Event')
 
 @extends('layouts.app')
 
@@ -27,7 +27,6 @@
                 <p class="text-grey">{{$event->user->bio ? $event->user->bio : 'Bio belum di set'}}</p>
             </div>
         </a>
-       
         <div class="ml-36">
             @auth
                 @if ($event->user_id == Auth::user()->id)
@@ -39,16 +38,21 @@
                     <input type="hidden" name="event_id" value="{{$event->id}}">
                                     <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                     <button type="submit" class="btn-secondary md:ml-8">Keluar</button>
-                 </form>
+                </form>
+                @elseif($event->is_pending)
+                <button class="link-secondary">Proses Verifikasi</button>
                 @else
-                {{-- <form action="{{route('event.join')}}" method="POST"> --}}
+                @if ($event->status_id == 1)
+                <button class="btn-primary md:ml-8" id="btn2">Gabung</button>
+                @else 
+                <form action="{{route('event.join')}}" method="POST">
                     @csrf
                     <input type="hidden" name="event_id" value="{{$event->id}}">
                     <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-                    <button type="submit" class="btn-primary md:ml-8" id="btn1">Gabung</button>
+                    <button type="submit" class="btn-primary md:ml-8" >Gabung</button>
                 </form>
                 @endif
-              
+                @endif
                 @endif 
             @endauth
             @guest
@@ -61,6 +65,7 @@
             @endguest
 
         </div>
+
     </div>
 
     @auth
@@ -99,8 +104,10 @@
     </div>
     @endauth
     
-
     <div class="mt-12 mx-auto w-6/12">
+        @error('document')
+        <span class="text-red-600 italic text-xs text-center mx-auto">{{$message}}</span>
+        @enderror
         <h1 class="font-bold text-3xl">{{$event->name}}</h1>
 
         <img src="{{asset('storage/' . $event->photo)}}" width="786" height="481" class="mt-16 mx-auto blok">
@@ -168,178 +175,145 @@
             @endif
         </div>
     </div>
+
+    <div class="mt-12 mx-auto w-6/12">
+        <hr>
+        <h1 class="text-dark font-semibold mt-10">Partisipan tertunda</h1>
+        <table class="table-auto w-full mt-10">
+            <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                <tr>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Nama</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Email</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-left">Bukti Pembayaran</div>
+                    </th>
+                    <th class="p-2 whitespace-nowrap">
+                        <div class="font-semibold text-center">Aksi</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="text-sm divide-y divide-gray-100">
+                @foreach ($pendings as $item)
+                <tr>
+                    <td class="p-2 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img src="https://raw.githubusercontent.com/cruip/vuejs-admin-dashboard-template/main/src/images/user-36-05.jpg" width="40" height="40" alt="Alex Shatov"></div>
+                            <div class="font-medium text-gray-800">Alex Shatov</div>
+                        </div>
+                    </td>
+                    <td class="p-2 whitespace-nowrap">
+                        <div class="text-left">alexshatov@gmail.com</div>
+                    </td>
+                    <td class="p-2 whitespace-nowrap">
+                        <div class="text-left font-medium text-green-500">$2,890.66</div>
+                    </td>
+                    <td class="p-2 whitespace-nowrap">
+                        <div class="text-lg text-center">🇺🇸</div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </main>
 
- {{-- modal --}}
- @auth
- <div class="bg-black bg-opacity-50 fixed inset-0 hidden justify-center items-center z-50" id="overlay">
-    <div class="bg-white max-w-2xl py-2 px-3  shadow-xl ">
-        <div class="p-6  mt-10 ">
-            <div class="flex justify-between mb-3">
-                <h3 class="text-lg font-bold  text-black ">
-                    Laporkan {{$event->name}}
-                </h3>
-            </div>
-              <p class="text-base leading-relaxed text-grey ">
-                Kami menangani laporan event dengan serius. Pihak HeyEvents!
-                tidak akan segan menindak pengguna yang melanggar ITE
-              </p>
-            <!-- input -->
-            <form action="{{route('event.report')}}" method="POST">
-            @csrf
-            <input type="hidden" name="event_id" value="{{$event->id}}">
-            <input type="hidden" name="reporter_id" value="{{Auth::user()->id}}">
-            <div class="mt-5 mb-3">
-                <label for="email" class="block mb-2 text-xl text-black font-bold">Mengapa Anda Melaporkan {{$event->name}}?</label>
-                @error('report')
-                <span class="text-red-600 italic text-xs">{{$message}}</span>
-                @enderror
-                <div class="border-1 border-black">
-                    <textarea name="report" id="message" rows="9" class="block p-2.5 w-full text-sm text-black bg-white border border-black outline-none "></textarea>
+    {{-- modal --}}
+    @auth
+    <div class="bg-black bg-opacity-50 fixed inset-0 hidden justify-center items-center z-50" id="overlay">
+        <div class="bg-white max-w-2xl py-2 px-3  shadow-xl ">
+            <div class="p-6  mt-10 ">
+                <div class="flex justify-between mb-3">
+                    <h3 class="text-lg font-bold  text-black ">
+                        Laporkan {{$event->name}}
+                    </h3>
                 </div>
-            </div>
-            <div class="flex items-center space-x-5 rounded-b border-gray-200  ">
-                <button data-modal-toggle="defaultModal" type="submit" type="button" class="btn-primary">Laporkan</button>
-                <button data-modal-toggle="defaultModal" id="close-btn" type="button" class="btn-secondary">Batal</button>
-            </div>
-            </form>
-           
-        </div>
-    </div>
-</div>
-
-{{-- modal1  --}}
-<div class="hidden bg-black bg-opacity-50 fixed inset-0 justify-center items-center" id="overlay1">
-    <div class="bg-white max-w-screen-lg py-2 px-3 rounded shadow-xl text-gray-800 flex">
-        <div class="card m-10 md:flex md:flex-col hidden">
-            <div class="mb-5">
-                <img src="./img/1.jpg" class="w-full">
-            </div>
-            <div class="mb-5 w-full">
-                <h4 class="text-prime font-bold text-xl w-full mb-2">Rapat Terbuka HIMA Unair</h4>
-                <p class="text-grey w-full">Rapat rutin tahunan dari berbagai himpunan mahasiswa Unair yang
-                    dilakukan secara terb...</p>
-            </div>
-            <div class="grid grid-cols-2 gap-y-5 mb-5">
-                <div class="flex items-center">
-                    <img src="./img/ic_location.svg">
-                    <p class="text-grey ml-3">Daring</p>
-                </div>
-                <div class="flex items-center">
-                    <img src="./img/ic_people.svg">
-                    <p class="text-grey ml-3">58 Peserta</p>
-                </div>
-                <div class="flex items-center">
-                    <img src="./img/ic_calendar.svg">
-                    <p class="text-grey ml-3">28 Januari 2022</p>
-                </div>
-                <div class="flex items-center">
-                    <img src="./img/ic_ticket.svg">
-                    <p class="text-prime font-semibold ml-3">Gratis</p>
-                </div>
-            </div>
-            <div>
-                <div class="flex items-center">
-                    <img src="./img/2.jpg" width="53" height="53">
-                    <div class="ml-5">
-                        <p class="text-prime font-bold">Haruna</p>
-                        <p class="text-grey">Mahasiswa</p>
+                <p class="text-base leading-relaxed text-grey ">
+                    Kami menangani laporan event dengan serius. Pihak HeyEvents!
+                    tidak akan segan menindak pengguna yang melanggar ITE
+                </p>
+                <!-- input -->
+                <form action="{{route('event.report')}}" method="POST">
+                @csrf
+                <input type="hidden" name="event_id" value="{{$event->id}}">
+                <input type="hidden" name="reporter_id" value="{{Auth::user()->id}}">
+                <div class="mt-5 mb-3">
+                    <label for="email" class="block mb-2 text-xl text-black font-bold">Mengapa Anda Melaporkan {{$event->name}}?</label>
+                    @error('report')
+                    <span class="text-red-600 italic text-xs">{{$message}}</span>
+                    @enderror
+                    <div class="border-1 border-black">
+                        <textarea name="report" id="message" rows="9" class="block p-2.5 w-full text-sm text-black bg-white border border-black outline-none "></textarea>
                     </div>
                 </div>
-            </div>
-            <a class="btn-event absolute right-0 bottom-0 py-4 group overflow-hidden">
-                <svg class="group-active:relative group-active:-right-4 transition duration-1000 ease-in-out"
-                    width="32" height="32" viewBox="0 0 32 32" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M5.33337 15.6343C5.33337 15.128 5.70958 14.7096 6.19768 14.6434L6.33337 14.6343L23.912 14.6351L17.5614 8.31036C17.17 7.92068 17.1687 7.28752 17.5583 6.89615C17.9126 6.54037 18.4681 6.5069 18.8602 6.79652L18.9726 6.89311L27.0392 14.9251C27.0908 14.9765 27.1356 15.0321 27.1736 15.0908C27.1844 15.1084 27.1953 15.1265 27.2057 15.145C27.2152 15.1608 27.2238 15.1772 27.232 15.1938C27.2433 15.2179 27.2543 15.2429 27.2643 15.2683C27.2724 15.288 27.2792 15.307 27.2854 15.3263C27.2928 15.3501 27.3 15.3756 27.3061 15.4014C27.3107 15.4194 27.3143 15.4367 27.3175 15.4542C27.3219 15.4801 27.3257 15.5069 27.3284 15.534C27.3307 15.5547 27.3321 15.5752 27.3329 15.5957C27.3331 15.6082 27.3334 15.6212 27.3334 15.6343L27.3329 15.673C27.3321 15.6926 27.3308 15.7122 27.3288 15.7318L27.3334 15.6343C27.3334 15.6974 27.3275 15.7591 27.3164 15.819C27.3138 15.8333 27.3107 15.8479 27.3072 15.8626C27.3001 15.8927 27.2919 15.9217 27.2825 15.9501C27.2778 15.9642 27.2724 15.9793 27.2667 15.9943C27.255 16.0243 27.2423 16.053 27.2283 16.081C27.2218 16.0941 27.2145 16.1079 27.2069 16.1215C27.1944 16.1437 27.1816 16.1648 27.1679 16.1854C27.1583 16.1999 27.1477 16.2151 27.1366 16.23L27.1279 16.2415C27.101 16.2767 27.0718 16.3101 27.0405 16.3414L27.0393 16.3423L18.9726 24.3756C18.5813 24.7654 17.9481 24.764 17.5584 24.3727C17.2041 24.017 17.173 23.4613 17.4643 23.0705L17.5613 22.9585L23.9094 16.6351L6.33337 16.6343C5.78109 16.6343 5.33337 16.1866 5.33337 15.6343Z"
-                        fill="white" />
-                </svg>
-            </a>
-        </div>
-
-        <div class="border-1 border-gray-300 hidden md:flex"></div>
-
-
-        <div class="md:mx-10 mx-2 flex flex-col md:w-6/12 w-fulls">
-            <div class="flex gap-x-5 mt-10">
-                <div class="mt-1">
-                    <img src="img/Ticket.svg" alt="">
+                <div class="flex items-center space-x-5 rounded-b border-gray-200  ">
+                    <button data-modal-toggle="defaultModal" type="submit" type="button" class="btn-primary">Laporkan</button>
+                    <button data-modal-toggle="defaultModal" id="close-btn" type="button" class="btn-secondary">Batal</button>
                 </div>
-                <div>
-                    <h1 class="text-2xl font-bold text-prime">Harga Akses</h1>
-                    <p class="text-gray-700">IDR 210.000,-</p>
-                </div>
-            </div>
-
-            <div class="mt-16">
-                <h1 class="text-2xl font-bold text-prime">Pilih Metode Pembayaran</h1>
-                <div class="mt-6">
-                    <img src="{{asset('img/BNI.svg')}} " alt="">
-                    <div class="flex gap-x-5 mt-2">
-                        <p>0123456789</p>
-                        <p class="text-gray-400 text-sm">copy</p>
-                    </div>
-                </div>
-                <div class="mt-6">
-                    <img src="{{asset('img/BCA.svg')}} " alt="">
-                    <div class="flex gap-x-5 mt-2">
-                        <p>0987654321</p>
-                        <p class="text-gray-400 text-sm">copy</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-center gap-x-5 items-center space-x-2 rounded-b border-gray-200 my-14">
-                <button data-modal-toggle="defaultModal"
-                    class="btn-secondary" id="modal2">Bayar Dengan Midtrans</button>
-                <div class="close-btn1">
-                    <button data-modal-toggle="defaultModal" class="btn-primary" id="btn2">Upload Bukti</button>
-                </div>
+                </form>
+            
             </div>
         </div>
     </div>
-</div>
 
+    <form action="{{route('event.pay')}}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="user_id" value="{{Auth::user()->id}}" >
+        <input type="hidden" name="event_id" value="{{$event->id}}" >
+        
     <!-- modal2 -->
-    <div class="hidden bg-black bg-opacity-50 absolute inset-0 justify-center items-center" id="overlay2">
-        <div class="bg-white max-w-screen-lg py-2 px-3 rounded shadow-xl text-gray-800 flex flex-col md:flex-row">
-            <div class="card md:m-10 m-0 md:w-1/2 w-11/12 md:flex md:flex-col hidden">
+    <div class="bg-black bg-opacity-50 fixed inset-0 hidden  justify-center items-center z-50" id="overlay2">
+        <div  class="modal-box">
+            <!-- Card -->
+            <div class="card">
                 <div class="mb-5">
-                    <img src="./img/1.jpg" class="w-full">
+                    <img src="{{asset('storage/' . $event->photo)}}" class="w-full h-200px">
                 </div>
                 <div class="mb-5 w-full">
-                    <h4 class="text-prime font-bold text-xl w-full mb-2">Rapat Terbuka HIMA Unair</h4>
-                    <p class="text-grey w-full">Rapat rutin tahunan dari berbagai himpunan mahasiswa Unair yang
-                        dilakukan secara terb...</p>
+                    <h4 class="text-prime font-bold text-xl w-full mb-2">{{Str::limit($event->name, 31, $end='...') }}</h4>
+                    <div class="text-grey max-w-full break-words whitespace-pre-wrap card-text">{{strip_tags(Str::limit($event->description, 100, $end='...')) }}</div>
                 </div>
                 <div class="grid grid-cols-2 gap-y-5 mb-5">
                     <div class="flex items-center">
-                        <img src="./img/ic_location.svg">
-                        <p class="text-grey ml-3">Daring</p>
+                        <img src="{{asset('img/ic_location.svg')}}">
+                        <p class="text-grey ml-3">{{$event->category->name}}</p>
                     </div>
                     <div class="flex items-center">
-                        <img src="./img/ic_people.svg">
-                        <p class="text-grey ml-3">58 Peserta</p>
+                        <img src="{{asset('img/ic_people.svg')}}">
+                        <p class="text-grey ml-3">{{$event->quota}} Peserta</p>
                     </div>
                     <div class="flex items-center">
-                        <img src="./img/ic_calendar.svg">
-                        <p class="text-grey ml-3">28 Januari 2022</p>
+                        <img src="{{asset('img/ic_calendar.svg')}}">
+                        @if ($event->is_ended)
+                        <p class="text-grey ml-3">Selesai</p>
+                        @else
+                        <p class="text-grey ml-3">{{ \Carbon\Carbon::parse($event->date)->isoFormat('D MMMM Y')}}</p>
+                        @endif
                     </div>
                     <div class="flex items-center">
-                        <img src="./img/ic_ticket.svg">
-                        <p class="text-prime font-semibold ml-3">Gratis</p>
+                        <img src="{{asset('img/ic_ticket.svg')}}">
+                        <p class="text-prime font-semibold ml-3">{{$event->status->name}}</p>
                     </div>
                 </div>
-                <div>
-                    <div class="flex items-center">
-                        <img src="./img/2.jpg" width="53" height="53">
+                <div class="relative">
+                    <a href="{{route('profile', $event->user->slug)}}" class="flex items-center">
+                        <img src="{{asset('storage/' . $event->user->photo)}}" width="53" height="53">
                         <div class="ml-5">
-                            <p class="text-prime font-bold">Haruna</p>
-                            <p class="text-grey">Mahasiswa</p>
+                            <div class="flex ">
+                                <p class="text-prime font-bold">{{$event->user->name}}</p>
+                                @if ($event->user->status_id == 1)
+                                <img src="{{asset('img/check.svg')}}" class="ml-3">
+                                @endif
+                            </div>
+                            <p class="text-grey">{{$event->user->bio ? $event->user->bio : 'Bio belum di set'}}</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
-                <a class="btn-event absolute right-0 bottom-0 py-4 group overflow-hidden">
-                    <svg class="group-active:relative group-active:-right-4 transition duration-1000 ease-in-out"
+                <a href="{{route('event.show', $event->slug)}}" class="btn-event absolute right-0 bottom-0 py-4 group overflow-hidden">
+                    <svg class="group-active:relative group-active:-right-4 transform group-hover:scale-125  transition duration-100 ease-in-out"
                         width="32" height="32" viewBox="0 0 32 32" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M5.33337 15.6343C5.33337 15.128 5.70958 14.7096 6.19768 14.6434L6.33337 14.6343L23.912 14.6351L17.5614 8.31036C17.17 7.92068 17.1687 7.28752 17.5583 6.89615C17.9126 6.54037 18.4681 6.5069 18.8602 6.79652L18.9726 6.89311L27.0392 14.9251C27.0908 14.9765 27.1356 15.0321 27.1736 15.0908C27.1844 15.1084 27.1953 15.1265 27.2057 15.145C27.2152 15.1608 27.2238 15.1772 27.232 15.1938C27.2433 15.2179 27.2543 15.2429 27.2643 15.2683C27.2724 15.288 27.2792 15.307 27.2854 15.3263C27.2928 15.3501 27.3 15.3756 27.3061 15.4014C27.3107 15.4194 27.3143 15.4367 27.3175 15.4542C27.3219 15.4801 27.3257 15.5069 27.3284 15.534C27.3307 15.5547 27.3321 15.5752 27.3329 15.5957C27.3331 15.6082 27.3334 15.6212 27.3334 15.6343L27.3329 15.673C27.3321 15.6926 27.3308 15.7122 27.3288 15.7318L27.3334 15.6343C27.3334 15.6974 27.3275 15.7591 27.3164 15.819C27.3138 15.8333 27.3107 15.8479 27.3072 15.8626C27.3001 15.8927 27.2919 15.9217 27.2825 15.9501C27.2778 15.9642 27.2724 15.9793 27.2667 15.9943C27.255 16.0243 27.2423 16.053 27.2283 16.081C27.2218 16.0941 27.2145 16.1079 27.2069 16.1215C27.1944 16.1437 27.1816 16.1648 27.1679 16.1854C27.1583 16.1999 27.1477 16.2151 27.1366 16.23L27.1279 16.2415C27.101 16.2767 27.0718 16.3101 27.0405 16.3414L27.0393 16.3423L18.9726 24.3756C18.5813 24.7654 17.9481 24.764 17.5584 24.3727C17.2041 24.017 17.173 23.4613 17.4643 23.0705L17.5613 22.9585L23.9094 16.6351L6.33337 16.6343C5.78109 16.6343 5.33337 16.1866 5.33337 15.6343Z"
@@ -347,70 +321,80 @@
                     </svg>
                 </a>
             </div>
-
-            <div class="border-1 border-gray-300 hidden md:flex"></div>
-
-            <div class="md:mx-10 mx-2 flex flex-col md:w-6/12 w-fulls">
-                <div class="flex gap-x-5 mt-10">
-                    <div class="mt-1">
-                        <img src="img/Ticket.svg" alt="">
-                    </div>
-                    <div>
-                        <h1 class="text-2xl font-bold text-prime">Harga Akses</h1>
-                        <p class="text-gray-700">IDR 210.000,-</p>
-                    </div>
-                </div>
-
-                <div class="mt-16">
-                    <h1 class="text-2xl font-bold text-prime">Pilih Metode Pembayaran</h1>
-                    <div class="mt-6">
-                        <img src="{{asset('img/BNI.svg')}} " alt="">
-                        <img src="{{asset('img/logo.svg')}}" alt="">
-                        <div class="flex gap-x-5 mt-2">
-                            <p>0123456789</p>
-                            <p class="text-gray-400 text-sm">copy</p>
+            <!-- End Card -->
+            <div class="line">
+            </div>
+            <div class="md:mx-10 mx-2 flex flex-col payment">
+                <div class="w-1 h-full absolute bg-grey left-60"></div>
+                    <div class="flex  mt-10">
+                        <div >
+                            <img src="img/Ticket.svg" alt="">
+                        </div>
+                        <div>
+                            <div class="flex mb-2">
+                                <img src="{{asset('img/ic_ticket.svg')}}">
+                                <h1 class="text-2xl font-bold text-prime ml-3">Harga Akses</h1>
+                            </div>
+                            <p class="text-black ml-10">IDR 210.000,-</p>
                         </div>
                     </div>
-                    <div class="mt-6">
-                        <img src="{{asset('img/BCA.svg')}} " alt="">
-                        <div class="flex gap-x-5 mt-2">
-                            <p>0987654321</p>
-                            <p class="text-gray-400 text-sm">copy</p>
+
+                    <div class="mt-16">
+                        <h1 class="text-2xl font-bold text-prime">Pilih Metode Pembayaran</h1>
+                        <div class="mt-6">
+                            <img src="{{asset('img/BNI.svg')}} " alt="">
+                            <div class="flex gap-x-5 mt-2">
+                                <p>0123456789</p>
+                                <p class="text-gray-400 text-sm">copy</p>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <img src="{{asset('img/BCA.svg')}} " alt="">
+                            <div class="flex gap-x-5 mt-2">
+                                <p>0987654321</p>
+                                <p class="text-gray-400 text-sm">copy</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="flex justify-center items-center space-x-2 rounded-b border-gray-200 mt-40">
-                    <button data-modal-toggle="defaultModal"
-                        class="btn-primary" id="btn3">Upload Bukti</button>
+                    <div style="margin-top: 100px;" class="flex justify-center items-center space-x-2 rounded-b border-gray-200 mt-40">
+                        <span data-modal-toggle="defaultModal"
+                            class="btn-primary w-full" id="btn3">Upload Bukti</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- modal3 -->
-    <div class="hidden bg-black bg-opacity-50 absolute inset-0 justify-center items-center" id="overlay3">
-        <div class="bg-white max-w-screen-xl py-2 px-3 rounded shadow-xl text-gray-800 flex w-8/12">
+    <div class="bg-black bg-opacity-50 fixed inset-0 hidden justify-center items-center z-50" id="overlay3">
+        <div class="modal-box">
             <div class="py-10 w-full mx-auto px-4 md:px-6">
-                <div id="step1">
+                <div >
                     <div class="flex justify-between">
-                        <a href="index.html" class="btn-secondary">Kembali</a>
-                        <button onclick="next()" class="btn-primary" id="btn4">Upload</button>
+                        <button  id="btn2" class="btn-secondary">Kembali</button>
+                        <a class="btn-primary" id="btn4">Upload</a>
                     </div>
         
-                    <div id="drop_zone" class="border-1 border-prime mt-10 border-dashed py-14 relative md:w-8/12 mx-auto">
+                    <div id="drop_zone" class="border-1 cursor-pointer border-prime mt-10 border-dashed py-28  relative md:w-8/12 mx-auto">
+      
                         <div id="btn_file_pick"
                             class="  absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center p-3">
+                            <!-- <div class="absolute">
+                                <p id="file_info">Nama file: asdas</p>
+                            </div> -->
                             <img src="" id="gambar" style="height: 100%; ">
                         </div>
                         <div id="upload_info" class="flex justify-center items-center flex-col">
-                            <img src="{{asset('img/ic_image.svg')}} ">
-                            <p class="text-prime mt-10 ml-3 md:ml-0">Drag and drop bukti pembayaran di kotak ini. Atau <span
+                            <img src="{{asset('img/ic_image.svg')}}">
+                            <p class="text-prime mt-10">Drag and drop foto event di kotak ini. Atau <span
                                     class="font-bold">upload</span></p>
-                            <p class="text-grey mt-3 ml-3 md:ml-0">*file harus dalam format jpg, jpeg, png</p>
-                            <input type="file" id="selectfile" class="opacity-0">
+                            <p class="text-grey mt-3">*file harus dalam format jpg, jpeg, png</p>
+                            <!-- <p><button type="button" id="" class="btn btn-primary"><span
+                                        class="glyphicon glyphicon-folder-open"></span> Select File</button></p> -->
+                            <input type="file" id="selectfile" name="document" class="opacity-0">
                             <p id="message_info"></p>
                         </div>
-        
+            
                     </div>
         
                     <div class="image">
@@ -422,8 +406,8 @@
     </div>
 
     <!-- modal4 -->
-    <div class="hidden bg-black bg-opacity-50 fixed inset-0 justify-center items-center z-50" id="overlay4">
-        <div class="bg-white py-2 px-3 rounded shadow-xl text-gray-800 flex w-9/12">
+    <div class="bg-black bg-opacity-50 fixed inset-0 hidden justify-center items-center z-50" id="overlay4">
+        <div class="modal-box">
             <div class="py-10 w-full mx-auto px-4 md:px-6">
                 <div class="flex justify-center">
                     <img src="{{asset('img/modal.svg')}} " alt="">
@@ -433,18 +417,123 @@
                     <p class="text-black">Pembayaran anda telah diterima dan sedang diverifikasi</p>
                 </div>
                 <div class="flex justify-center mt-10">
-                    <button data-modal-toggle="defaultModal"
+                    <button type="submit" data-modal-toggle="defaultModal"
                         class="btn-primary" id="close-btn4">Kembali</button>
                 </div>
             </div>
         </div>
     </div>
+</form>
 
- @endauth
+    @endauth
  
 @endsection
 
 @push('js')
+<script>
+    if (!document.getElementById('selectfile')) {
+        document.getElementById('gambar').style.display = 'none';
+        document.getElementById('upload_info').style.opacity = 1;
+    }
+    var fileobj;
+    $(document).ready(function () {
+        $("#drop_zone").on("dragover", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        });
+        $("#drop_zone").on("drop", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            fileobj = event.originalEvent.dataTransfer.files[0];
+            gambar(event.originalEvent.dataTransfer);
+            var fname = fileobj.name;
+            var fsize = fileobj.size;
+            if (fname.length > 0) {
+                document.getElementById('file_info').innerHTML = "Nama file : " + fname +
+                    ' <br>Ukuran file : ' + bytesToSize(fsize);
+            }
+            document.getElementById('selectfile').files[0] = fileobj;
+            // document.getElementById('btn_upload').style.display = "inline";
+        });
+
+
+
+        function gambar(a) {
+            console.log('IMGAE', a.files)
+            if (a.files && a.files[0]) {
+                if (document.getElementById('selectfile').files[0]) {
+                    document.getElementById('upload_info').style.opacity = 0;
+                    document.getElementById('gambar').style.display = 'block';
+                }
+                // let preview  = URL.createObjectURL(document.getElementById('selectfile').files[0])
+                //     document.getElementById('gambar').src = preview;
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('gambar').src = e.target.result;
+                }
+                reader.readAsDataURL(a.files[0]);
+            }
+
+        }
+        $('#selectfile').change(function () {
+            gambar(document.getElementById('selectfile'));
+        });
+
+        $('#btn_file_pick').click(function () {
+            /*normal file pick*/
+            gambar(document.getElementById('selectfile'));
+            document.getElementById('selectfile').click();
+            document.getElementById('selectfile').onchange = function () {
+                fileobj = document.getElementById('selectfile').files[0];
+                var fname = fileobj.name;
+                var fsize = fileobj.size;
+                if (fname.length > 0) {
+                    document.getElementById('file_info').innerHTML = "Nama file : " + fname +
+                        ' <br>Ukuran File : ' + bytesToSize(fsize);
+                }
+                // document.getElementById('btn_upload').style.display = "inline";
+            };
+        });
+        $('#btn_upload').click(function () {
+            if (fileobj == "" || fileobj == null) {
+                alert("Please select a file");
+                return false;
+            } else {
+                ajax_file_upload(fileobj);
+            }
+        });
+    });
+
+    function ajax_file_upload(file_obj) {
+        if (file_obj != undefined) {
+            var form_data = new FormData();
+            form_data.append('upload_file', file_obj);
+            $.ajax({
+                type: 'POST',
+                url: 'upload.php',
+                contentType: false,
+                processData: false,
+                data: form_data,
+                beforeSend: function (response) {
+                    $('#message_info').html("Uploading your file, please wait...");
+                },
+                success: function (response) {
+                    $('#message_info').html(response);
+                    alert(response);
+                    $('#selectfile').val('');
+                }
+            });
+        }
+    }
+
+    function bytesToSize(bytes) {
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        if (bytes == 0) return '0 Byte';
+        var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+        return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    }
+</script>
 <script>
     // modal report 
 const overlay = document.querySelector('#overlay')

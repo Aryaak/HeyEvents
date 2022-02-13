@@ -19,6 +19,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('event/leave', [EventController::class, 'leave'])->name('event.leave');
     Route::post('event/save', [EventController::class, 'save'])->name('event.save');
     Route::post('event/unsave', [EventController::class, 'unsave'])->name('event.unsave');
+    Route::post('event/pay', [EventController::class, 'pay'])->name('event.pay');
     
     Route::get('discussion/{slug}', [DiscussionController::class, 'discussions'])->name('event.discussion');
     Route::post('discussion/store', [DiscussionController::class, 'store'])->name('discussion.store');

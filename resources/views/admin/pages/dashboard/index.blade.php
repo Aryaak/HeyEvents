@@ -1,4 +1,4 @@
-@section('title', 'Buat Event')
+@section('title', 'Dashboard')
 @extends('admin.layouts.dashboard')
 
 @section('page', 'Dashboard')

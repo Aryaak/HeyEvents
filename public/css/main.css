@@ -101,3 +101,27 @@ input[type="radio"]:checked+label {
     height: 5px;
     background-color: #312B78 !important;
 }
+
+.modal-box {
+    position: relative;
+    width: 80vw;
+    background-color: white;
+    display: flex;
+}
+
+.modal-box .card {
+    margin: 80px 50px;
+}
+
+.modal-box .payment {
+    margin: 40px 60px;
+}
+
+.modal-box .line{
+    position: absolute;
+    top: 0;
+    left: 35vw;
+    width: 1px;
+    height: 100%;
+    background-color: gray;
+}

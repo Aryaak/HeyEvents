@@ -153,12 +153,14 @@ class EventController extends Controller
     {
         $event = Event::where('slug', $slug)->first();
 
-        $event['is_joined'] = DB::table('event_user')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event->id)->first();
+        $event['is_joined'] = DB::table('event_user')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event->id)->where('status_id', 1)->first();
+        $event['is_pending'] = DB::table('event_user')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event->id)->where('status_id', 2)->first();
         $event['is_saved'] = DB::table('event_saved')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event->id)->first();
 
-        $members = array_slice($event->users->where('id', '!=', $event->user->id)->toArray(), 0, 11);
-
-        return view('pages.event.show', compact('event', 'members'));
+        $members = array_slice($event->users->where('id', '!=', $event->user->id)->where('status_id',  1)->toArray(), 0, 11);
+        $pendings = $event->users->where('status_id', 1);
+        dd($pendings);
+        return view('pages.event.show', compact('event', 'members', 'pendings'));
     }
     
 
@@ -208,6 +210,23 @@ class EventController extends Controller
 
         EventReport::create($data);
 
+        return redirect()->back();
+    }
+
+    public function pay(Request $request)
+    {
+        $input = request()->all();
+
+        $this->validate($request, [
+            'document' => ['mimes:jpeg,jpg,png,gif,pdf', 'required', 'max:10000'],
+        ]);
+
+        DB::table('event_user')->insert([
+            'event_id' => $input['event_id'],
+            'user_id' => $input['user_id'],
+            'status_id' => 2,
+            'document' => request()->file('document') ? request()->file('document')->store('documents') : null
+        ]);
         return redirect()->back();
     }
 }
