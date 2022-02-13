@@ -22,7 +22,7 @@
                         dengan event dan <br> ciptakan momen berharga dalam hidup
                     </p>
                 </div>
-                <div class="flex flex-1 gap-6 justify-center">
+                <div class="flex md:flex-row flex-col gap-6 justify-center ml-10">
                     <button class="btn-primary h-2/5">Cari Events</button>
                     <button class="btn mb-5 md:mb-0 bg-white hover:bg-prime hover:text-white ">Buat Events</button>
                 </div>
@@ -36,7 +36,8 @@
 
     <!-- logo -->
     <div
-        class="relative content flex md:flex-row md:flex-rows max-w-screen-xl px-4 mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-12">
+        class="logo-iklan relative content flex md:flex-row md:flex-rows max-w-screen-xl px-4 mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-12 mx-auto overflow-x-auto space-x-8">
+    {{-- <div class="relative content flex md:flex-row md:flex-rows max-w-screen-xl px-4 mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-12 overflow-x-auto space-x-8"> --}}
         <img src="img/apple.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-0">
         <img src="img/adobe.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
         <img src="img/slack.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
@@ -45,34 +46,37 @@
     </div>
 
     <!-- content -->
-    <div
-        class="relative content flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-start md:flex-row md:px-8 lg:px-8 py-5 mt-12 pl-4">
-        <div class="md:ml-20 ml-0">
-            <img src="img/kotak.png" alt="">
-        </div>
-        <div>
-            <h1 class="font-semibold md:text-3xl text-lg ml-36">Cari dan <br> Gabung <br> Event <br> Disekitar</h1>
-        </div>
-        <div class="ml-20">
-            <img src="img/content1.png" alt="">
-        </div>
+   <div
+    class="content1 relative content flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-start md:flex-row md:px-8 lg:px-8 py-5 mt-12 pl-4">
+    <div class="md:ml-20 ml-10">
+        <img src="img/kotak.png" alt="">
     </div>
+    <div class="flex justify-center">
+        <h1 class="font-semibold md:text-3xl text-2xl md:ml-16 ml-0 mt-10 text-center">Cari dan <br class="md:flex hidden">
+            Gabung <br class="md:flex hidden"> Event Disekitar</h1>
+    </div>
+    <div class="md:ml-10 ml-0 flex justify-center">
+        <img src="img/content1.png" class="w-16">
+    </div>
+</div>
 
-    <!-- content2 -->
-    <div
-        class="relative content flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-end md:flex-row md:px-8 lg:px-8 py-5 mt-16">
-        <div class="ml-80">
-            <img src="img/content2.png" alt="">
-        </div>
-        <div class="ml-16">
-            <p class="text-grey w-2/4 mb-5">Bertemu dengan berbagai teman baru. Berbagi ide, menambah relasi, dan
-                ciptakan momen bersama</p>
-            <button class="btn-secondary">Gabung Events Sekarang</button>
-        </div>
-        <div class="mr-20">
-            <img src="img/kotak2.png" alt="">
-        </div>
+{{-- content2 --}}
+<div
+    class="relative content flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-end md:flex-row md:px-8 lg:px-8 py-5 mt-12 pl-4 gap-x-5 content2">
+    <div class="md:ml-20 ml-0 flex justify-center">
+        <img src="img/content2.png">
     </div>
+    <div class="content ml-0 md:mt-0 mt-14 text-center">
+        <p class="text-grey mb-5">Bertemu dengan berbagai teman baru. Berbagi ide, menambah relasi, dan
+            ciptakan momen bersama</p>
+    <div class="flex justify-center">
+        <button class="btn-secondary">Gabung Events Sekarang</button>
+    </div>
+    </div>
+    <div class="ml-10 md:mt-0 mt-10 flex justifys-center">
+        <img src="img/kotak2.png" alt="">
+    </div>
+</div>
 
     <!-- content3 -->
     <div
@@ -101,16 +105,20 @@
     <div class="bg-prime">
         <div
             class="flex flex-col max-w-screen-xl mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-16">
-            <div class="text-white">
-                <h1 class="font-bold text-3xl w-3/5 mb-5">Beberapa Event Akan Berlangsung</h1>
-                <p class="w-2/5 mb-7">Berikut adalah beberapa event yang akan
-                    diadakan oleh komunitas HeyEvents!</p>
-                <button class="btn bg-green text-white">Cari Lebih Lanjut</button>
+            <div class="text-white flex">
+                <div class=" text-center">
+                    <h1 class="font-bold text-3xl w-full md:w-3/5 mb-5">Beberapa Event Akan Berlangsung</h1>
+                    <p class="w-full md:w-2/5 mb-7">Berikut adalah beberapa event yang akan
+                        diadakan oleh komunitas HeyEvents!</p>
+                    <div>
+                        <button class="btn bg-green text-white">Cari Lebih Lanjut</button>
+                    </div>
+                </div>
             </div>
 
             <div class="variable slider p-4">
                 <!-- Card -->
-                <div class="mx-4">
+                <div class="mx-4 flex flex-col justify-center">
                     <div class="card border-none">
 
                         <div class="mb-5">
@@ -388,10 +396,8 @@
         </div>
         <!-- card -->
         <div class="flex md:flex-row flex-col justify-center">
-            <div>
-                <div class="mx-4 mt-16">
+            <div class="mx-4 mt-16 flex justify-center">
                     <div class="card">
-
                         <div class="mb-5">
                             <!-- <img src="./img/smkn1-head.png" class="w-full"> -->
                             <img src="./img/rate.svg" alt="">
@@ -402,87 +408,83 @@
                                 aplikasi
                                 seperti ini di Indonesia, platform untuk cari info info event yang ada. Sangat
                                 membantu buat orang kayak aku yang sukaa banget nge-event 😆</p>
-                        </div>
-                        <div class="flex">
-                            <div>
-                                <div class="flex">
-                                    <img src="./img/smkn1.png" width="53" height="53">
-                                    <div class="ml-5">
-                                        <div class="flex">
-                                            <p class="text-prime font-bold">SMKN 1 Surabaya</p>
-                                            <img src="{{asset('img/check.svg')}}" class="w-1/4 h-1/4">
-                                        </div>
-                                        <p class="text-grey">Sekolah</p>
+                    </div>
+                    <div class="flex">
+                        <div>
+                             <div class="flex">
+                                <img src="./img/smkn1.png" width="53" height="53">
+                                <div class="ml-5">
+                                     <div class="flex">
+                                        <p class="text-prime font-bold">SMKN 1 Surabaya</p>
+                                        <img src="{{asset('img/check.svg')}}" class="w-1/4 h-1/4">
                                     </div>
+                                    <p class="text-grey">Sekolah</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
-                <div class="mx-4 mt-16">
-                    <div class="card">
-
-                        <div class="mb-5">
-                            <!-- <img src="./img/smkn1-head.png" class="w-full"> -->
-                            <img src="./img/rate.svg" alt="">
-                        </div>
-                        <div class="mb-5 w-full">
-                            <!-- <h4 class="text-prime font-bold text-xl w-full mb-2">SMK Coding Surabaya 2022</h4> -->
-                            <p class="text-grey text-base w-full">Webnya keren bangett. Belum ada konsep aplikasi
-                                seperti ini di Indonesia, platform untuk cari info info event yang ada. Sangat
-                                membantu buat orang kayak aku yang sukaa banget nge-event 😆</p>
-                        </div>
-                        <div class="flex">
-                            <div>
-                                <div class="flex items-center">
-                                    <img src="./img/smkn1.png" width="53" height="53">
-                                    <div class="ml-5">
-                                        <div class="flex">
-                                            <p class="text-prime font-bold">SMKN 1 Surabaya</p>
-                                            <img src="{{asset('img/check.svg')}}" class="w-1/4 h-1/4">
-                                        </div>
-                                        <p class="text-grey">Sekolah</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="mx-4 mt-16 flex justify-center">
+                <div class="card">
+                    <div class="mb-5">
+                        <!-- <img src="./img/smkn1-head.png" class="w-full"> -->
+                        <img src="./img/rate.svg" alt="">
                     </div>
+                    <div class="mb-5 w-full">
+                        <!-- <h4 class="text-prime font-bold text-xl w-full mb-2">SMK Coding Surabaya 2022</h4> -->
+                        <p class="text-grey text-base md:w-full w-72">Webnya keren bangett. Belum ada konsep
+                            aplikasi
+                            seperti ini di Indonesia, platform untuk cari info info event yang ada. Sangat
+                            membantu buat orang kayak aku yang sukaa banget nge-event 😆</p>
                 </div>
-            </div>
-            <div>
-                <div class="mx-4 mt-16">
-                    <div class="card">
-
-                        <div class="mb-5">
-                            <!-- <img src="./img/smkn1-head.png" class="w-full"> -->
-                            <img src="./img/rate.svg" alt="">
-                        </div>
-                        <div class="mb-5 w-full">
-                            <!-- <h4 class="text-prime font-bold text-xl w-full mb-2">SMK Coding Surabaya 2022</h4> -->
-                            <p class="text-grey text-base w-full">Webnya keren bangett. Belum ada konsep aplikasi
-                                seperti ini di Indonesia, platform untuk cari info info event yang ada. Sangat
-                                membantu buat orang kayak aku yang sukaa banget nge-event 😆</p>
-                        </div>
-                        <div class="flex">
-                            <div>
-                                <div class="flex items-center">
-                                    <img src="./img/smkn1.png" width="53" height="53">
-                                    <div class="ml-5">
-                                        <div class="flex">
-                                            <p class="text-prime font-bold">SMKN 1 Surabaya</p>
-                                            <img src="{{asset('img/check.svg')}}" class="w-1/4 h-1/4">
-                                        </div>
-                                        <p class="text-grey">Sekolah</p>
-                                    </div>
+                <div class="flex">
+                    <div>
+                         <div class="flex">
+                            <img src="./img/smkn1.png" width="53" height="53">
+                            <div class="ml-5">
+                                 <div class="flex">
+                                    <p class="text-prime font-bold">SMKN 1 Surabaya</p>
+                                    <img src="{{asset('img/check.svg')}}" class="w-1/4 h-1/4">
                                 </div>
+                                <p class="text-grey">Sekolah</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="mx-4 mt-16 flex justify-center">
+            <div class="card">
+                <div class="mb-5">
+                    <!-- <img src="./img/smkn1-head.png" class="w-full"> -->
+                    <img src="./img/rate.svg" alt="">
+                </div>
+                <div class="mb-5 w-full">
+                    <!-- <h4 class="text-prime font-bold text-xl w-full mb-2">SMK Coding Surabaya 2022</h4> -->
+                    <p class="text-grey text-base md:w-full w-72">Webnya keren bangett. Belum ada konsep
+                        aplikasi
+                        seperti ini di Indonesia, platform untuk cari info info event yang ada. Sangat
+                        membantu buat orang kayak aku yang sukaa banget nge-event 😆</p>
+            </div>
+            <div class="flex">
+                <div>
+                     <div class="flex">
+                        <img src="./img/smkn1.png" width="53" height="53">
+                        <div class="ml-5">
+                             <div class="flex">
+                                <p class="text-prime font-bold">SMKN 1 Surabaya</p>
+                                <img src="{{asset('img/check.svg')}}" class="w-1/4 h-1/4">
+                            </div>
+                            <p class="text-grey">Sekolah</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+        
         <div class="flex justify-center mt-8">
             <button class="btn-secondary mt-12 ">Gabung Events Sekarang</button>
         </div>
