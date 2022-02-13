@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
+
+    public function index()
+    {
+        $data = Event::latest()->get();
+        return view('admin.pages.event.index', compact('data'));
+    }
+
     public function search($category = 'semua')
     {
         $query    = Event::latest();
@@ -60,7 +67,7 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $validation = [
-            'photo' => ['mimes:jpeg,jpg,png,gif', 'required', 'max:10000'],
+            'photo' => ['mimes:jpeg,jpg,png,gif,pdf', 'required', 'max:10000'],
             'name' => ['required', 'string', 'min:4', 'max:100'],
             'description' => ['required', 'string', 'min:20'],
             'address' => ['required', 'string', 'min:4', 'max:100'],

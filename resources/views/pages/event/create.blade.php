@@ -31,7 +31,7 @@
                 <img src="" id="gambar" style="height: 100%; ">
             </div>
             <div id="upload_info" class="flex justify-center items-center flex-col">
-                <img src="./img/ic_image.svg">
+                <img src="{{asset('img/ic_image.svg')}}">
                 <p class="text-prime mt-10">Drag and drop foto event di kotak ini. Atau <span
                         class="font-bold">upload</span></p>
                 <p class="text-grey mt-3">*file harus dalam format jpg, jpeg, png</p>

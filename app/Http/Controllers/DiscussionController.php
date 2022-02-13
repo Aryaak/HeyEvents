@@ -13,7 +13,7 @@ class DiscussionController extends Controller
 
     private function checkEventMember($event_id)
     {
-        $is_joined = DB::table('event_user')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event_id)->first();
+        $is_joined = DB::table('event_user')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event_id)->where('status_id', 1)->first();
         
         return $is_joined;
     }

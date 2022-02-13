@@ -38,52 +38,26 @@
             </div>
             <nav :class="{'flex': open, 'hidden': !open}"
                 class="flex-col justify-start  hidden md:flex md:justify-end md:flex-row mt-6 md:mt-0 mb-6 md:mb-0">
-                <a href="index.html" class="text-white px-5 hover:text-prime mb-4 md:mb-0">Home</a>
-                <a href="search.html" class="text-white px-5 hover:text-prime mb-4 md:mb-0">Cari Event</a>
-                <a href="create.html" class="text-white font-bold nav-active  px-5 mb-4 md:mb-0">Buat Event</a>
-                <a href="joined.html" class="text-white px-5 hover:text-prime mb-4 md:mb-0">Tergabung</a>
-                <a href="manage.html" class="text-white px-5 hover:text-prime mb-4 md:mb-0">Kelola</a>
-                <!-- <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                    href="#">Contact</a>
-                <div @click.away="open = false" class="relative" x-data="{ open: false }">
-                    <button @click="open = !open"
-                        class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                        <span>Dropdown</span>
-                        <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
-                            class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
-                            <path fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                    <div x-show="open" x-transition:enter="transition ease-out duration-100"
-                        x-transition:enter-start="transform opacity-0 scale-95"
-                        x-transition:enter-end="transform opacity-100 scale-100"
-                        x-transition:leave="transition ease-in duration-75"
-                        x-transition:leave-start="transform opacity-100 scale-100"
-                        x-transition:leave-end="transform opacity-0 scale-95"
-                        class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
-                        <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
-                            <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                href="#">Link #1</a>
-                            <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                href="#">Link #2</a>
-                            <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                href="#">Link #3</a>
-                        </div>
-                    </div>
-                </div> -->
+                <a href="{{route('home')}}" class="text-white px-5 hover:text-prime mb-4 md:mb-0">Home</a>
+                <a href="{{route('event.search')}}" class="text-white px-5 hover:text-prime mb-4 md:mb-0">Cari Event</a>
+                <a href="{{route('event.create')}}" class="text-white px-5 hover:text-prime mb-4 md:mb-0">Buat Event</a>
+                <a href="{{route('event.joined')}}" class="text-white px-5 hover:text-prime mb-4 md:mb-0">Tergabung</a>
+                <a href="{{route('event.manage')}}" class="text-white px-5 hover:text-prime mb-4 md:mb-0">Kelola</a>
+              
             </nav>
             <div :class="{'flex': open, 'hidden': !open}"
                 class=" hidden  px-5 md:flex md:justify-end md:flex-row md:pl-14 items-center md:border-l-2 border-ghost z-50">
                 <p class="text-white font-semibold text-xl mr-3 order-2 md:order-1">{{$user->name}}</p>
-                <img src="{{asset('img/3.jpg')}} " width="44" class="mr-3 order-1 md:order-2">
+                <img src="{{asset('storage/' . $user->photo)}} " width="44" class="mr-3 order-1 md:order-2">
                 <div class="relative order-3 cursor-pointer group br-prime " @click="nav_open = !nav_open">
                     <img src="{{asset('img/drop-down-2.svg')}} " width="24">
                     <div :class="{'flex transition ease-in-out duration-500': nav_open, 'hidden': !nav_open}"
                         class="hidden bg-white absolute p-5 -bottom-40 -right-16 shadow-md  flex-col justify-center ">
-                        <a href="profile.html" class="mg-5 btn-primary">Profile</a>
-                        <a class="mt-5 btn-secondary">Keluar</a>
+                        <a href="{{route('profile')}}" class="mg-5 btn-primary">Profile</a>
+                        <form action="{{route('logout')}}" method="POST">
+                        @csrf
+                        <button type="submit" class="mt-5 btn-secondary">Keluar</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -112,14 +86,19 @@
     <!-- end header -->
 
     <main class="py-16  max-w-screen-xl mx-auto px-4 md:px-6">
-        <section id="step1">
-
+        <form action="{{route('profile.verification.send')}}" method="POST" enctype="multipart/form-data">
+        @csrf
             <div class=" mt-20 text-center">
                 <h3 class="text-black font-bold text-3xl">Verifikasi Akunmu Sekarang</h3>
                 <p class="text-grey mt-3">Upload dokumen identitas pribadi atau organisasi perusahaan untuk verifikasi
                 </p>
+
+                @error('document')
+                <span class="text-red-600 italic text-xs text-center">{{$message}}</span>
+                @enderror
             </div>
 
+          
             <div id="drop_zone" class="border-1 border-prime mt-10 border-dashed py-28  relative md:w-8/12 mx-auto">
                 <div id="btn_file_pick"
                     class="  absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center p-3">
@@ -129,135 +108,35 @@
                     <img src="" id="gambar" style="height: 100%; ">
                 </div>
                 <div id="upload_info" class="flex justify-center items-center flex-col">
-                    <img src="./img/drop-down-2.svg">
-                    <p class="text-prime mt-10">Drag and drop foto event di kotak ini. Atau <span
+                    <img src="{{asset('img/ic_image.svg')}}">
+                    <p class="text-prime mt-10">Drag and drop dokumen di kotak ini. Atau <span
                             class="font-bold">upload</span></p>
-                    <p class="text-grey mt-3">*file harus dalam format jpg, jpeg, png</p>
+                    <p class="text-grey mt-3">*file harus dalam format jpg, jpeg, png, dpf</p>
                     <!-- <p><button type="button" id="" class="btn btn-primary"><span
                                 class="glyphicon glyphicon-folder-open"></span> Select File</button></p> -->
-                    <input type="file" id="selectfile" class="opacity-0">
+                    <input name="document" type="file" id="selectfile" class="opacity-0">
                     <p id="message_info"></p>
                 </div>
+
 
             </div>
 
             <div class="image">
             </div>
 
-        </section>
+            <button type="submit" class="btn-primary mt-5 mx-auto">Ajukan Verifikasi</button>
 
-        <section id="step2" class="hidden">
-            <div class="flex justify-between">
-                <button onclick="back()" class="btn-secondary">Kembali</button>
-                <button class="btn-primary">Buat</button>
-            </div>
-
-            <div class=" mt-20 text-center">
-                <h3 class="text-black font-bold text-3xl">Detail Event</h3>
-            </div>
-
-            <form action="" class="mt-10 md:w-5/12 mx-auto">
-
-                <div class="flex flex-col mb-5">
-                    <label for="title" class="text-prime font-semibold text-xl">Nama Event</label>
-                    <input type="text" name="title" id="title" class="form-control mt-2"
-                        placeholder="Judul utama eventmu">
-                </div>
-
-                <div class="flex flex-col mb-5">
-                    <label for="description" class="text-prime font-semibold text-xl mb-2">Deskripsi</label>
-                    <textarea id="description" class="form-control " name="description" id="description" cols="30"
-                        rows="10"></textarea>
-                </div>
-
-                <div class="flex flex-col mb-5">
-                    <label for="description" class="text-prime font-semibold text-xl">Pengadaan</label>
-                    <div class="mt-2 flex">
-                        <div class="flex items-center mr-4 mb-4">
-                            <input name="procurement" id="onsite" type="radio" class="hidden" checked />
-                            <label for="onsite" class="flex items-center cursor-pointer text-lg text-grey">
-                                <span
-                                    class="w-8 h-8 inline-block mr-2 rounded-full border bg-smoke flex-no-shrink"></span>
-                                Onsite</label>
-                        </div>
-                        <div class="flex items-center mr-4 mb-4">
-                            <input name="procurement" id="online" type="radio" class="hidden" />
-                            <label for="online" class="flex items-center cursor-pointer text-lg text-grey">
-                                <span
-                                    class="w-8 h-8 inline-block mr-2 rounded-full border bg-smoke flex-no-shrink"></span>
-                                Online</label>
-                        </div>
-                    </div>
-                    <input type="text" name="info" id="info" class="form-control mt-2"
-                        placeholder="Lokasi event atau link video conference">
-                </div>
-
-                <div class="flex flex-col mb-5  relative">
-                    <label for="date" class="text-prime font-semibold text-xl">Jadwal</label>
-                    <div class="form-control relative mt-2">
-                        <!-- <div class="bg-prime absolute bottom-0 right-0 h-full px-4 flex justify-center">
-                            <img src="./img/ic_calendar2.svg" width="16">
-                        </div> -->
-                        <input autofocus="true" type="date" name="date" id="date" class="w-full outline-none">
-                    </div>
-                </div>
-
-                <div class="flex flex-col mb-5  relative">
-                    <label for="quota" class="text-prime font-semibold text-xl">Jumlah Peserta</label>
-                    <div class="form-control relative mt-2">
-                        <p class="text-prime absolute right-0 bg-white pr-4">Peserta</p>
-                        <input autofocus="true" type="number" name="quota" id="quota" min="0"
-                            class="w-full outline-none" value="0">
-                    </div>
-                </div>
-
-                <div class="flex flex-col mb-5">
-                    <label for="description" class="text-prime font-semibold text-xl">Akses</label>
-                    <div class="mt-2 flex">
-                        <div class="flex items-center mr-4 mb-4">
-                            <input onchange="changeAccess()" name="access" id="paid" type="radio" class="hidden"
-                                checked />
-                            <label for="paid" class="flex items-center cursor-pointer text-lg text-grey">
-                                <span
-                                    class="w-8 h-8 inline-block mr-2 rounded-full border bg-smoke flex-no-shrink"></span>
-                                Berbayar</label>
-                        </div>
-                        <div class="flex items-center mr-4 mb-4">
-                            <input onchange="changeAccess()" name="access" id="free" type="radio" class="hidden" />
-                            <label for="free" class="flex items-center cursor-pointer text-lg text-grey">
-                                <span
-                                    class="w-8 h-8 inline-block mr-2 rounded-full border bg-smoke flex-no-shrink"></span>
-                                Gratis</label>
-                        </div>
-                    </div>
-                    <input type="number" name="price" id="price" class="form-control mt-2" placeholder="Harga tiket"
-                        min="0">
-                </div>
             </form>
-        </section>
     </main>
 
     <footer class="text-center py-10 px-4 md:px-6">
         <p class="text-grey font-semibold">© 2022 HeyEvents! by Ampersand Team. All Rights Reserved.</p>
     </footer>
 
-    <script>
-    </script>
+    <script src="{{ mix('js/app.js') }}"></script>
 
     <script>
-        CKEDITOR.replace('description');
 
-        const next = () => {
-            document.getElementById('step1').style.display = 'none';
-            document.getElementById('step2').style.display = 'block';
-        }
-
-        const back = () => {
-            document.getElementById('step1').style.display = 'block';
-            document.getElementById('step2').style.display = 'none';
-        }
-
-        var x = document.getElementById("date").autofocus;
         if (!document.getElementById('selectfile')) {
             document.getElementById('gambar').style.display = 'none';
             document.getElementById('upload_info').style.opacity = 1;

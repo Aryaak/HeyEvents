@@ -72,7 +72,9 @@
             <div class="ml-5">
                 <div class="flex items-center gap-x-2">
                     <p class="text-prime font-bold">{{$event->users[0]->name}}</p>
-                    <img src="{{asset('img/ic_check.svg')}}">
+                    @if ($event->users[0]->status_id == 1)
+                        <img src="{{asset('img/ic_check.svg')}}">
+                    @endif
                 </div>
                 <p class="text-grey">{{$event->users[0]->bio}}</p>
             </div>
@@ -98,7 +100,9 @@
                     <div class="ml-5">
                         <div class="flex items-center gap-x-2">
                             <p class="text-prime font-bold">{{$item->user->name}}</p>
-                            <img src="{{asset('img/ic_check.svg')}}">
+                            @if ($item->user->status_id == 1)
+                                <img src="{{asset('img/ic_check.svg')}}">
+                            @endif
                         </div>
                         <div class="bg-smoke mt-5 p-3 w-max">
                             <p class="text-prime">{{$item->message}}</p>

@@ -13,7 +13,12 @@
             </span>
             <span class="text-prime font-semibold">Edit Profil</span>
         </div>
-        <button class="btn-primary">Ajukan Verifikkasi</button>
+        @if (Auth::user()->status_id == 3)
+        <a href="{{route('profile.verification')}}" class="btn-primary">Ajukan Verifikasi</a>
+        @endif
+        @if (Auth::user()->status_id == 2)
+        <button class="link-secondary">Menunggu Verifikasi</button>
+        @endif
     </section>
 
     <section class="flex flex-col mx-auto text-center md:mt-16 mt-10 items-center w-max ">

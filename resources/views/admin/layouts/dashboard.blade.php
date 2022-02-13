@@ -31,6 +31,7 @@
   </main>
   
   <!--   Core JS Files   -->
+  <script src="{{ mix('js/app.js') }}"></script>
   <script src="{{asset('js/core/popper.min.js')}} "></script>
   <script src="{{asset('js/core/bootstrap.min.js')}}"></script>
   <script src="{{asset('js/plugins/perfect-scrollbar.min.js')}}"></script>

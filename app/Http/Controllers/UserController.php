@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\UserReport;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $data = User::latest()->get();
+        return view('admin.pages.user.index', compact('data'));
+    }
+
     public function profile($slug = null, $category=null)
     {
         $user = null;
@@ -96,7 +101,24 @@ class UserController extends Controller
     
     public function verification()
     {
+        if(Auth::user()->status_id != 3) return redirect()->route('profile');
+
         $user = Auth::user();
         return view('pages.profile.verification', compact('user'));
+    }
+
+    public function sendVerification(Request $request)
+    {
+
+        $this->validate($request, [
+            'document' => ['mimes:jpeg,jpg,png,gif,pdf', 'required', 'max:10000'],
+        ]);
+
+        User::where('id',  Auth::user()->id)->update([
+            'status_id' => 2,
+            'document' => request()->file('document')->store('documents')
+        ]);
+
+        return redirect()->route('profile');
     }
 }

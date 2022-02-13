@@ -22,7 +22,10 @@
             <div class="flex absolute md:mt-3 mt-5 justify-self-center ">
                 <a href="{{route('profile.edit')}}" class="btn-secondary mr-3">Edit Profil</a>
                 @if (Auth::user()->status_id == 3)
-                    <button class="btn-primary">Ajukan Verifikasi</button>
+                    <a href="{{route('profile.verification')}}" class="btn-primary">Ajukan Verifikasi</a>
+                @endif
+                @if (Auth::user()->status_id == 2)
+                <button class="link-secondary">Menunggu Verifikasi</button>
                 @endif
             </div> 
             @endif
