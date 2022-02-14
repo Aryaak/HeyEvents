@@ -27,6 +27,10 @@ body {
     font-style: italic;
 }
 
+.card-1{
+    width: 19rem;
+}
+
 .card-text {
     height: 80px;
 }
