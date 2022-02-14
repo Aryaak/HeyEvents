@@ -10,7 +10,13 @@
       </nav>
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-          <p class=" text-dark  font-weight-bolder mx-3">{{Auth::user()->name}}</p>
+          <div class="d-flex flex-column me-2">
+            <p class=" text-dark  font-weight-bolder">{{Auth::user()->name}}</p>
+            <form action="{{route('logout')}}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger btn-sm">Keluar</button>
+            </form>
+          </div>
           <img width="50" src="{{asset('storage/' . Auth::user()->photo)}}">
         </div>
       </div>

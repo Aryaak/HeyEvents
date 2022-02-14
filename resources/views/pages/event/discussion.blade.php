@@ -88,42 +88,44 @@
             <p class="mt-3 text-grey">Tanya dan diskusi tentang event atau <br> ngobrol dengan partisipan lain disini</p>
             </div>
 
-            @foreach ($event->discussions as $item)
-            <div class="mt-10 md:px-8 px-4">
-                @if ($item->user_id == Auth::user()->id)
-                <div class="bg-prime mt-5 p-3 w-max ml-auto">
-                    <p class="text-white">{{$item->message}}</p>
-                </div>
-                @else
-                <div class="flex items-start  mb-8 justify-self-start">
-                    <img src="{{asset('storage/'.$item->user->photo)}}" width="53" height="53">
-                    <div class="ml-5">
-                        <div class="flex items-center gap-x-2">
-                            <p class="text-prime font-bold">{{$item->user->name}}</p>
-                            @if ($item->user->status_id == 1)
-                                <img src="{{asset('img/ic_check.svg')}}">
-                            @endif
-                        </div>
-                        <div class="bg-smoke mt-5 p-3 w-max">
-                            <p class="text-prime">{{$item->message}}</p>
-                        </div>
+            <div id="messages_box">
+                @foreach ($event->discussions as $item)
+                <div class="mt-10 md:px-8 px-4">
+                    @if ($item->user_id == Auth::user()->id)
+                    <div class="bg-prime mt-5 p-3 w-max ml-auto">
+                        <p class="text-white">{{$item->message}}</p>
                     </div>
-                </div>   
-                @endif
+                    @else
+                    <div class="flex items-start  mb-8 justify-self-start">
+                        <img src="{{asset('storage/'.$item->user->photo)}}" width="53" height="53">
+                        <div class="ml-5">
+                            <div class="flex items-center gap-x-2">
+                                <p class="text-prime font-bold">{{$item->user->name}}</p>
+                                @if ($item->user->status_id == 1)
+                                    <img src="{{asset('img/ic_check.svg')}}">
+                                @endif
+                            </div>
+                            <div class="bg-smoke mt-5 p-3 w-max">
+                                <p class="text-prime">{{$item->message}}</p>
+                            </div>
+                        </div>
+                    </div>   
+                    @endif
+                </div>
+                @endforeach
             </div>
-            @endforeach
-            
-                <form action="{{route('discussion.store')}}" method="POST">
+    
+                <form id="form">
                     <div class="p-7 fixed bottom-0 md:w-full w-screen bg-white shadow-t-lg flex gap-x-10 ">
-                    @csrf
-                    <input type="hidden" value="{{$event->id}}" name="event_id">
-                    <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
-                    <input type="text" name="message" class="form-control md:w-6/12 w-full" placeholder="Ketikkan pesanmu disini">
+                    <input id="event" type="hidden" value="{{$event->id}}" name="event_id">
+                    <input id="user" type="hidden" value="{{Auth::user()->id}}" name="user_id">
+                    <input id="auth" type="hidden" value="{{Auth::user()->id}}">
+                    <input id="message" type="text" name="message" class="form-control md:w-6/12 w-full" placeholder="Ketikkan pesanmu disini">
                     <button type="submit">
                         <img src="{{asset('img/ic_send.svg')}}" class="cursor-pointer">
                     </button>
             </div>
-        </form>
+            </form>
     </div>
     </section>
 </main>

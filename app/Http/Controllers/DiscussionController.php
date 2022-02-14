@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Discussion as EventsDiscussion;
 use App\Models\Discussion;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class DiscussionController extends Controller
 {
@@ -28,14 +30,28 @@ class DiscussionController extends Controller
 
     public function store(Request $request)
     {
-        $data = $this->validate($request, [
-            'event_id' => ['required'],
-            'user_id' => ['required'],
-            'message' => ['required']
+        $user = User::where('id', $request->input('user_id'))->first();
+        event(new EventsDiscussion(
+        $request->input('event_id'),
+        $request->input('user_id'),
+        $request->input('message'),
+        $user->photo,
+        $user->name,
+        $user->status_id,
+        ));
+        Discussion::create([
+            'event_id' => $request->input('event_id'),
+            'user_id' => $request->input('user_id'),
+            'message' => $request->input('message')
         ]);
+        // $data = $this->validate($request, [
+        //     'event_id' => ['required'],
+        //     'user_id' => ['required'],
+        //     'message' => ['required']
+        // ]);
 
-        Discussion::create($data);
+        // Discussion::create($data);
 
-        return redirect()->back();
+        // return redirect()->back();
     }
 }
