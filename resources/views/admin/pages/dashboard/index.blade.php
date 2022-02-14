@@ -101,7 +101,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="{{asset('storage/' . $item->photo)}}" class="avatar avatar-sm me-3" alt="xd">
+                        <img src="{{asset('storage/' . $item->photo)}}" width="50" height="50" class="me-3" alt="xd">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">{{$item->name}}</h6>
@@ -140,7 +140,7 @@
         <div class="card-body p-3">
             @foreach ($users as $item)
             <div class= "mb-3 d-flex">
-                <img src="{{asset('storage/' . $item->photo)}}" class="avatar avatar-sm me-3" alt="xd">
+                <img src="{{asset('storage/' . $item->photo)}}"  width="50" height="50" class="me-3" alt="xd">
               <div class="">
                 <h6 class="text-dark text-sm font-weight-bold mb-0">{{$item->name}}</h6>
                 <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{$item->created_at->diffForHumans()}}</p>

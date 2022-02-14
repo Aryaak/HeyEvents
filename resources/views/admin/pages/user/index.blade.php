@@ -34,7 +34,7 @@
                             <tr>
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full" src="{{asset('storage/' . $item->photo)}}" width="50" height="50" alt="{{$item->name}}"></div>
+                                        <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img  src="{{asset('storage/' . $item->photo)}}" width="50" height="50" alt="{{$item->name}}"></div>
                                         <div class="font-medium text-gray-800">{{$item->name}}</div>
                                     </div>
                                 </td>

@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('search/{category?}', [EventController::class, 'search'])->name('event.search');
+Route::get('event/{slug}', [EventController::class, 'show'])->name('event.show');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('create', [EventController::class, 'create'])->name('event.create');
     Route::post('event/store', [EventController::class, 'store'])->name('event.store');
@@ -35,16 +39,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('user/report', [UserController::class, 'report'])->name('user.report');
     Route::post('event/report', [EventController::class, 'report'])->name('event.report');
 });
-
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('search/{category?}', [EventController::class, 'search'])->name('event.search');
-Route::get('event/{slug}', [EventController::class, 'show'])->name('event.show');
-
-Route::get('admin', [DashboardController::class, 'index'])->name('admin');
 Route::get('/admin/login', function () {
     return view('admin.layouts.auth');
+})->middleware('admin.guest');
+
+Route::group(['middleware' => 'admin'], function(){
+    Route::get('admin', [DashboardController::class, 'index'])->name('admin');
+    Route::get('admin/user', [UserController::class, 'index'])->name('admin.user');
+    Route::get('admin/event', [EventController::class, 'index'])->name('admin.event');
+    Route::get('auth/redirect', [LoginController::class, 'redirectToProvider']);
+    Route::get('auth/callback', [LoginController::class, 'handleProviderCallback']);
 });
-Route::get('admin/user', [UserController::class, 'index'])->name('admin.user');
-Route::get('admin/event', [EventController::class, 'index'])->name('admin.event');
-Route::get('auth/redirect', [LoginController::class, 'redirectToProvider']);
-Route::get('auth/callback', [LoginController::class, 'handleProviderCallback']);
+
+
