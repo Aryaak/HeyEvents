@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $data = User::latest()->get();
+        $data = User::latest()->where('role_id', '!=', 1)->get();
         return view('admin.pages.user.index', compact('data'));
     }
 
@@ -134,5 +134,19 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('profile');
+    }
+
+    public function verified()
+    {
+        User::where('id', request('user_id'))->update([
+            'status_id' => 1
+        ]);
+        return redirect()->back()->with(['success', 'Pengguna berhasil diverifikasi']);
+    }
+
+    public function block()
+    {
+        User::where('id', request('user_id'))->delete();
+        return redirect()->back()->with(['success' => 'Pengguna berhasil diblokir']);
     }
 }

@@ -251,4 +251,10 @@ class EventController extends Controller
 
         return redirect()->back();
     }
+
+    public function block()
+    {
+        Event::where('id', request('event_id'))->delete();
+        return redirect()->back()->with(['success' => 'Event berhasil diblokir']);
+    }
 }

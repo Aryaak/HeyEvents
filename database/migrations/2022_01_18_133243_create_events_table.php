@@ -27,7 +27,7 @@ class CreateEventsTable extends Migration
             $table->integer('quota');
             $table->integer('price')->default(0);
             $table->timestamp('date');
-            $table->softDeletes();
+            
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

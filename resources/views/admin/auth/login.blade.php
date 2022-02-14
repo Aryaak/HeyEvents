@@ -18,7 +18,7 @@
                           <label class="text-danger">{{$message}}</label>
                       @enderror
                       @if (Session::has('failed'))
-                          {{Session::get('failed')}}
+                      <label class="text-danger">  {{Session::get('failed')}}</label>
                       @endif
                       <input type="email" name="email" class="form-control" placeholder="Masukan email..." aria-label="Email" aria-describedby="email-addon">
                     </div>

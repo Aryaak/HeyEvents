@@ -18,7 +18,7 @@ class CreateDiscussionsTable extends Migration
             $table->unsignedBigInteger('event_id');
             $table->unsignedBigInteger('user_id');
             $table->string('message');
-            $table->softDeletes();
+            
             $table->timestamps();
         });
     }
