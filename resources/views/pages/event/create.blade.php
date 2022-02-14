@@ -11,7 +11,7 @@
             <a href="{{route('home')}}" class="btn-secondary">Batal</a>
             <a onclick="next()" class="btn-primary">Selanjutnya</a>
         </div>
-
+        
         <div class=" mt-20 text-center">
             <h3 class="text-black font-bold text-3xl">Berencana Mengadakan Event?</h3>
             <p class="text-grey mt-3">Upload foto event kamu. Foto juga akan digunakan sebagai thumbnail.</p>
@@ -30,9 +30,9 @@
                 </div> -->
                 <img src="" id="gambar" style="height: 100%; ">
             </div>
-            <div id="upload_info" class="flex justify-center items-center flex-col">
+            <div id="upload_info" class="flex justify-center items-center flex-col px-5 md:px-0">
                 <img src="{{asset('img/ic_image.svg')}}">
-                <p class="text-prime mt-10">Drag and drop foto event di kotak ini. Atau <span
+                <p class="text-prime mt-10 text-sm md:text-base">Drag and drop foto event di kotak ini. Atau <span
                         class="font-bold">upload</span></p>
                 <p class="text-grey mt-3">*file harus dalam format jpg, jpeg, png</p>
                 <!-- <p><button type="button" id="" class="btn btn-primary"><span

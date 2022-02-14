@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('user/report', [UserController::class, 'report'])->name('user.report');
     Route::post('event/report', [EventController::class, 'report'])->name('event.report');
 });
+
 Route::get('/admin/login', function () {
     return view('admin.layouts.auth');
 })->middleware('admin.guest');
