@@ -3,7 +3,7 @@
 @extends('layouts.app')
 
 @section('content')
-<main>
+<main class="overlow-hidden">
     <section
         class="relative content flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5"
         id="home">
@@ -35,14 +35,15 @@
     </section>
 
     <!-- logo -->
-    <div
-        class="logo-iklan relative content flex md:flex-row md:flex-rows max-w-screen-xl px-4 mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-12 mx-auto overflow-x-auto space-x-8">
-    {{-- <div class="relative content flex md:flex-row md:flex-rows max-w-screen-xl px-4 mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-12 overflow-x-auto space-x-8"> --}}
-        <img src="img/apple.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-0">
-        <img src="img/adobe.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
-        <img src="img/slack.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
-        <img src="img/spotify.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
-        <img src="img/google.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
+    <div class="flex justify-center">
+        <div
+            class="logo-iklan relative content flex md:flex-row md:flex-rows max-w-screen-xl px-4 mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-12 mx-auto overflow-x-auto space-x-8">
+            <img src="img/apple.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-0">
+            <img src="img/adobe.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
+            <img src="img/slack.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
+            <img src="img/spotify.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
+            <img src="img/google.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
+        </div>
     </div>
 
     <!-- content -->
@@ -62,16 +63,16 @@
 
 {{-- content2 --}}
 <div
-    class="relative content flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-end md:flex-row md:px-8 lg:px-8 py-5 mt-12 pl-4 gap-x-5 content2">
+    class="content2 relative content flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-end md:flex-row md:px-8 lg:px-8 py-5 mt-12 pl-4 gap-x-5 content2">
     <div class="md:ml-20 ml-0 flex justify-center">
         <img src="img/content2.png">
     </div>
-    <div class="content ml-0 md:mt-0 mt-14 text-center">
+    <div class="content md:ml-10 ml-0 md:mt-0 mt-14 text-right">
         <p class="text-grey mb-5">Bertemu dengan berbagai teman baru. Berbagi ide, menambah relasi, dan
             ciptakan momen bersama</p>
-    <div class="flex justify-center">
-        <button class="btn-secondary">Gabung Events Sekarang</button>
-    </div>
+        <div class="flex btn-content">
+            <button class="btn-secondary">Gabung Events Sekarang</button>
+        </div>
     </div>
     <div class="ml-10 md:mt-0 mt-10 flex justifys-center">
         <img src="img/kotak2.png" alt="">
@@ -104,9 +105,9 @@
 
     <div class="bg-prime">
         <div
-            class="flex flex-col max-w-screen-xl mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-16">
+            class="flex flex-col mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-16">
             <div class="text-white flex">
-                <div class=" text-center">
+                <div class="slick flex flex-col flex justify-center">
                     <h1 class="font-bold text-3xl w-full md:w-3/5 mb-5">Beberapa Event Akan Berlangsung</h1>
                     <p class="w-full md:w-2/5 mb-7">Berikut adalah beberapa event yang akan
                         diadakan oleh komunitas HeyEvents!</p>
@@ -116,7 +117,7 @@
                 </div>
             </div>
 
-            <div class="variable slider p-4">
+            <div class="variable slider p-4 md:w-1/2 w-9/12">
                 <!-- Card -->
                 <div class="mx-4 flex flex-col justify-center">
                     <div class="card border-none">

@@ -117,7 +117,7 @@ input[type="radio"]:checked+label {
     margin: 40px 60px;
 }
 
-.modal-box .line{
+.modal-box .line {
     position: absolute;
     top: 0;
     left: 35vw;
@@ -127,46 +127,62 @@ input[type="radio"]:checked+label {
 }
 
 /* index */
-.logo-iklan{
-    /* overflow-x: scroll; */
+body{
     overflow-x: auto;
 }
-.content1 h1{
+.logo-iklan {
+    overflow-x: auto;
+}
+
+.content1 h1 {
     margin-bottom: 10px;
     text-align: start;
     padding: 0px 50px 0px 50px;
 }
-.content2 .content{
-    width: 100%;
-}
-.content2 p{
+
+.content2 .content {
     width: 100%;
 }
 
-@media (min-width: 768px) {
-.content2 p{
-    width: 40%;
+.content2 p {
+    width: 100%;
+    text-align: center;
 }
-.content2 .content{
-    width: 40%;
+.content2 .btn-content{
+    justify-content: center;
 }
-}
-
 /* search */
-.navbar{
+.navbar {
     overflow: auto;
 }
 
-.search{
-    margin-top:20px;
+.search {
+    margin-top: 20px;
 }
 
-input:focus{
+input:focus {
     outline: none;
 }
 
 @media (min-width: 768px) {
-.search{
-    margin-top: 0px;
-}
+    .content2 p {
+        width: 100%;
+        text-align: left;
+    }
+    .content2 .btn-content{
+        margin-top: 50px;
+        justify-content: flex-start;
+    }
+    .slick{
+        display: flex;
+        justify-content: center;
+    }
+    .content2 .content {
+        width: 40%;
+    }
+
+    /* search */
+    .search {
+        margin-top: 0px;
+    }
 }
