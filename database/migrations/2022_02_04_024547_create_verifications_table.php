@@ -16,7 +16,7 @@ class CreateVerificationsTable extends Migration
         Schema::create('verifications', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->softDeletes();
+            
             $table->timestamps();
         });
     }

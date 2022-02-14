@@ -3,10 +3,10 @@
     <div x-data="{ open: false, nav_open:false }"
         class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
         <div class="p-4 flex flex-row items-center justify-between">
-            <div class="flex">
+            <a class="flex"  href="{{route('home')}}">
                 <img src="{{asset('img/logo.svg')}}" class="mr-3">
-                <a href="#" class="font-bold text-prime text-2xl">HeyEvents!</a>
-            </div>
+                <span class="font-bold text-prime text-2xl">HeyEvents!</span>
+            </a>
             <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
                 <svg fill="#312B78" viewBox="0 0 20 20" class="w-6 h-6">
                     <path x-show="!open" fill-rule="evenodd"

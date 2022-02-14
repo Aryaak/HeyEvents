@@ -48,8 +48,11 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('admin', [DashboardController::class, 'index'])->name('admin');
     Route::get('admin/user', [UserController::class, 'index'])->name('admin.user');
     Route::get('admin/event', [EventController::class, 'index'])->name('admin.event');
-    Route::get('auth/redirect', [LoginController::class, 'redirectToProvider']);
-    Route::get('auth/callback', [LoginController::class, 'handleProviderCallback']);
+    Route::get('admin/user/verified', [UserController::class, 'verified'])->name('admin.user.verified');
+    Route::get('admin/user/block', [UserController::class, 'block'])->name('admin.user.block');
+    Route::get('admin/event/block', [EventController::class, 'block'])->name('admin.event.block');
 });
 
+Route::get('auth/redirect', [LoginController::class, 'redirectToProvider']);
+Route::get('auth/callback', [LoginController::class, 'handleProviderCallback']);
 

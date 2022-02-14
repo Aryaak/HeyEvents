@@ -13,10 +13,25 @@ use Illuminate\Support\Facades\DB;
 class EventController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->checkEnded();
+    }
+
     public function index()
     {
         $data = Event::latest()->get();
         return view('admin.pages.event.index', compact('data'));
+    }
+
+    private function checkEnded()
+    {
+        $data = Event::where('is_ended', false)->get();
+        foreach($data as $item){
+            if(Carbon::now() > $item->date){
+                Event::where('id', $item->id)->update(['is_ended' => true]);
+            }
+        }
     }
 
     public function search($category = 'semua')
@@ -250,5 +265,11 @@ class EventController extends Controller
         ])->delete();
 
         return redirect()->back();
+    }
+
+    public function block()
+    {
+        Event::where('id', request('event_id'))->delete();
+        return redirect()->back()->with(['success' => 'Event berhasil diblokir']);
     }
 }
