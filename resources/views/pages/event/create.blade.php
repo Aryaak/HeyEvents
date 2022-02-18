@@ -226,7 +226,6 @@
 
 
         function gambar(a) {
-            console.log('IMGAE', a.files)
             if (a.files && a.files[0]) {
                 if (document.getElementById('selectfile').files[0]) {
                     document.getElementById('upload_info').style.opacity = 0;
