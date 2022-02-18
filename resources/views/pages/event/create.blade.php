@@ -30,11 +30,11 @@
                 </div> -->
                 <img src="" id="gambar" style="height: 100%; ">
             </div>
-            <div id="upload_info" class="flex justify-center items-center flex-col px-5 md:px-0">
+            <div id="upload_info" class="upload flex justify-center items-center flex-col px-5 md:px-0">
                 <img src="{{asset('img/ic_image.svg')}}">
                 <p class="text-prime mt-10 text-sm md:text-base">Drag and drop foto event di kotak ini. Atau <span
                         class="font-bold">upload</span></p>
-                <p class="text-grey mt-3">*file harus dalam format jpg, jpeg, png</p>
+                <p class="text-grey mt-3">*file harus dalam format jpg, jpeg, png, orientasi lanskap, dan berukuran maks 1 MB</p>
                 <!-- <p><button type="button" id="" class="btn btn-primary"><span
                             class="glyphicon glyphicon-folder-open"></span> Select File</button></p> -->
                 <input type="file" id="selectfile" name="photo" class="opacity-0">
@@ -51,7 +51,7 @@
     <section id="step2" class="hidden">
         <div class="flex justify-between">
             <a onclick="back()" class="btn-secondary">Kembali</a>
-            <button type="submit" class="btn-primary">Buat</button>
+            {{-- <button type="submit" class="btn-primary">Buat</button> --}}
         </div>
 
         <div class=" mt-20 text-center">
@@ -162,9 +162,13 @@
                     <input value="{{old('price')}}" type="number" name="price" id="price" class="form-control mt-2 w-full" placeholder="Harga tiket"
                         min="0">
                 </div>
-               
+            </div>
+
+            <div class="flex justify-center">
+                <button type="submit" class="btn-primary w-full">Buat</button>
             </div>
         </div>
+       
     </section>
 </form>
 </main>

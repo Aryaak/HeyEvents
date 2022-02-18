@@ -168,6 +168,11 @@ input:focus {
     outline: none;
 }
 
+/* upload image */
+.upload p{
+    max-width: 25rem;
+    text-align: center;
+}
 @media (min-width: 768px) {
     /* landing */
     .content2 p {

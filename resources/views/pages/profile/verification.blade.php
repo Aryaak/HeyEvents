@@ -107,11 +107,11 @@
                     </div> -->
                     <img src="" id="gambar" style="height: 100%; ">
                 </div>
-                <div id="upload_info" class="flex justify-center items-center flex-col">
+                <div id="upload_info" class="upload flex justify-center items-center flex-col">
                     <img src="{{asset('img/ic_image.svg')}}">
                     <p class="text-prime mt-10">Drag and drop dokumen di kotak ini. Atau <span
                             class="font-bold">upload</span></p>
-                    <p class="text-grey mt-3">*file harus dalam format jpg, jpeg, png, dpf</p>
+                    <p class="text-grey mt-3">*file harus dalam format jpg, jpeg, png, orientasi lanskap, dan berukuran maks 1 MB</p>
                     <!-- <p><button type="button" id="" class="btn btn-primary"><span
                                 class="glyphicon glyphicon-folder-open"></span> Select File</button></p> -->
                     <input name="document" type="file" id="selectfile" class="opacity-0">
