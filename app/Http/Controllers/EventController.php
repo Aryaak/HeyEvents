@@ -24,6 +24,7 @@ class EventController extends Controller
         return view('admin.pages.event.index', compact('data'));
     }
 
+
     private function checkEnded()
     {
         $data = Event::where('is_ended', false)->get();

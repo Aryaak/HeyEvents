@@ -30,7 +30,7 @@
         <div class="ml-36">
             @auth
                 @if ($event->user_id == Auth::user()->id)
-                <button class="btn-primary md:ml-8">Ubah</button>
+                <button class="link-secondary">Sedang Berlangsung</button>
                 @else
                 @if ($event->is_joined)
                 <form action="{{route('event.leave')}}" method="POST">
