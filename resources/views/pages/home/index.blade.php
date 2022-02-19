@@ -9,7 +9,7 @@
         id="home">
         <div class="flex md:mx-8 mx-auto mt-14">
             <!-- Content -->
-            <div class="mr-20 " data-aos="fade-right" data-aos-duration="1000">
+            <div class="mr-20 " data-aos="fade-right max-w-screen-xl" data-aos-duration="1000">
                 <div class="md:ml-0 ml-10">
                     <p class="text-base text-green pb-6 font-semibold">MOMEN SEKALI SEUMUR HIDUP</p>
                     <h2 class="md:text-3xl text-lg pb-6 font-bold leading-loose">
@@ -49,7 +49,7 @@
 
 </div>
 
-<div class="flex flex-col items-center gap-10 mt-16 relative w-10/12 mx-auto">
+<div class="flex flex-col items-center max-w-screen-xl gap-10 mt-16 relative w-10/12 mx-auto overflow-hidden">
     <img data-aos="fade-down-right" data-aos-duration="1000" src="img/kotak.png" class="absolute left-0 hidden md:block">
 
     <div class="flex items-start justify-between gap-x-10 flex-col md:flex-row gap-y-10 md:gap-y-0">
@@ -98,7 +98,7 @@
 
     <div class="bg-prime">
         <div
-            class="flex flex-col mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-16">
+            class="flex flex-col md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-16 max-w-screen-xl mx-auto">
             <div data-aos="fade-right" data-aos-duration="1000"  class="text-white flex">
                 <div class="slick  flex-col flex justify-center">
                     <h1 class="font-bold text-3xl w-full md:w-3/5 mb-5">Beberapa Event Akan Berlangsung</h1>
@@ -184,9 +184,9 @@
                 HeyEvents! Sekarang</h1>
         </div>
         <!-- card -->
-        <div class="rate flex md:flex-row flex-col justify-center">
+        <div class="flex md:flex-row flex-col justify-center rate">
             <div data-aos="fade-up" data-aos-duration="1000" class="mx-4 mt-16 flex justify-center">
-                    <div class="bg-white md:w-96 w-72 p-2 md:p-2  border-1 border-grey relative">
+                    <div class="bg-white md:w-96 w-72 p-4  border-1 border-grey relative">
                         <div class="mb-5">
                             <!-- <img src="./img/smkn1-head.png" class="w-full"> -->
                             <img src="./img/rate.svg" alt="">
@@ -214,7 +214,7 @@
                 </div>
             </div>
             <div data-aos="fade-up" data-aos-duration="1500" class="mx-4 mt-16 flex justify-center">
-                <div class="bg-white md:w-96 w-72 p-2 md:p-2  border-1 border-grey relative">
+                <div class="bg-white md:w-96 w-72 p-4  border-1 border-grey relative">
                     <div class="mb-5">
                         <!-- <img src="./img/smkn1-head.png" class="w-full"> -->
                         <img src="./img/rate.svg" alt="">
@@ -240,7 +240,7 @@
             </div>
         </div>
         <div  data-aos="fade-up" data-aos-duration="2000" class="mx-4 mt-16 flex justify-center">
-            <div class="bg-white md:w-96 w-72 p-2 md:p-2  border-1 border-grey relative">
+            <div class="bg-white md:w-96 w-72 p-4  border-1 border-grey relative">
                 <div class="mb-5">
                     <!-- <img src="./img/smkn1-head.png" class="w-full"> -->
                     <img src="./img/rate.svg" alt="">
