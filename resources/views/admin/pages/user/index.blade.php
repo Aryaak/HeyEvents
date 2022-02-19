@@ -47,8 +47,8 @@
                                 <td class="p-2 whitespace-nowrap">
                                         {{$item->status->name}}
                                 </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <button class="btn btn-primary"  data-toggle="modal" data-target="#showModal{{$item->id}}">LIHAT</button>
+                                <td class="p-2 whitespace-nowrap prime">
+                                    <button class="btn bg-primee text-white"  data-toggle="modal" data-target="#showModal{{$item->id}}">LIHAT</button>
                                 </td>
                             </tr>
                             @empty
@@ -109,7 +109,7 @@
                                         <div class="text-left">{{$item->email}}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
-                                        <a target="_blank" href="{{asset('storage/' . $item->document)}}" class="badge badge-primary">Dokumen</a>
+                                        <a target="_blank" href="{{asset('storage/' . $item->document)}}" class="badge bg-primee">Dokumen</a>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
                                             {{$item->status->name}}
@@ -118,7 +118,7 @@
                                         @if ($item->status_id != 1)
                                         <form action="{{route('admin.user.verified')}}">
                                             <input type="hidden" name="user_id" value="{{$item->id}}">
-                                            <button type="submit" class="btn btn-primary">Verifikasi</button>
+                                            <button type="submit" class="btn bg-primee text-white">Verifikasi</button>
                                         </form>
                                         @endif
                                         <form action="{{route('admin.user.block')}}">
@@ -200,7 +200,7 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn bg-primee text-white" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
