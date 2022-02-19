@@ -19,7 +19,7 @@
                 <p>{{$user->address ?$user->address : 'Belum ditentukan' }}</p>
             </div>
             @if ($user->id == Auth::user()->id )
-            <div class="flex absolute md:mt-3 mt-5 justify-self-center ">
+            <div class="flex absolute md:mt-3 mt-5 justify-self-center flex-col md:flex-row gap-y-5 md:gap-y-0 mb-5 md:mb-0">
                 <a href="{{route('profile.edit')}}" class="btn-secondary mr-3">Edit Profil</a>
                 @if (Auth::user()->status_id == 3)
                     <a href="{{route('profile.verification')}}" class="btn-primary">Ajukan Verifikasi</a>

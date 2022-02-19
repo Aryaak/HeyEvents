@@ -10,14 +10,13 @@ const messageEl = document.getElementById('message');
 const formEl = document.getElementById('form');
 const messageBoxEl = document.getElementById('messages_box');
 
-formEl.addEventListener('submit', function(e){
+formEl.addEventListener('submit', function (e) {
     e.preventDefault();
 
     let errors = false;
-    if(!messageEl.value){
-       alert('ERROR')
-        }
-    if(messageEl.value){
+    if (!messageEl.value) {
+    }
+    if (messageEl.value) {
         const options = {
             method: 'POST',
             url: 'store',
@@ -33,9 +32,9 @@ formEl.addEventListener('submit', function(e){
 })
 
 window.Echo.channel('discussion')
-    .listen('.discussion', function(e) {
+    .listen('.discussion', function (e) {
         console.log(e)
-        if(e.user_id == authEl.value){
+        if (e.user_id == authEl.value) {
             messageBoxEl.innerHTML += ` 
         <div class="mt-10 md:px-8 px-4">
         
@@ -61,6 +60,6 @@ window.Echo.channel('discussion')
     </div>   
     </div>`
         }
-        
+
     })
 

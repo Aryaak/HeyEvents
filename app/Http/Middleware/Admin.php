@@ -21,6 +21,6 @@ class Admin
             return $next($request);
         }
         Auth::logout();
-        return redirect('admin/login')->with(['failed' => 'Admin tidak ditemukan']);
+        return redirect('admin/login');
     }
 }

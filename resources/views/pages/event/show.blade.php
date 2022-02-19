@@ -75,7 +75,6 @@
             <img class="img-event-action" src="{{asset('img/icon-1.svg')}}" >
         </a>
         @endif
-     
         @if (Auth::user()->id != $event->user->id)
             @if ($event['is_saved'])
             <form action="{{route('event.unsave')}}" method="POST">
@@ -98,6 +97,10 @@
                 </form>
             @endif
         @endif
+
+        <button class="btn-event-action  mb-3">
+            <img class="img-event-action" onclick="copy()"  src="{{asset('img/Discovery.svg')}}">
+        </button>
 
         @if ($event->user_id != Auth::user()->id)
         <button id="btn" class="group btn-event-action mb-3">
@@ -452,6 +455,19 @@
 @endsection
 
 @push('js')
+
+<script>
+    const copy = () => {
+    var dummy = document.createElement('input'),
+        text = window.location.href;
+
+        document.body.appendChild(dummy);
+        dummy.value = text;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+    }
+</script>
 <script>
     if (!document.getElementById('selectfile')) {
         document.getElementById('gambar').style.display = 'none';
@@ -557,6 +573,8 @@
     }
 </script>
 <script>
+
+
     // modal report 
 const overlay = document.querySelector('#overlay')
 const delBtn = document.querySelector('#btn')

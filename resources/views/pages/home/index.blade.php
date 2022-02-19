@@ -22,7 +22,7 @@
                         dengan event dan <br> ciptakan momen berharga dalam hidup
                     </p>
                 </div>
-                <div class="flex md:flex-row flex-col justify-center gap-6 items-center">
+                <div class="flex md:flex-row  flex-col md:justify-start justify-center gap-6 items-center">
                     <a href="{{route('event.search')}}" class="btn-primary h-2/5">Cari Events</a>
                     <a href="{{route('event.create')}}" class="text-prime font-semibold ">Buat Events</a>
                 </div>
@@ -35,9 +35,9 @@
     </section>
 
     <!-- logo -->
-    <div class="flex justify-center">
-        <div
-            class="logo-iklan relative content flex md:flex-row md:flex-rows max-w-screen-xl px-4 mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-12 mx-auto overflow-x-auto space-x-8">
+    <div style="overflow-y: hidden" class="flex justify-center overflow-y-hidden">
+        <div style="overflow-y: hidden"
+            class="logo-iklan relative content flex md:flex-row md:flex-rows max-w-screen-xl px-4 mx-auto md:items-center overflow-y-hidden md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-12 mx-auto overflow-x-auto space-x-8">
             <img data-aos="fade-up" data-aos-duration="1000" src="img/apple.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-0">
             <img data-aos="fade-up" data-aos-duration="1500" src="img/adobe.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
             <img data-aos="fade-up" data-aos-duration="2000" src="img/slack.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
