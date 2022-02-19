@@ -159,6 +159,9 @@ body{
 .content2 .btn-content{
     justify-content: center;
 }
+.rate p{
+    max-width: 265px;
+}
 /* search */
 .navbar {
     overflow: auto;

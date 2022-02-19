@@ -57,7 +57,7 @@
                     Gabung <br> Event <br> Disekitar</h1>
         <img data-aos="fade-left" data-aos-duration="1000" src="img/content1.png">
     </div>
-    
+
     o<div class="flex justify-between gap-x-10 items-end flex-col md:flex-row">
         <img data-aos="fade-right" data-aos-duration="1000" src="img/content2.png">
         <div data-aos="fade-left" data-aos-duration="1000" class="mt-10">
@@ -66,7 +66,7 @@
             <a href="{{route('event.search')}}" class="btn-secondary">Gabung Events Sekarang</a>
         </div>
     </div>
-    
+
     <img data-aos="fade-up-left" data-aos-duration="1000" src="img/kotak2.png" class="absolute bottom-0 right-0 hidden md:block">
 
 </div>
@@ -170,7 +170,7 @@
                         </div>
                     <!-- End Card -->
                     @endforeach
-               
+
             </div>
         </div>
     </div>
@@ -184,9 +184,9 @@
                 HeyEvents! Sekarang</h1>
         </div>
         <!-- card -->
-        <div class="flex md:flex-row flex-col justify-center">
+        <div class="rate flex md:flex-row flex-col justify-center">
             <div data-aos="fade-up" data-aos-duration="1000" class="mx-4 mt-16 flex justify-center">
-                    <div class="bg-white md:w-96 w-72 p-4  border-1 border-grey relative">
+                    <div class="bg-white md:w-96 w-72 p-2 md:p-2  border-1 border-grey relative">
                         <div class="mb-5">
                             <!-- <img src="./img/smkn1-head.png" class="w-full"> -->
                             <img src="./img/rate.svg" alt="">
@@ -214,7 +214,7 @@
                 </div>
             </div>
             <div data-aos="fade-up" data-aos-duration="1500" class="mx-4 mt-16 flex justify-center">
-                <div class="bg-white md:w-96 w-72 p-4  border-1 border-grey relative">
+                <div class="bg-white md:w-96 w-72 p-2 md:p-2  border-1 border-grey relative">
                     <div class="mb-5">
                         <!-- <img src="./img/smkn1-head.png" class="w-full"> -->
                         <img src="./img/rate.svg" alt="">
@@ -240,7 +240,7 @@
             </div>
         </div>
         <div  data-aos="fade-up" data-aos-duration="2000" class="mx-4 mt-16 flex justify-center">
-            <div class="bg-white md:w-96 w-72 p-4  border-1 border-grey relative">
+            <div class="bg-white md:w-96 w-72 p-2 md:p-2  border-1 border-grey relative">
                 <div class="mb-5">
                     <!-- <img src="./img/smkn1-head.png" class="w-full"> -->
                     <img src="./img/rate.svg" alt="">
@@ -265,12 +265,12 @@
         </div>
         </div>
         </div>
-        
+
         <div data-aos="fade-up" data-aos-duration="3000" class="flex justify-center mt-8">
             <a href="{{route('event.search')}}" class="btn-secondary mt-12 ">Gabung Events Sekarang</a>
         </div>
     </div>
 
-  
+
 </main>
 @endsection

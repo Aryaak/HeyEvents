@@ -13,20 +13,12 @@
             <a href="{{route('event.search', 'gratis')}}" class="{{$category == 'gratis' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Gratis</a>
             <a href="{{route('event.search', 'berbayar')}}" class="{{$category == 'berbayar' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Berbayar</a>
         </section>
-<<<<<<< HEAD
-
-        <div class='w-3/12'>
-            <div class="flex items-center max-w-md mx-auto bg-white rounded-lg " x-data="{ search: '' }">
-                <div class="w-full border-1 p-1.5">
-                    <input type="search" class="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
-=======
         <form action="{{route('event.search', $category)}}" method="GET">
             @csrf
         <div >
             <div class="search flex items-center max-w-md mx-auto bg-white rounded-lg" x-data="{ search: '' }">
                 <div class="md:w-60 w-full border-1 p-1.5">
                     <input value="{{old('keyword')}}" name="keyword" type="search" class="w-full px-4 py-1 text-gray-800 rounded-full"
->>>>>>> 318ce796ca75703209f5d97d3bb99dae74d3c191
                         placeholder="Cari nama atau pengelola event..." x-model="search">
                 </div>
                 <div>
