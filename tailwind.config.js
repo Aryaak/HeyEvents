@@ -14,7 +14,9 @@ module.exports = {
         'yellow': '#F3A939',
         'overlay': '#F1F0FF',
         'smoke': '#E5E5E5',
-        'ghost': 'rgba(116, 110, 110, 0.4);'
+        'ghost': 'rgba(116, 110, 110, 0.4)',
+        'danger': '#F33939',
+        'green': '#1BB13C'
       },
     },
     fontWeight: {

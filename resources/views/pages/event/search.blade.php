@@ -40,7 +40,7 @@
     <section class="mt-16 grid md:grid-cols-3 grid-cols-1 md:gap-10 gap-5">
         @foreach ($events as $item)
         <!-- Card -->
-        <div class="card">
+        <div class="card" data-aos="fade-up" data-aos-duration="1000">
             <div class="mb-5">
                 <img src="{{asset('storage/' . $item->photo)}}" class="w-full h-200px">
             </div>

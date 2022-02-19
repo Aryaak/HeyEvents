@@ -21,7 +21,7 @@
         <div x-data="{ open: false, nav_open: false }"
             class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
             <div class="p-4 flex flex-row items-center justify-between">
-                <a href="index.html" class="flex">
+                <a href="{{route('home')}}" class="flex">
                     <img src="{{asset('img/logo-2.svg')}} " class="mr-3">
                     <p href="#" class="font-bold text-white text-2xl">HeyEvents!</p>
                 </a>

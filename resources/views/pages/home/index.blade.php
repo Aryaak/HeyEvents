@@ -9,7 +9,7 @@
         id="home">
         <div class="flex md:mx-8 mx-auto mt-14">
             <!-- Content -->
-            <div class="mr-20 ">
+            <div class="mr-20 " data-aos="fade-right" data-aos-duration="1000">
                 <div class="md:ml-0 ml-10">
                     <p class="text-base text-green pb-6 font-semibold">MOMEN SEKALI SEUMUR HIDUP</p>
                     <h2 class="md:text-3xl text-lg pb-6 font-bold leading-loose">
@@ -22,13 +22,13 @@
                         dengan event dan <br> ciptakan momen berharga dalam hidup
                     </p>
                 </div>
-                <div class="flex md:flex-row flex-col gap-6 items-center">
+                <div class="flex md:flex-row flex-col justify-center gap-6 items-center">
                     <a href="{{route('event.search')}}" class="btn-primary h-2/5">Cari Events</a>
                     <a href="{{route('event.create')}}" class="text-prime font-semibold ">Buat Events</a>
                 </div>
             </div>
             <!-- Image -->
-            <div class="flex justify-center flex-1 mb-10 md:mb-16 lg:mb-0 z-10 ml-10">
+            <div data-aos="fade-left" data-aos-duration="1000" class="flex justify-center flex-1 mb-10 md:mb-16 lg:mb-0 z-10 ml-10">
                 <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="img/hero.png" alt="" />
             </div>
         </div>
@@ -38,61 +38,54 @@
     <div class="flex justify-center">
         <div
             class="logo-iklan relative content flex md:flex-row md:flex-rows max-w-screen-xl px-4 mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-12 mx-auto overflow-x-auto space-x-8">
-            <img src="img/apple.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-0">
-            <img src="img/adobe.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
-            <img src="img/slack.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
-            <img src="img/spotify.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
-            <img src="img/google.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
+            <img data-aos="fade-up" data-aos-duration="1000" src="img/apple.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-0">
+            <img data-aos="fade-up" data-aos-duration="1500" src="img/adobe.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
+            <img data-aos="fade-up" data-aos-duration="2000" src="img/slack.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
+            <img data-aos="fade-up" data-aos-duration="2500" src="img/spotify.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
+            <img data-aos="fade-up" data-aos-duration="3000" src="img/google.png" alt="" class="md:w-1/12 md:h-1/12 w-14 md:mx-6 mx-2">
         </div>
     </div>
 
-    <!-- content -->
-   <div
-    class="content1 relative content flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-start md:flex-row md:px-8 lg:px-8 py-5 mt-12 pl-4">
-    <div class="md:ml-20 ml-10">
-        <img src="img/kotak.png" alt="">
-    </div>
-    <div class="flex justify-center">
-        <h1 class="font-semibold md:text-3xl text-2xl md:ml-16 ml-0 mt-10 text-center">Cari dan <br class="md:flex hidden">
-            Gabung <br class="md:flex hidden"> Event Disekitar</h1>
-    </div>
-    <div class="md:ml-10 ml-0 flex justify-center">
-        <img src="img/content1.png" class="w-16">
-    </div>
+
 </div>
 
-{{-- content2 --}}
-<div
-    class="content2 relative content flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-end md:flex-row md:px-8 lg:px-8 py-5 mt-12 pl-4 gap-x-5 content2">
-    <div class="md:ml-20 ml-0 flex justify-center">
-        <img src="img/content2.png">
+<div class="flex flex-col items-center gap-10 mt-16 relative w-10/12 mx-auto">
+    <img data-aos="fade-down-right" data-aos-duration="1000" src="img/kotak.png" class="absolute left-0 hidden md:block">
+
+    <div class="flex items-start justify-between gap-x-10 flex-col md:flex-row gap-y-10 md:gap-y-0">
+        <h1 data-aos="fade-right" data-aos-duration="1000" style="font-size: 2.5em !important; margin-top: -12px" class="font-semibold text-left">Cari dan <br>
+                    Gabung <br> Event <br> Disekitar</h1>
+        <img data-aos="fade-left" data-aos-duration="1000" src="img/content1.png">
     </div>
-    <div class="content md:ml-10 ml-0 md:mt-0 mt-14 text-right">
-        <p class="text-grey mb-5">Bertemu dengan berbagai teman baru. Berbagi ide, menambah relasi, dan
-            ciptakan momen bersama</p>
-        <div class="flex btn-content">
+    
+    o<div class="flex justify-between gap-x-10 items-end flex-col md:flex-row">
+        <img data-aos="fade-right" data-aos-duration="1000" src="img/content2.png">
+        <div data-aos="fade-left" data-aos-duration="1000" class="mt-10">
+            <p class="text-grey  leading-loose mb-5">Bertemu dengan berbagai teman <br> baru. Berbagi ide, menambah relasi, <br> dan
+                        ciptakan momen bersama</p>
             <a href="{{route('event.search')}}" class="btn-secondary">Gabung Events Sekarang</a>
         </div>
     </div>
-    <div class="ml-10 md:mt-0 mt-10 flex justifys-center">
-        <img src="img/kotak2.png" alt="">
-    </div>
+    
+    <img data-aos="fade-up-left" data-aos-duration="1000" src="img/kotak2.png" class="absolute bottom-0 right-0 hidden md:block">
+
 </div>
+
 
     <!-- content3 -->
     <div
         class="relative content flex flex-row max-w-screen-xl px-4 mx-auto md:items-center md:justify-center md:px-8 lg:px-8 py-5 mt-16 w-32 md:w-full justify-center">
-        <img src="img/content3-1.png">
-        <img src="img/content3-2.png">
-        <img src="img/content3-3.png">
+        <img data-aos="fade-up" data-aos-duration="1000" src="img/content3-1.png">
+        <img data-aos="fade-up" data-aos-duration="1500" src="img/content3-2.png">
+        <img data-aos="fade-up" data-aos-duration="2000" src="img/content3-3.png">
     </div>
     <div
         class="relative content gap-x-5 flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-16">
-        <div class="md:ml-20 ml-0">
+        <div data-aos="fade-up" data-aos-duration="1000" class="md:ml-20 ml-0">
             <h1 class="font-bold md:text-4xl text-lg leading-relaxed">Pengelola Event? Atau, Ingin Mengadakan Event?
                 Sans.</h1>
         </div>
-        <div class="mr-10">
+        <div data-aos="fade-up" data-aos-duration="1500" class="mr-10">
             <p class="mb-10 md:mt-0 mt-3 text-xs md:text-lg leading-relaxed text-grey">Menginisiasi dan mengadakan
                 event dengan mudah
                 dan tidak terbatas pada skala perorangan, organisasi,
@@ -106,7 +99,7 @@
     <div class="bg-prime">
         <div
             class="flex flex-col mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-16">
-            <div class="text-white flex">
+            <div data-aos="fade-right" data-aos-duration="1000"  class="text-white flex">
                 <div class="slick  flex-col flex justify-center">
                     <h1 class="font-bold text-3xl w-full md:w-3/5 mb-5">Beberapa Event Akan Berlangsung</h1>
                     <p class="w-full md:w-2/5 mb-7">Berikut adalah beberapa event yang akan
@@ -185,14 +178,14 @@
     <!-- card -->
     <div
         class="max-w-screen-xl mx-auto md:items-center md:justify-center md:flex-row md:px-8 lg:px-8 py-5 mt-16">
-        <div class="items-center Absolut inset-x-0">
+        <div data-aos="fade-up" data-aos-duration="1000" class="items-center Absolut inset-x-0">
             <h1 class="font-bold text-3xl text-prime text-center justify-center items-center">Tunggu Apalagi?
                 Jadilah Bagian Dari <br>
                 HeyEvents! Sekarang</h1>
         </div>
         <!-- card -->
         <div class="flex md:flex-row flex-col justify-center">
-            <div class="mx-4 mt-16 flex justify-center">
+            <div data-aos="fade-up" data-aos-duration="1000" class="mx-4 mt-16 flex justify-center">
                     <div class="bg-white md:w-96 w-72 p-4  border-1 border-grey relative">
                         <div class="mb-5">
                             <!-- <img src="./img/smkn1-head.png" class="w-full"> -->
@@ -220,7 +213,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mx-4 mt-16 flex justify-center">
+            <div data-aos="fade-up" data-aos-duration="1500" class="mx-4 mt-16 flex justify-center">
                 <div class="bg-white md:w-96 w-72 p-4  border-1 border-grey relative">
                     <div class="mb-5">
                         <!-- <img src="./img/smkn1-head.png" class="w-full"> -->
@@ -246,7 +239,7 @@
                 </div>
             </div>
         </div>
-        <div class="mx-4 mt-16 flex justify-center">
+        <div  data-aos="fade-up" data-aos-duration="2000" class="mx-4 mt-16 flex justify-center">
             <div class="bg-white md:w-96 w-72 p-4  border-1 border-grey relative">
                 <div class="mb-5">
                     <!-- <img src="./img/smkn1-head.png" class="w-full"> -->
@@ -270,10 +263,10 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
         </div>
         
-        <div class="flex justify-center mt-8">
+        <div data-aos="fade-up" data-aos-duration="3000" class="flex justify-center mt-8">
             <a href="{{route('event.search')}}" class="btn-secondary mt-12 ">Gabung Events Sekarang</a>
         </div>
     </div>
