@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Discussion;
 
 
 class Event extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'user_id',
@@ -36,6 +34,11 @@ class Event extends Model
     {
         return $this->belongsTo(EventStatus::class);
     }
+    
+    public function reports()
+    {
+        return $this->hasMany(EventReport::class);
+    }
 
     public function user()
     {
@@ -44,7 +47,7 @@ class Event extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withPivot('status_id', 'document');
     }
 
     public function discussions()

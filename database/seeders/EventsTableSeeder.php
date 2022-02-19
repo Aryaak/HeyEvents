@@ -31,7 +31,6 @@ class EventsTableSeeder extends Seeder
         ]);
 
         DB::table('event_user')->insert([
-            'id' => 1,
             'event_id' => 1,
             'user_id' => 3,
             'status_id' => 1,
@@ -54,7 +53,6 @@ class EventsTableSeeder extends Seeder
         ]);
 
         DB::table('event_user')->insert([
-            'id' => 2,
             'event_id' => 2,
             'user_id' => 3,
             'status_id' => 1,
@@ -66,7 +64,7 @@ class EventsTableSeeder extends Seeder
             'user_id' => 3,
             'name' => 'Lomba Cyber Security Pelajar',
             'slug' => 'lomba-cyber-security-pelajar',
-            'description' => 'SMK Coding Surabaya merupakan pelatihan siswa jurusan RPL yang diselenggarakan seti lorem  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam reprehenderit, exercitationem qui provident molestiae quasi quis consectetur ullam sint amet atque, natus libero eligendi error voluptas! Nam alias at iure! Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+            'description' => 'SMK Negeri 1 Surabaya menyelenggarakan lomba Cyber Securiry untuk seti lorem  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam reprehenderit, exercitationem qui provident molestiae quasi quis consectetur ullam sint amet atque, natus libero eligendi error voluptas! Nam alias at iure! Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
 
             The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
             'address' => 'SMKN 1 Surabaya',
@@ -78,7 +76,6 @@ class EventsTableSeeder extends Seeder
         ]);
 
         DB::table('event_user')->insert([
-            'id' => 3,
             'event_id' => 3,
             'user_id' => 3,
             'status_id' => 1,
@@ -101,7 +98,6 @@ class EventsTableSeeder extends Seeder
         ]);
 
         DB::table('event_user')->insert([
-            'id' => 4,
             'event_id' => 4,
             'user_id' => 4,
             'status_id' => 1,
@@ -124,7 +120,6 @@ class EventsTableSeeder extends Seeder
         ]);
 
         DB::table('event_user')->insert([
-            'id' => 5,
             'event_id' => 5,
             'user_id' => 2,
             'status_id' => 1,
@@ -139,15 +134,14 @@ class EventsTableSeeder extends Seeder
             'description' => 'Kami dari Ampersand Team membuka seminar untuk donasi bencana alam untuk seti lorem  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam reprehenderit, exercitationem qui provident molestiae quasi quis consectetur ullam sint amet atque, natus libero eligendi error voluptas! Nam alias at iure! Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
 
             The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
-            'address' => 'SMKN 1 Surabaya',
-            'date' => '2022-08-30 00:00:00',
+            'address' => 'https://meet.google.com/dfx-atgo-rew',
+            'date' => '2022-02-16 00:00:00',
             'quota' => 200,
             'category_id' => 2,
             'status_id' => 2,
         ]);
 
         DB::table('event_user')->insert([
-            'id' => 6,
             'event_id' => 6,
             'user_id' => 2,
             'status_id' => 1,

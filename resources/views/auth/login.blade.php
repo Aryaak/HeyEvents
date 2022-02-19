@@ -141,7 +141,7 @@
     <!-- Left Section -->
     <section class="md:py-10 md:pl-20 py-10 px-5">
         <a href="{{route('home')}}" class="flex">
-            <img src="./img/logo.svg" class="mr-3">
+            <img src="{{asset('img/logo.svg')}}" class="mr-3">
             <p href="#" class="font-bold text-prime text-2xl">HeyEvents!</p>
         </a>
 
@@ -170,10 +170,10 @@
 
             <div class="mt-5">
                 <button type="submit" class="btn-primary w-full">Masuk</button>
-                <button class="btn-outline-primary w-full mt-3">
-                    <img src="./img/ic_google.svg" class="mr-3">
+                <a href="{{ '/auth/redirect'}}" class="btn-outline-primary w-full mt-3">
+                    <img src="{{asset('img/ic_google.svg')}}" class="mr-3">
                     <span>Masuk dengan Google</span>
-                </button>
+                </a>
             </div>
         </form>
 

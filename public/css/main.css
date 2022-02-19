@@ -27,6 +27,10 @@ body {
     font-style: italic;
 }
 
+.card-1{
+    width: 19rem;
+}
+
 .card-text {
     height: 80px;
 }
@@ -100,4 +104,99 @@ input[type="radio"]:checked+label {
 .turbolinks-progress-bar {
     height: 5px;
     background-color: #312B78 !important;
+}
+
+.modal-box {
+    position: relative;
+    width: 80vw;
+    background-color: white;
+    display: flex;
+}
+
+.modal-box .card {
+    margin: 80px 50px;
+}
+
+.modal-box .payment {
+    margin: 40px 60px;
+}
+
+.modal-box .line {
+    position: absolute;
+    top: 0;
+    left: 35vw;
+    width: 1px;
+    height: 100%;
+    background-color: gray;
+}
+
+
+.bg-primee{
+    background-color: #312B78;
+}
+/* index */
+body{
+    overflow-x: auto;
+}
+.logo-iklan {
+    overflow-x: auto;
+}
+
+.content1 h1 {
+    margin-bottom: 10px;
+    text-align: start;
+    padding: 0px 50px 0px 50px;
+}
+
+.content2 .content {
+    width: 100%;
+}
+
+.content2 p {
+    width: 100%;
+    text-align: center;
+}
+.content2 .btn-content{
+    justify-content: center;
+}
+/* search */
+.navbar {
+    overflow: auto;
+}
+
+.search {
+    margin-top: 20px;
+}
+
+input:focus {
+    outline: none;
+}
+
+/* upload image */
+.upload p{
+    max-width: 25rem;
+    text-align: center;
+}
+@media (min-width: 768px) {
+    /* landing */
+    .content2 p {
+        width: 100%;
+        text-align: left;
+    }
+    .content2 .btn-content{
+        margin-top: 50px;
+        justify-content: flex-start;
+    }
+    .slick{
+        display: flex;
+        justify-content: center;
+    }
+    .content2 .content {
+        width: 40%;
+    }
+
+    /* search */
+    .search {
+        margin-top: 0px;
+    }
 }

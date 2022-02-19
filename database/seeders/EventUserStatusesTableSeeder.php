@@ -18,5 +18,9 @@ class EventUserStatusesTableSeeder extends Seeder
             'id' => 1,
             'name' => 'Tergabung'
         ]);
+        EventUserStatus::create([
+            'id' => 2,
+            'name' => 'Tertunda'
+        ]);
     }
 }

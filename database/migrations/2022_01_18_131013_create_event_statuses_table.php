@@ -16,7 +16,7 @@ class CreateEventStatusesTable extends Migration
         Schema::create('event_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->softDeletes();
+            
             $table->timestamps();
         });
     }

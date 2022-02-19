@@ -13,7 +13,7 @@
     <section class="mt-16 grid grid-cols-3 gap-10">
         @foreach ($events as $item)
         <!-- Card -->
-        <div class="card">
+        <div class="card"  data-aos="fade-up" data-aos-duration="1000">
             <div class="mb-5 card-img">
                 <img src="{{asset('storage/' . $item->photo)}}" class="w-full" height="200">
             </div>
@@ -32,7 +32,11 @@
                 </div>
                 <div class="flex items-center">
                     <img src="{{asset('img/ic_calendar.svg')}}">
+                      @if ($item->is_ended)
+                    <p class="text-grey ml-3">Selesai</p>
+                    @else
                     <p class="text-grey ml-3">{{ \Carbon\Carbon::parse($item->date)->isoFormat('D MMMM Y')}}</p>
+                    @endif
                 </div>
                 <div class="flex items-center">
                     <img src="{{asset('img/ic_ticket.svg')}}">
@@ -40,13 +44,18 @@
                 </div>
             </div>
             <div>
-                <div class="flex items-center">
+                <a href="{{route('profile', $item->user->slug)}}" class="flex items-center">
                     <img src="{{asset('storage/' . $item->user->photo)}}" width="53" height="53">
                     <div class="ml-5">
-                        <p class="text-prime font-bold">{{$item->user->name}}</p>
+                        <div class="flex ">
+                            <p class="text-prime font-bold">{{$item->user->name}}</p>
+                            @if ($item->user->status_id == 1)
+                            <img src="{{asset('img/check.svg')}}" class="ml-3">
+                            @endif
+                        </div>
                         <p class="text-grey">{{$item->user->bio ? $item->user->bio : 'Bio belum di set'}}</p>
                     </div>
-                </div>
+                </a>
             </div>
             <a href="{{route('event.show', $item->slug)}}" class="btn-event absolute right-0 bottom-0 py-4 group overflow-hidden">
                 <svg class="group-active:relative group-active:-right-4 transform group-hover:scale-125  transition duration-100 ease-in-out"

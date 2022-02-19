@@ -3,10 +3,10 @@
     <div x-data="{ open: false, nav_open:false }"
         class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
         <div class="p-4 flex flex-row items-center justify-between">
-            <div class="flex">
+            <a class="flex"  href="{{route('home')}}">
                 <img src="{{asset('img/logo.svg')}}" class="mr-3">
-                <a href="#" class="font-bold text-prime text-2xl">HeyEvents!</a>
-            </div>
+                <span class="font-bold text-prime text-2xl">HeyEvents!</span>
+            </a>
             <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
                 <svg fill="#312B78" viewBox="0 0 20 20" class="w-6 h-6">
                     <path x-show="!open" fill-rule="evenodd"
@@ -41,12 +41,39 @@
             <img src="{{asset('storage/' . Auth::user()->photo)}}" width="44" class="mr-3 order-1 md:order-2">
             <div class="relative order-3 cursor-pointer group br-prime " @click="nav_open = !nav_open">
                 <img src="{{asset('img/ic_down.svg')}}" width="24" >
-                <div :class="{'flex transition ease-in-out duration-500': nav_open, 'hidden': !nav_open}" class="hidden bg-white absolute p-5 -bottom-40 -right-16 shadow-md  flex-col justify-center ">
-                    <a href="{{route('profile')}}" class="mg-5 btn-primary">Profile</a>
+                <div style="width: 200px; position: absolute; right: 0vw; top: 100px" :class="{'flex transition ease-in-out duration-500': nav_open, 'hidden': !nav_open}" class="hidden bg-white  py-10  min-w-max   shadow-lg  ">
+                    {{-- <a href="{{route('profile')}}" class="mg-5 btn-primary">Profile</a>
                     <form action="{{route('logout')}}" method="POST">
                         @csrf
                         <button type="submit" class="mt-5 btn-secondary">Keluar</button>
-                    </form>
+                    </form> --}}
+                    <div class="flex flex-col  gap-y-5 mx-auto">
+                        <a href="{{route('profile')}}" class="flex  gap-x-5">
+                            <img src="{{asset('img/Profile.svg')}}">
+                            <p class="font-semibold text-lg text-grey">Profil</p>
+                        </a>
+                        <a href="{{route('profile.edit')}}" class="flex  gap-x-5">
+                            <img src="{{asset('img/Edit.svg')}}">
+                            <p class="font-semibold text-lg text-grey">Edit Profil</p>
+                        </a>
+                        <div class="flex  gap-x-5">
+                            <img src="{{asset('img/Verified.svg')}}">
+                            @if (Auth::user()->status_id  == 1)
+                            <p class="font-semibold text-lg text-green">Terverifikasi</p>
+                            @else
+                            <a href="{{route('profile.verification')}}" class="font-semibold text-lg text-grey">Verifikasi</a>
+                            @endif
+                        </div> 
+                        <hr>
+                        <form action="{{route('logout')}}" method="POST">
+                        @csrf
+                        <button type="submit" class="flex  gap-x-5 ">
+                            <img src="{{asset('img/Logout.svg')}}">
+                            <p style="color: #F33939" class="font-semibold text-lg ">Keluar</p>
+                        </button>
+                        </form>
+                    </div>
+                    
                 </div>
             </div>
         </div>

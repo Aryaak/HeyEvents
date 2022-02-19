@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -36,6 +38,13 @@ class RegisterController extends Controller
      *
      * @return void
      */
+
+    public function showRegistrationForm()
+    {
+        $event = Event::inRandomOrder()->first();
+        return view('auth.register', compact('event'));
+    }
+
     public function __construct()
     {
         $this->middleware('guest');
@@ -50,8 +59,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'min:4', 'max:20'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email:rfc,dns' ,  'max:255', 'unique:users', ''],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -64,10 +73,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         return User::create([
-            'photo' => 'default/' . rand(1, 8) . '.png',
             'name' => $data['name'],
+            'photo' => 'default/' . rand(1, 8) . '.png',
+            'slug' => Str::slug($data['name']),
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

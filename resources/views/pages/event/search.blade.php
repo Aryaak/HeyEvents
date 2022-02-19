@@ -4,8 +4,8 @@
 
 @section('content')
 <main class="py-16  max-w-screen-xl mx-auto px-4 md:px-6">
-    <div class="flex justify-between">
-        <section class="flex items-center gap-x-10">
+    <div class="flex flex-col md:flex-row justify-between">
+        <section class="navbar flex items-center gap-x-10 overflow-x-auto space-x-8">
             <a href="{{route('event.search')}}"class="{{$category == 'semua' ? 'link-secondary ' : 'text-grey cursor-pointer'}} ">Semua</a>
             <a href="{{route('event.search', 'onsite')}}" class="{{$category == 'onsite' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Onsite</a>
             <a href="{{route('event.search', 'online')}}" class="{{$category == 'online' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Online</a>
@@ -13,11 +13,20 @@
             <a href="{{route('event.search', 'gratis')}}" class="{{$category == 'gratis' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Gratis</a>
             <a href="{{route('event.search', 'berbayar')}}" class="{{$category == 'berbayar' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Berbayar</a>
         </section>
+<<<<<<< HEAD
 
         <div class='w-3/12'>
             <div class="flex items-center max-w-md mx-auto bg-white rounded-lg " x-data="{ search: '' }">
                 <div class="w-full border-1 p-1.5">
                     <input type="search" class="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+=======
+        <form action="{{route('event.search', $category)}}" method="GET">
+            @csrf
+        <div >
+            <div class="search flex items-center max-w-md mx-auto bg-white rounded-lg" x-data="{ search: '' }">
+                <div class="md:w-60 w-full border-1 p-1.5">
+                    <input value="{{old('keyword')}}" name="keyword" type="search" class="w-full px-4 py-1 text-gray-800 rounded-full"
+>>>>>>> 318ce796ca75703209f5d97d3bb99dae74d3c191
                         placeholder="Cari nama atau pengelola event..." x-model="search">
                 </div>
                 <div>
@@ -33,13 +42,13 @@
                 </div>
             </div>
         </div>
-    </div>
+        </form>
     </div>
 
-    <section class="mt-16 grid grid-cols-3 gap-10">
+    <section class="mt-16 grid md:grid-cols-3 grid-cols-1 md:gap-10 gap-5">
         @foreach ($events as $item)
         <!-- Card -->
-        <div class="card">
+        <div class="card" data-aos="fade-up" data-aos-duration="1000">
             <div class="mb-5">
                 <img src="{{asset('storage/' . $item->photo)}}" class="w-full h-200px">
             </div>
@@ -58,7 +67,11 @@
                 </div>
                 <div class="flex items-center">
                     <img src="{{asset('img/ic_calendar.svg')}}">
+                    @if ($item->is_ended)
+                    <p class="text-grey ml-3">Selesai</p>
+                    @else
                     <p class="text-grey ml-3">{{ \Carbon\Carbon::parse($item->date)->isoFormat('D MMMM Y')}}</p>
+                    @endif
                 </div>
                 <div class="flex items-center">
                     <img src="{{asset('img/ic_ticket.svg')}}">
@@ -66,13 +79,18 @@
                 </div>
             </div>
             <div class="relative">
-                <div class="flex items-center">
+                <a href="{{route('profile', $item->user->slug)}}" class="flex items-center">
                     <img src="{{asset('storage/' . $item->user->photo)}}" width="53" height="53">
                     <div class="ml-5">
-                        <p class="text-prime font-bold">{{$item->user->name}}</p>
+                        <div class="flex ">
+                            <p class="text-prime font-bold">{{$item->user->name}}</p>
+                            @if ($item->user->status_id == 1)
+                            <img src="{{asset('img/check.svg')}}" class="ml-3">
+                            @endif
+                        </div>
                         <p class="text-grey">{{$item->user->bio ? $item->user->bio : 'Bio belum di set'}}</p>
                     </div>
-                </div>
+                </a>
             </div>
             <a href="{{route('event.show', $item->slug)}}" class="btn-event absolute right-0 bottom-0 py-4 group overflow-hidden">
                 <svg class="group-active:relative group-active:-right-4 transform group-hover:scale-125  transition duration-100 ease-in-out"

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\EventReport;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -10,12 +12,41 @@ use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
-    public function search($category = 'semua', $keyword = '')
-    {
-        $query    = Event::latest();
 
-        $query = $query->where('name', 'LIKE', '%' . $keyword . '%')
-            ->where('description', 'LIKE', '%' . $keyword . '%');
+    public function __construct()
+    {
+        $this->checkEnded();
+    }
+
+    public function index()
+    {
+        $data = Event::latest()->get();
+        return view('admin.pages.event.index', compact('data'));
+    }
+
+
+    private function checkEnded()
+    {
+        $data = Event::where('is_ended', false)->get();
+        foreach($data as $item){
+            if(Carbon::now() > $item->date){
+                Event::where('id', $item->id)->update(['is_ended' => true]);
+            }
+        }
+    }
+
+    public function search($category = 'semua')
+    {
+        $query    = new Event();
+        if(request('keyword')){
+            $query = $query->where(function($query2){
+                $query2->where('name', 'LIKE', '%' . request('keyword') . '%')
+                ->oRwhere('description', 'LIKE', '%' . request('keyword') . '%')
+                ->oRwhereHas('user', function($query3){
+                    $query3->where('name', 'LIKE', '%' . request('keyword') . '%');
+                });
+            });
+        }
 
         switch ($category) {
             case 'onsite':
@@ -31,6 +62,9 @@ class EventController extends Controller
                 $query = $query->where('status_id', 2);
                 break;
             case 'terverifikasi':
+                $query = $query->whereHas('user', function($query){
+                    $query->where('status_id', 1);
+                });
                 break;
             default:
                 $category = 'semua';
@@ -38,7 +72,7 @@ class EventController extends Controller
         }
 
         $events = $query->get();
-        return view('pages.event.search', compact('events', 'category', 'keyword'));
+        return view('pages.event.search', compact('events', 'category'));
     }
 
     public function create()
@@ -49,7 +83,7 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $validation = [
-            'photo' => ['mimes:jpeg,jpg,png,gif', 'required', 'max:10000'],
+            'photo' => ['mimes:jpeg,jpg,png,gif,pdf', 'required', 'max:10000'],
             'name' => ['required', 'string', 'min:4', 'max:100'],
             'description' => ['required', 'string', 'min:20'],
             'address' => ['required', 'string', 'min:4', 'max:100'],
@@ -79,20 +113,25 @@ class EventController extends Controller
 
     public function joined($category = 'semua')
     {
-        $events = Auth::user()->events;
+        $events = [];
+        $query = Auth::user()->eventsJoined->where('user_id', '!=', Auth::user()->id);
 
         switch ($category) {
             case 'akan-berlangsung':
-                break;
-            case 'selesai':
-                foreach ($events as $key => $item) {
-                    if (!$item->is_ended) {
+                $events = $query->where('is_ended', false);
+
+                foreach($events as $key => $item){
+                    if(Carbon::parse($item->date)->subDays(7) > Carbon::now()){
                         unset($events[$key]);
                     }
                 }
                 break;
+            case 'selesai':
+                $events = $query->where('is_ended', true);
+                break;
             default:
                 $category = 'semua';
+                $events = $query;
                 break;
         }
 
@@ -101,20 +140,27 @@ class EventController extends Controller
 
     public function manage($category = 'semua')
     {
+        $events = [];
         $query    = Event::where('user_id', Auth::user()->id)->latest();
 
         switch ($category) {
             case 'akan-berlangsung':
+                $events = $query->where('is_ended', false)->get();
+
+                foreach($events as $key => $item){
+                    if(Carbon::parse($item->date)->subDays(7) > Carbon::now()){
+                        unset($events[$key]);
+                    }
+                }
                 break;
             case 'selesai':
-                $query = $query->where('is_ended', true);
+                $events = $query->where('is_ended', true)->get();
                 break;
             default:
                 $category = 'semua';
+                $events = $query->get();
                 break;
         }
-
-        $events = $query->get();
 
         return view('pages.event.manage', compact('events', 'category'));
     }
@@ -122,9 +168,13 @@ class EventController extends Controller
     public function show($slug)
     {
         $event = Event::where('slug', $slug)->first();
-        $event['is_joined'] = DB::table('event_user')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event->id)->first();
-        $members = array_slice($event->users->toArray(), 0, 11);
-        return view('pages.event.show', compact('event', 'members'));
+        $event['is_joined'] = DB::table('event_user')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event->id)->where('status_id', 1)->first();
+        $event['is_pending'] = DB::table('event_user')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event->id)->where('status_id', 2)->first();
+        $event['is_saved'] = DB::table('event_saved')->where('user_id', isset(Auth::user()->id) ? Auth::user()->id : null)->where('event_id', $event->id)->first();
+
+        $members = array_slice($event->users->where('id', '!=', $event->user->id)->where('pivot.status_id',  1)->toArray(), 0, 11);
+        $pendings = $event->users->where('pivot.status_id', 2);
+        return view('pages.event.show', compact('event', 'members', 'pendings'));
     }
     
 
@@ -147,5 +197,80 @@ class EventController extends Controller
         DB::table('event_user')->where('event_id', $input['event_id'])->where('user_id', $input['user_id'])->delete();
 
         return redirect()->back();
+    }
+
+    public function save()
+    {
+        DB::table('event_saved')->insert(request()->except('_token'));
+        return redirect()->back();
+    }
+
+    public function unsave()
+    {
+        $input = request()->all();
+        
+        DB::table('event_saved')->where('event_id', $input['event_id'])->where('user_id', $input['user_id'])->delete();
+
+        return redirect()->back();
+    }
+
+    public function report(Request $request)
+    {
+        $data = $this->validate($request, [
+            'event_id' => 'required',
+            'reporter_id' => 'required',
+            'report' => ['required', 'min:10']
+        ]);
+
+        EventReport::create($data);
+
+        return redirect()->back();
+    }
+
+    public function pay(Request $request)
+    {
+        $input = request()->all();
+
+        $this->validate($request, [
+            'document' => ['mimes:jpeg,jpg,png,gif,pdf', 'required', 'max:10000'],
+        ]);
+
+        DB::table('event_user')->insert([
+            'event_id' => $input['event_id'],
+            'user_id' => $input['user_id'],
+            'status_id' => 2,
+            'document' => request()->file('document') ? request()->file('document')->store('documents') : null
+        ]);
+        return redirect()->back();
+    }
+
+    public function accept()
+    {
+        $input = request()->all();
+
+        DB::table('event_user')->where([
+            'user_id' => $input['user_id'],
+            'event_id' => $input['event_id']
+        ])->update(['status_id' => 1]);
+
+        return redirect()->back();
+    }
+
+    public function reject()
+    {
+        $input = request()->all();
+        
+        DB::table('event_user')->where([
+            'user_id' => $input['user_id'],
+            'event_id' => $input['event_id']
+        ])->delete();
+
+        return redirect()->back();
+    }
+
+    public function block()
+    {
+        Event::where('id', request('event_id'))->delete();
+        return redirect()->back()->with(['success' => 'Event berhasil diblokir']);
     }
 }
