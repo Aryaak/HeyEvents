@@ -130,6 +130,10 @@ input[type="radio"]:checked+label {
     background-color: gray;
 }
 
+
+.bg-primee{
+    background-color: #312B78;
+}
 /* index */
 body{
     overflow-x: auto;

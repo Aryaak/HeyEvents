@@ -53,7 +53,7 @@
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="text-lg text-center">
-                                        <button class="btn btn-primary"  data-toggle="modal" data-target="#showModal{{$item->id}}">LIHAT</button>
+                                        <button class="btn bg-primee text-white"  data-toggle="modal" data-target="#showModal{{$item->id}}">LIHAT</button>
                                     </div>
                                 </td>
                             </tr>
@@ -209,7 +209,7 @@
                 </table>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn bg-primee text-white" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
