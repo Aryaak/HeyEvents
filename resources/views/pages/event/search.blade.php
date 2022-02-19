@@ -13,26 +13,23 @@
             <a href="{{route('event.search', 'gratis')}}" class="{{$category == 'gratis' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Gratis</a>
             <a href="{{route('event.search', 'berbayar')}}" class="{{$category == 'berbayar' ? 'link-secondary ' : 'text-grey cursor-pointer'}}">Berbayar</a>
         </section>
-        <div>
-            <div
-                class='flex items-center justify-center from-cyan-100 via-pink-200 to-yellow-200 bg-gradient-to-br'>
-                <div class="flex items-center max-w-md mx-auto bg-white rounded-lg " x-data="{ search: '' }">
-                    <div class="w-full border-1 p-1.5">
-                        <input type="search" class="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
-                            placeholder="search" x-model="search">
-                    </div>
-                    <div>
-                        <button type="submit"
-                            class="flex items-center bg-blue-500 justify-center w-12 h-12 text-white rounded-r-lg"
-                            :class="(search.length > 0) ? 'bg-purple-500' : 'bg-gray-500 cursor-not-allowed'"
-                            :disabled="search.length == 0">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
-                        </button>
-                    </div>
+
+        <div class='w-3/12'>
+            <div class="flex items-center max-w-md mx-auto bg-white rounded-lg " x-data="{ search: '' }">
+                <div class="w-full border-1 p-1.5">
+                    <input type="search" class="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+                        placeholder="Cari nama atau pengelola event..." x-model="search">
+                </div>
+                <div>
+                    <button type="submit" class="flex items-center bg-prime justify-center w-12 h-12 text-white"
+                        :class="(search.length > 0) ? 'bg-purple-500' : 'bg-prime cursor-not-allowed'"
+                        :disabled="search.length == 0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -44,7 +41,7 @@
         <!-- Card -->
         <div class="card">
             <div class="mb-5">
-                <img src="{{asset('storage/' . $item->photo)}}" class="w-full" height="200">
+                <img src="{{asset('storage/' . $item->photo)}}" class="w-full h-200px">
             </div>
             <div class="mb-5 w-full">
                 <h4 class="text-prime font-bold text-xl w-full mb-2">{{Str::limit($item->name, 31, $end='...') }}</h4>
@@ -88,7 +85,7 @@
         </div>
         <!-- End Card -->
         @endforeach
-      
+
     </section>
 </main>
 @endsection
